@@ -1,0 +1,76 @@
+/** Kiểu dữ liệu & hàm thuần cho danh sách app Fox. Không import React/antd. */
+
+export type AppStatus = 'live' | 'building' | 'planned'
+
+export interface AppLink {
+  label: string
+  url: string
+}
+
+export interface FoxApp {
+  /** Mã 2 chữ (docs/MA_APP.md) */
+  code: string
+  name: string
+  /** Mảng cuộc sống, hiển thị nhỏ trên thẻ */
+  area: string
+  desc: string
+  /** Linh vật của app trong public/fox/ (sinh từ Fox.Files) */
+  mascot: string
+  /** Màu nhấn riêng — chỉ dùng cho icon/viền thẻ */
+  accent: string
+  status: AppStatus
+  version?: string
+  /** Link chính (mở khi bấm thẻ) */
+  url?: string
+  /** Link phụ (VD bản chạy trên máy) */
+  extra?: AppLink[]
+  /** Từ khóa tìm kiếm thêm */
+  tags?: string[]
+}
+
+export const STATUS_LABEL: Record<AppStatus, string> = {
+  live: 'Đang chạy',
+  building: 'Đang xây',
+  planned: 'Kế hoạch',
+}
+
+const STATUS_ORDER: Record<AppStatus, number> = { live: 0, building: 1, planned: 2 }
+
+/** Bỏ dấu tiếng Việt + chữ thường để tìm "tai chinh" ra "Tài chính". */
+export function normalize(s: string): string {
+  return s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .toLowerCase()
+    .trim()
+}
+
+/** Lọc app theo chuỗi tìm: mọi từ phải xuất hiện trong tên, mã, mảng, mô tả hoặc tag. */
+export function filterApps(apps: readonly FoxApp[], query: string): FoxApp[] {
+  const words = normalize(query).split(/\s+/).filter(Boolean)
+  if (words.length === 0) return [...apps]
+  return apps.filter((a) => {
+    const hay = normalize([a.name, a.code, a.area, a.desc, ...(a.tags ?? [])].join(' '))
+    return words.every((w) => hay.includes(w))
+  })
+}
+
+/** Sắp xếp: đang chạy → đang xây → kế hoạch, giữ thứ tự gốc trong cùng nhóm. */
+export function sortApps(apps: readonly FoxApp[]): FoxApp[] {
+  return apps
+    .map((a, i) => ({ a, i }))
+    .sort((x, y) => STATUS_ORDER[x.a.status] - STATUS_ORDER[y.a.status] || x.i - y.i)
+    .map((x) => x.a)
+}
+
+/** App mở được (có link) — dùng cho phím Enter khi tìm ra đúng 1 app. */
+export function openable(apps: readonly FoxApp[]): FoxApp[] {
+  return apps.filter((a) => a.status !== 'planned' && !!a.url)
+}
+
+export function countByStatus(apps: readonly FoxApp[]): Record<AppStatus, number> {
+  const out: Record<AppStatus, number> = { live: 0, building: 0, planned: 0 }
+  for (const a of apps) out[a.status]++
+  return out
+}

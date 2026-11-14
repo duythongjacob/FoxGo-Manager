@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Icon Fox.TàiChính: nền mint dịu, cáo cam ấm. Vùng an toàn maskable = hình tròn bán kính 205 ở giữa. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3fbf8"/>
+      <stop offset="0.55" stop-color="#dff3ee"/>
+      <stop offset="1" stop-color="#c6e9e1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdba74"/>
+      <stop offset="0.5" stop-color="#fb923c"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="ear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdba74"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="cheek" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fff1e2"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="190%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#0f766e" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="215" r="200" fill="url(#glow)"/>
+  <!-- cáo: khung 64 phóng 5 lần, đặt giữa -->
+  <g transform="translate(96 92) scale(5)" filter="url(#soft)">
+    <path d="M8 10 L24 21 Q32 18 40 21 L56 10 L52 33 Q49 49 32 57 Q15 49 12 33 Z" fill="url(#fur)"/>
+    <path d="M13 17 L22 23.5 L17 30 Z" fill="url(#ear)" opacity="0.7"/>
+    <path d="M51 17 L42 23.5 L47 30 Z" fill="url(#ear)" opacity="0.7"/>
+    <path d="M14 35 Q24 38 32 47 Q40 38 50 35 Q47 49 32 56 Q17 49 14 35 Z" fill="url(#cheek)"/>
+    <ellipse cx="23.5" cy="33" rx="2.6" ry="3" fill="#292524"/>
+    <ellipse cx="40.5" cy="33" rx="2.6" ry="3" fill="#292524"/>
+    <circle cx="24.4" cy="32" r="0.8" fill="#ffffff" opacity="0.9"/>
+    <circle cx="41.4" cy="32" r="0.8" fill="#ffffff" opacity="0.9"/>
+    <path d="M28.5 47.5 Q32 45.5 35.5 47.5 Q34 51 32 51.5 Q30 51 28.5 47.5 Z" fill="#292524"/>
+  </g>
+</svg>

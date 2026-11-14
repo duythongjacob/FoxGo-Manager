@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script>
+      // Đặt chế độ sáng/tối TRƯỚC khi vẽ để không nháy. Khóa phải khớp THEME_KEY trong src/lib/theme.ts.
+      ;(function () {
+        var mode = 'system'
+        try {
+          mode = localStorage.getItem('foxdots.theme') || 'system'
+        } catch (e) {}
+        var dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+      })()
+    </script>
+    <meta name="theme-color" content="#0f766e" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <meta name="description" content="Foxdots — trang tổng hợp các app Fox của bạn" />
+    <title>Foxdots</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
