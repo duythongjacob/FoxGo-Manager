@@ -19,13 +19,14 @@ FoxGo_Manager/  (trong FoxdotsProject/ — tài liệu chung ở ../docs/)
 ├── package.json              thư viện + lệnh npm (dev, check, build)
 ├── vite.config.ts            cấu hình Vite + Vitest (cổng, alias @/, số phiên bản)
 ├── firebase.json             cấu hình Firebase Hosting (site foxgo)
+├── chay_local.bat            nhấp đúp để chạy trên máy: dev :5170 hoặc build + preview :4170
 │
 ├── docs/                     tài liệu của app
 │   ├── CAU_TRUC_THU_MUC.md       file này
 │   ├── LUONG_CODE.md             luồng chạy, luồng dữ liệu, luồng phát triển
 │   ├── BAO_TRI.md                việc bảo trì thường gặp, xử lý sự cố
 │   └── features/                 mỗi tính năng một file md + README.md mục lục
-├── scripts/                  lệnh Node phụ trợ (check-tree.mjs)
+├── scripts/                  lệnh Node phụ trợ (check-tree.mjs, fuel-update.mjs)
 ├── public/                   🌐 file tĩnh chép nguyên vào bản build: manifest, icon
 │   └── fox/                  🌐 linh vật SVG (sinh từ ../Fox.Files, không vẽ tay)
 │       └── bieu-cam/         🌐 8 biểu cảm của cáo (trang Giới thiệu)
@@ -49,14 +50,14 @@ Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, 
 |---|---|---|
 | `docs/` | Tài liệu app: cấu trúc, luồng code, bảo trì | Repo GitHub công khai — không ghi dữ liệu cá nhân |
 | `docs/features/` | Tài liệu từng tính năng (mẫu `../docs/templates/FEATURE.md`), mục lục `README.md` | Viết cùng commit với code |
-| `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật) | Chạy trong `npm run check` |
+| `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật), `fuel-update.mjs` + `fuel-parse.mjs` (giá xăng → `src/data/fuel.json`) | Chạy trong `npm run check` |
 | `public/` | File tĩnh: `manifest.webmanifest` (cài như app), `icon.svg` | 🌐 |
 | `public/fox/` | Linh vật: đầu `fox-<app>.svg`, toàn thân `*-toan-than.svg`, cáo vẫy tay, cáo giới thiệu | 🌐 Sinh bằng `../Fox.Files/tools/gen_fox.py` rồi chép sang |
 | `public/fox/bieu-cam/` | 8 biểu cảm `fox-<tên>.svg` | 🌐 Tên khớp `EXPRESSIONS` trong LandingPage |
 | `src/` | Mã nguồn TypeScript/React | Luồng: `docs/LUONG_CODE.md` |
 | `src/app/` | `Root.tsx` (theme AntD + chọn trang), `Layout.tsx`, `useRoute.ts`, `themeStore.ts` | Không chứa logic nghiệp vụ |
 | `src/components/` | `Wordmark.tsx` (logo "Fox."), `WxIcon.tsx` (biểu tượng thời tiết SVG) | Chỉ đặt ở đây khi ≥ 2 nơi dùng |
-| `src/data/` | `apps.ts` (danh sách app), `external.ts` (gọi Open-Meteo/CoinGecko/ExchangeRate-API + đệm) | Mọi lệnh gọi mạng nằm ở đây |
+| `src/data/` | `apps.ts` (danh sách app), `external.ts` (gọi Open-Meteo/CoinGecko/ExchangeRate-API + đệm), `fuel.json` (snapshot giá xăng) | Mọi lệnh gọi mạng nằm ở đây |
 | `src/features/` | Mỗi thư mục con = 1 trang (Page.tsx + CSS riêng + component riêng) | |
 | `src/features/launcher/` | Trang chủ: `LauncherPage.tsx`, `InfoDock.tsx` (thanh thông số), `launcher.css` | `docs/features/trang-chu.md`, `thanh-thong-so.md` |
 | `src/features/landing/` | Trang Giới thiệu: `LandingPage.tsx`, `landing.css` | `docs/features/gioi-thieu.md` |

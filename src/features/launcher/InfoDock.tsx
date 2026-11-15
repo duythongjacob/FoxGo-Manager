@@ -11,8 +11,9 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import WxIcon from '@/components/WxIcon'
-import { fetchMarket, fetchUsdVnd, fetchWeather, readCityName, saveCityName } from '@/data/external'
+import { FUEL, fetchMarket, fetchUsdVnd, fetchWeather, readCityName, saveCityName } from '@/data/external'
 import { normalize } from '@/lib/apps'
+import { fuelDateLabel, pickRon95 } from '@/lib/fuel'
 import { href } from '@/lib/route'
 import { formatDate, formatTime, greeting } from '@/lib/greeting'
 import { compactVnd, goldPerLuong, OZ_PER_LUONG, pct, usd, type Market } from '@/lib/market'
@@ -52,20 +53,25 @@ function Change({ v }: { v: number | null }) {
   return <span className={`dk-chg ${dir}`}>{pct(v)}</span>
 }
 
-/** Một dòng giá: nhãn bên trái, giá trị + biến động bên phải. */
+/** Xăng RON95 vùng 1 kỳ gần nhất — tính một lần (snapshot không đổi khi trang đang mở). */
+const RON95 = FUEL ? pickRon95(FUEL.items) : null
+
+/** Một dòng giá: nhãn bên trái, giá trị + biến động bên phải; `title` = tooltip riêng của dòng. */
 function Stat({
   label,
   value,
   change,
   failed,
+  title,
 }: {
   label: string
   value?: ReactNode
   change?: ReactNode
   failed: boolean
+  title?: string
 }) {
   return (
-    <li className="dk-stat">
+    <li className="dk-stat" title={title}>
       <span className="dk-label">{label}</span>
       {value !== undefined ? (
         <span className="dk-stat-val">
@@ -169,7 +175,8 @@ export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; 
   // Nguồn bắt buộc ghi (Open-Meteo CC BY 4.0, ExchangeRate-API) — để trong tooltip, không chiếm chỗ trên giao diện
   const source =
     'Nguồn: Open-Meteo · CoinGecko (PAX Gold ≈ 1 oz vàng thế giới, chưa gồm chênh lệch vàng miếng trong nước) · ' +
-    `ExchangeRate-API${m ? ` · cập nhật ${hhmm(m.updated)}` : ''}. Chỉ để tham khảo.`
+    `ExchangeRate-API${m ? ` · cập nhật ${hhmm(m.updated)}` : ''}` +
+    `${FUEL ? ` · xăng: ${FUEL.source}, kỳ ${fuelDateLabel(FUEL.priceDate)}` : ''}. Chỉ để tham khảo.`
 
   const cityOptions = VN_CITIES.map((c) => ({ value: c.name, label: c.name }))
 
@@ -282,6 +289,18 @@ export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; 
               change={m && <Change v={m.btc.change24h} />}
               failed={mErr}
             />
+            {FUEL && RON95 && (
+              <Stat
+                label="Xăng RON95"
+                value={`${RON95.region1.toLocaleString('en-US')} đ`}
+                change={<span className="dk-chg">kỳ {fuelDateLabel(FUEL.priceDate).slice(0, 5)}</span>}
+                failed={false}
+                title={
+                  `Giá bán lẻ ${RON95.name} vùng 1 của Petrolimex (đ/lít), kỳ điều hành ${fuelDateLabel(FUEL.priceDate)}` +
+                  `${RON95.region2 ? ` · vùng 2: ${RON95.region2.toLocaleString('en-US')} đ` : ''}. Nguồn: ${FUEL.source}.`
+                }
+              />
+            )}
           </ul>
         </div>
 

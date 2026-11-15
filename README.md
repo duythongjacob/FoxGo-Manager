@@ -53,6 +53,7 @@ Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\
 
 Firebase Hosting, site `foxgo` trong project `foxgo-aed1f`:
 ```bash
+npm run fuel:update   # giá xăng kỳ mới nhất → src/data/fuel.json (lỗi mạng thì giữ bản cũ)
 npm run check && npm run build
 npx firebase-tools deploy --only hosting --project foxgo-aed1f
 ```

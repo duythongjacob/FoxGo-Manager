@@ -6,9 +6,12 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 ### Đổi (15/11/2026)
 - Logo FoxGo mới (favicon / icon cài app): mặt cáo tròn + đuôi cuộn chóp trắng trên nền tối — sinh bằng
   `Fox.Files/tools/gen_fox.py` (`svg/logo/foxgo-icon.svg`).
-- Ô Fox.CôngViệc trên trang chủ bấm được (link tạm bản trên máy, cổng 5175) cho tới khi phát hành web.
+- Ô Fox.CôngViệc trỏ bản web https://foxgo-work.web.app (trước đó: link tạm bản trên máy, cổng 5175).
+- `chay_local.bat`: nhấp đúp chạy trên máy (dev :5170 hoặc build + preview :4170).
 - Thanh thông số luôn thu nhỏ khi mở trang (không nhớ lựa chọn mở nữa).
 ### Thêm
+- Thanh thông số: dòng **Xăng RON95** (giá bán lẻ Petrolimex vùng 1, kỳ điều hành) — snapshot `src/data/fuel.json`
+  tạo bằng `npm run fuel:update`, trình duyệt không gọi thêm dịch vụ nào.
 - Trang chủ (`#/`) tối giản theo màn khóa Fox.TàiChính: nền lưới chấm + vầng sáng, cáo trong khung kính, ô app dạng kính
   (app kế hoạch: viền đứt, mờ); chân trang "FoxGo 2026 by Thong Duy".
 - Thanh thông số dọc bên trái (màn hẹp: ngăn kéo trượt từ trái): giờ + lời chào, thời tiết (chọn thành phố, 3 ngày — Open-Meteo),

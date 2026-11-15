@@ -4,11 +4,18 @@
  *  - Open-Meteo (không cần key, CC BY 4.0): https://open-meteo.com
  *  - CoinGecko simple/price (không cần key): https://www.coingecko.com — Bitcoin, PAX Gold ≈ 1 oz vàng
  *  - ExchangeRate-API open access (không cần key): https://www.exchangerate-api.com — USD/VND
- * Tính năng: docs/features/thanh-thong-so.md. Phân tích phản hồi (hàm thuần, có test) ở lib/weather.ts, lib/market.ts.
+ *  - Giá xăng Petrolimex (anh yêu cầu 15/11/2026, giống Fox.TàiChính FF-075): KHÔNG gọi từ trình duyệt — snapshot
+ *    `fuel.json` đóng gói cùng trang, tạo trên máy bằng `npm run fuel:update` (GET giaxanghomnay.com).
+ * Tính năng: docs/features/thanh-thong-so.md. Phân tích phản hồi (hàm thuần, có test) ở lib/weather.ts, lib/market.ts, lib/fuel.ts.
  * Khóa localStorage: `foxdots.ext.*` (đệm), `foxdots.city` (thành phố) — giữ tên cũ để không mất cài đặt (FD-012).
  */
+import { isFuelPrices, type FuelPrices } from '@/lib/fuel'
 import { parseCoinGecko, parseUsdVnd, type Market } from '@/lib/market'
 import { parseOpenMeteo, type City, type Weather } from '@/lib/weather'
+import fuelSnapshot from './fuel.json'
+
+/** Giá xăng dầu kỳ gần nhất (snapshot trong bundle); null nếu file hỏng → thanh thông số ẩn dòng xăng. */
+export const FUEL: FuelPrices | null = isFuelPrices(fuelSnapshot) ? fuelSnapshot : null
 
 /** Kết quả gọi dịch vụ ngoài kèm cờ "đang dùng bản cũ". */
 export interface Fetched<T> {

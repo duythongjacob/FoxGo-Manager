@@ -15,6 +15,8 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 - **Dịch vụ ngoài được duyệt (anh duyệt 14/11/2026, giống Fox.TàiChính)** — chỉ trong `src/data/external.ts`:
   Open-Meteo (`api.open-meteo.com`, thời tiết — chỉ gửi tọa độ thành phố chọn từ danh sách), CoinGecko
   (`api.coingecko.com`, Bitcoin + PAX Gold ≈ vàng thế giới), ExchangeRate-API (`open.er-api.com`, USD/VND).
+  **Giá xăng Petrolimex (anh yêu cầu 15/11/2026, giống Fox.TàiChính FF-075):** trình duyệt không gọi — `npm run fuel:update`
+  (GET `giaxanghomnay.com` từ máy) → `src/data/fuel.json` đóng gói; chạy trước mỗi lần deploy.
   Không gửi dữ liệu cá nhân, có đệm localStorage (`foxdots.ext.*`), ghi nguồn (tooltip của thanh thông số — bắt buộc theo giấy phép Open-Meteo/ExchangeRate-API). Thêm dịch vụ khác → hỏi anh.
 - **Firebase project `foxgo-aed1f`** (anh tạo 15/11/2026): chỉ dùng **Hosting** (FD-004, site `foxgo` → https://foxgo.web.app; deploy: `npm run build` rồi `npx firebase-tools deploy --only hosting`) — trang tĩnh, không cần SDK `firebase`
   trong bundle. Không `getAnalytics`, không Firestore/Auth cho tới FD-007 có PRD.

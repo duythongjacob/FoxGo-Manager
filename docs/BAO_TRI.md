@@ -45,6 +45,7 @@ Khóa `foxdots.theme` nằm ở **hai nơi**: `src/lib/theme.ts` và script đ�
 
 ## Deploy & GitHub
 ```bash
+npm run fuel:update   # giá xăng kỳ mới nhất → src/data/fuel.json (lỗi mạng thì giữ bản cũ)
 npm run check && npm run build
 npx firebase-tools deploy --only hosting --project foxgo-aed1f     # → https://foxgo.web.app
 ```

@@ -1,0 +1,43 @@
+{
+  "source": "Petrolimex (giaxanghomnay.com)",
+  "priceDate": "2026-11-12",
+  "fetchedAt": "2026-11-15T16:00:35.679Z",
+  "items": [
+    {
+      "name": "Xăng E5 RON 92 Mức 2",
+      "region1": 19390,
+      "region2": 19770,
+      "unit": "VND/lít"
+    },
+    {
+      "name": "Xăng E10 RON 95 Mức 5",
+      "region1": 21840,
+      "region2": 22270,
+      "unit": "VND/lít"
+    },
+    {
+      "name": "Xăng E10 RON 95 Mức 3",
+      "region1": 19840,
+      "region2": 20230,
+      "unit": "VND/lít"
+    },
+    {
+      "name": "Dầu hỏa 2-K",
+      "region1": 26400,
+      "region2": 26920,
+      "unit": "VND/lít"
+    },
+    {
+      "name": "DO 0,05S Mức 2",
+      "region1": 26820,
+      "region2": 27350,
+      "unit": "VND/lít"
+    },
+    {
+      "name": "DO 0,001S Mức 5",
+      "region1": 28620,
+      "region2": 29190,
+      "unit": "VND/lít"
+    }
+  ]
+}
