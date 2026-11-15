@@ -85,7 +85,6 @@ Không gửi dữ liệu cá nhân. Nguồn ghi trong tooltip của thanh (bắt
 | Khóa | Giá trị | Ai đọc/ghi |
 |---|---|---|
 | `foxdots.theme` | `system` · `light` · `dark` | `lib/theme.ts` (THEME_KEY), `app/themeStore.ts`, script đầu `index.html` |
-| `foxdots.dock` | `open` · `collapsed` | `features/launcher/LauncherPage.tsx` |
 | `foxdots.city` | tên thành phố trong `VN_CITIES` | `data/external.ts` |
 | `foxdots.ext.*` | `{ at, value }` đệm dữ liệu ngoài | `data/external.ts` |
 

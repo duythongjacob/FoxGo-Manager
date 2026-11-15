@@ -3,6 +3,11 @@
 Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo SemVer.
 
 ## [Chưa phát hành]
+### Đổi (15/11/2026)
+- Logo FoxGo mới (favicon / icon cài app): mặt cáo tròn + đuôi cuộn chóp trắng trên nền tối — sinh bằng
+  `Fox.Files/tools/gen_fox.py` (`svg/logo/foxgo-icon.svg`).
+- Ô Fox.CôngViệc trên trang chủ bấm được (link tạm bản trên máy, cổng 5175) cho tới khi phát hành web.
+- Thanh thông số luôn thu nhỏ khi mở trang (không nhớ lựa chọn mở nữa).
 ### Thêm
 - Trang chủ (`#/`) tối giản theo màn khóa Fox.TàiChính: nền lưới chấm + vầng sáng, cáo trong khung kính, ô app dạng kính
   (app kế hoạch: viền đứt, mờ); chân trang "FoxGo 2026 by Thong Duy".

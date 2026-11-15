@@ -9,7 +9,7 @@ Chỉ để tham khảo.
 ## Cách dùng / hành vi
 - **Thu nhỏ** (mặc định): dải hẹp chỉ có giờ + nhiệt độ + biểu tượng thời tiết + nút "Giới thiệu".
 - **Mở rộng** (bấm nút menu): giờ lớn, thứ/ngày + lời chào; thời tiết hiện tại + ô chọn thành phố + dự báo 3 ngày;
-  3 dòng giá: Vàng (đ/lượng, % 24h), USD (đ), Bitcoin (USD, % 24h). Lựa chọn thu/mở được nhớ trên máy.
+  3 dòng giá: Vàng (đ/lượng, % 24h), USD (đ), Bitcoin (USD, % 24h). Mỗi lần mở trang luôn ở dạng thu nhỏ (không nhớ lựa chọn mở).
 - Ô chọn thành phố: 21 thành phố lớn VN, gõ tìm không dấu ("ha noi" → Hà Nội).
 - Rê chuột lên thanh: tooltip ghi **nguồn** + giờ cập nhật giá.
 - Trạng thái:
@@ -67,3 +67,4 @@ Luồng đệm chi tiết: [../LUONG_CODE.md](../LUONG_CODE.md) mục 4.
 | Ngày | Phiên bản | Thay đổi |
 |---|---|---|
 | 15/11/2026 | chưa phát hành | Bản đầu (chép logic thời tiết/giá từ Fox.TàiChính FF-033/034/036) |
+| 15/11/2026 | chưa phát hành | Luôn thu nhỏ khi mở trang; bỏ khóa nhớ `foxdots.dock` |

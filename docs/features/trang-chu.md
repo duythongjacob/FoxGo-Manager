@@ -28,7 +28,6 @@ Tối giản theo màn khóa của Fox.TàiChính.
 | Dữ liệu | Lưu ở đâu | Khóa / đường dẫn | Ghi chú |
 |---|---|---|---|
 | Danh sách app | mã nguồn | `src/data/apps.ts` | xem [danh-sach-app.md](danh-sach-app.md) |
-| Thu/mở thanh thông số | localStorage | `foxdots.dock` = `open` / `collapsed` | mặc định thu nhỏ |
 
 ## Mã nguồn
 | File | Vai trò |
@@ -53,3 +52,4 @@ Tối giản theo màn khóa của Fox.TàiChính.
 |---|---|---|
 | 14/11/2026 | 0.1.0 | Bản đầu: lời chào, đồng hồ, tìm nhanh, lưới thẻ app |
 | 15/11/2026 | chưa phát hành | Làm lại kiểu màn khóa, bỏ ô tìm & thẻ app cũ; đổi tên FoxGo |
+| 15/11/2026 | chưa phát hành | Thanh thông số luôn thu nhỏ khi mở; ô Fox.CôngViệc bấm được (bản trên máy) |

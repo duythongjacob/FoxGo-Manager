@@ -6,27 +6,6 @@ import Wordmark from '@/components/Wordmark'
 import InfoDock from './InfoDock'
 import './launcher.css'
 
-/** Trạng thái thu/mở thanh thông số: 'open' | 'collapsed' (giữ tên khóa cũ — FD-012). */
-const DOCK_KEY = 'foxdots.dock'
-
-/** Thanh thông số đang thu nhỏ? Mặc định thu nhỏ; chỉ mở khi người dùng đã chọn mở (lưu trên máy). */
-function readCollapsed(): boolean {
-  try {
-    return localStorage.getItem(DOCK_KEY) !== 'open'
-  } catch {
-    return true
-  }
-}
-
-/** Ghi trạng thái thu/mở; lỗi lưu trữ thì chỉ áp dụng trong phiên. */
-function saveCollapsed(v: boolean): void {
-  try {
-    localStorage.setItem(DOCK_KEY, v ? 'collapsed' : 'open')
-  } catch {
-    /* chỉ áp dụng trong phiên */
-  }
-}
-
 /** Ô app dạng kính (như ảnh đại diện màn khóa). App "kế hoạch" không có link, hiển thị mờ. */
 function AppTile({ app }: { app: FoxApp }) {
   const live = app.status !== 'planned' && !!app.url
@@ -77,11 +56,9 @@ function AppTile({ app }: { app: FoxApp }) {
  */
 export default function LauncherPage() {
   const apps = useMemo(() => sortApps(APPS), [])
-  const [collapsed, setCollapsed] = useState(readCollapsed)
-  const toggle = () => {
-    setCollapsed(!collapsed)
-    saveCollapsed(!collapsed)
-  }
+  // Luôn thu nhỏ khi mở trang (anh chọn 15/11/2026) — không nhớ lựa chọn mở giữa các lần vào
+  const [collapsed, setCollapsed] = useState(true)
+  const toggle = () => setCollapsed(!collapsed)
 
   return (
     <div className="lc">
