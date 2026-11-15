@@ -45,11 +45,11 @@ export const APPS: FoxApp[] = [
       'Đồng bộ máy tính và điện thoại, dùng được khi mất mạng',
     ],
     accent: '#2563eb',
-    // Đang xây v0.1 (FW-000) — chưa có bản web: link chính tạm là bản chạy trên máy (cổng 5175, docs/MA_APP.md).
-    // Phát hành → đổi url thành 'https://foxgo-work.web.app' + status 'live'.
+    // v0.1 (FW-000) đã deploy nghiệm thu lên foxgo-work.web.app (15/11/2026) — link chính trỏ bản web.
+    // Anh nghiệm thu xong → đổi status 'live'.
     status: 'building',
     version: '0.1',
-    url: 'http://localhost:5175',
+    url: 'https://foxgo-work.web.app',
     extra: [
       { label: 'Trên máy', url: 'http://localhost:5175' },
       { label: 'Test', url: 'http://localhost:5176' },

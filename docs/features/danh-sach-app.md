@@ -46,3 +46,4 @@ Cách thêm app: [../BAO_TRI.md](../BAO_TRI.md).
 | 15/11/2026 | chưa phát hành | Thêm `tagline`, `fullBody`, `highlights`; bỏ hàm tìm/đếm không còn dùng |
 | 15/11/2026 | chưa phát hành | Fox.CôngViệc chuyển "Đang xây" v0.1 (FW-000), tính năng chính theo bản thật |
 | 15/11/2026 | chưa phát hành | Fox.CôngViệc có link chính tạm `http://localhost:5175` (bản trên máy) — ô trên trang chủ bấm được |
+| 15/11/2026 | chưa phát hành | Fox.CôngViệc link chính đổi sang `https://foxgo-work.web.app` (bản nghiệm thu đã deploy) |
