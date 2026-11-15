@@ -1,3 +1,4 @@
+/** Trang chủ (#/) — xem docs/features/trang-chu.md. CSS: launcher.css (tiền tố .lc- trang, .dk- thanh thông số). */
 import { useMemo, useState, type CSSProperties } from 'react'
 import { APPS } from '@/data/apps'
 import { sortApps, STATUS_LABEL, type FoxApp } from '@/lib/apps'
@@ -5,6 +6,7 @@ import Wordmark from '@/components/Wordmark'
 import InfoDock from './InfoDock'
 import './launcher.css'
 
+/** Trạng thái thu/mở thanh thông số: 'open' | 'collapsed' (giữ tên khóa cũ — FD-012). */
 const DOCK_KEY = 'foxdots.dock'
 
 /** Thanh thông số đang thu nhỏ? Mặc định thu nhỏ; chỉ mở khi người dùng đã chọn mở (lưu trên máy). */
@@ -16,6 +18,7 @@ function readCollapsed(): boolean {
   }
 }
 
+/** Ghi trạng thái thu/mở; lỗi lưu trữ thì chỉ áp dụng trong phiên. */
 function saveCollapsed(v: boolean): void {
   try {
     localStorage.setItem(DOCK_KEY, v ? 'collapsed' : 'open')

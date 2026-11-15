@@ -1,9 +1,11 @@
 /**
  * Thời tiết — hàm thuần (chép từ Fox.TàiChính `lib/weather.ts`, FF-034).
- * Mã thời tiết WMO (Open-Meteo `weather_code`) → mô tả tiếng Việt + nhóm biểu tượng.
+ * Mã thời tiết WMO (Open-Meteo `weather_code`) → mô tả tiếng Việt + nhóm biểu tượng; danh sách thành phố;
+ * chuẩn hóa phản hồi API. Tính năng: docs/features/thanh-thong-so.md.
  */
 export type WeatherIcon = 'sun' | 'partly' | 'cloud' | 'fog' | 'drizzle' | 'rain' | 'storm' | 'snow'
 
+/** Bảng mã WMO 4677 (bộ mã Open-Meteo trả về): [các mã, mô tả, biểu tượng]. */
 const TABLE: [number[], string, WeatherIcon][] = [
   [[0], 'Trời quang', 'sun'],
   [[1], 'Ít mây', 'partly'],
@@ -25,6 +27,7 @@ const TABLE: [number[], string, WeatherIcon][] = [
   [[96, 99], 'Dông kèm mưa đá', 'storm'],
 ]
 
+/** Mã WMO → mô tả + biểu tượng; mã lạ → "Không rõ". */
 export function describeWeather(code: number): { text: string; icon: WeatherIcon } {
   const row = TABLE.find(([codes]) => codes.includes(code))
   return row ? { text: row[1], icon: row[2] } : { text: 'Không rõ', icon: 'cloud' }
@@ -67,14 +70,20 @@ export const DEFAULT_CITY = VN_CITIES[0]
 export const cityByName = (name: string | null | undefined): City =>
   VN_CITIES.find((c) => c.name === name) ?? DEFAULT_CITY
 
+/** Thời tiết đã chuẩn hóa. Nhiệt độ °C, độ ẩm %, gió km/h. */
 export interface Weather {
   temp: number
+  /** Nhiệt độ cảm nhận */
   feels: number
   humidity: number
   wind: number
+  /** Mã WMO — đưa vào describeWeather() */
   code: number
+  /** false = ban đêm → biểu tượng mặt trăng */
   isDay: boolean
+  /** Dự báo theo ngày (YYYY-MM-DD giờ địa phương); rain = % khả năng mưa cao nhất, null nếu nguồn không có */
   days: { date: string; max: number; min: number; code: number; rain: number | null }[]
+  /** Thời điểm tải (ms) */
   fetched: number
 }
 

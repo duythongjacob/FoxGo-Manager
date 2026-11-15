@@ -1,3 +1,7 @@
+/**
+ * Trang Giới thiệu (#/gioi-thieu) — xem docs/features/gioi-thieu.md. CSS: landing.css (tiền tố .ld-).
+ * Nội dung chữ khớp ../docs/TAM_NHIN.md (nguyên tắc, lộ trình) — đổi một bên thì đổi cả hai.
+ */
 import type { CSSProperties, ReactNode } from 'react'
 import {
   ArrowRightOutlined,
@@ -15,6 +19,7 @@ import { sortApps, STATUS_LABEL, type FoxApp } from '@/lib/apps'
 import { href } from '@/lib/route'
 import './landing.css'
 
+/** 6 nguyên tắc sản phẩm (rút gọn từ ../docs/TAM_NHIN.md). */
 const PRINCIPLES: { icon: ReactNode; title: string; desc: string }[] = [
   {
     icon: <LockOutlined />,
@@ -48,6 +53,7 @@ const PRINCIPLES: { icon: ReactNode; title: string; desc: string }[] = [
   },
 ]
 
+/** Biểu cảm linh vật: [tên trong public/fox/bieu-cam/fox-<tên>.svg, nhãn]. */
 const EXPRESSIONS = [
   ['happy', 'Vui'],
   ['wink', 'Nháy mắt'],
@@ -59,6 +65,7 @@ const EXPRESSIONS = [
   ['sleepy', 'Buồn ngủ'],
 ] as const
 
+/** 3 giai đoạn của hệ sinh thái (../docs/TAM_NHIN.md → Kiến trúc tổng thể); `now` = giai đoạn hiện tại. */
 const PHASES = [
   {
     title: 'Trang chủ lối tắt',
@@ -75,9 +82,11 @@ const PHASES = [
   },
 ]
 
+/** Cuộn mượt tới mục có id (nút trong hero). */
 const goTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
+/** Gắn màu nhấn của app vào biến CSS --app-accent (quy tắc: màu app chỉ đi qua biến này). */
 const accent = (a: FoxApp) => ({ '--app-accent': a.accent }) as CSSProperties
 
 /** Chú cáo vẫy tay ở giữa, 6 linh vật app xoay chậm trên quỹ đạo. */
@@ -110,6 +119,7 @@ function Orbit({ apps }: { apps: FoxApp[] }) {
   )
 }
 
+/** Ô lớn 2×2 trong lưới bento: app đầu tiên sau sắp xếp (đang chạy) — linh vật toàn thân + tính năng chính. */
 function FeaturedApp({ app }: { app: FoxApp }) {
   return (
     <article id={app.code.toLowerCase()} className="ld-bento-main" style={accent(app)}>
@@ -145,6 +155,7 @@ function FeaturedApp({ app }: { app: FoxApp }) {
   )
 }
 
+/** Ô nhỏ trong lưới bento cho các app còn lại. */
 function SmallApp({ app }: { app: FoxApp }) {
   return (
     <article id={app.code.toLowerCase()} className="ld-bento-item" style={accent(app)}>
@@ -169,6 +180,7 @@ function SmallApp({ app }: { app: FoxApp }) {
   )
 }
 
+/** Tiêu đề mục: dòng nhỏ (eyebrow) + h2 + mô tả. */
 function Head({
   id,
   eyebrow,

@@ -1,3 +1,4 @@
+/** Khung trang dùng chung: nền, thanh trên + chân trang (chỉ trang Giới thiệu). Xem docs/features/dieu-huong.md. */
 import type { ReactNode } from 'react'
 import { Button, Tooltip } from 'antd'
 import { ArrowLeftOutlined, DesktopOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons'
@@ -5,6 +6,7 @@ import Wordmark from '@/components/Wordmark'
 import { href, type RouteId } from '@/lib/route'
 import { MODE_LABEL, nextMode, type ThemeMode } from '@/lib/theme'
 
+/** Biểu tượng nút đổi giao diện theo chế độ hiện tại. */
 const MODE_ICON = { system: <DesktopOutlined />, light: <SunOutlined />, dark: <MoonOutlined /> }
 
 interface Props {
@@ -50,6 +52,7 @@ export default function Layout({ current, mode, onCycleMode, children }: Props) 
         </header>
       )}
 
+      {/* key = trang → đổi trang thì React dựng lại <main>, chạy lại hiệu ứng vào trang trong CSS */}
       <main className="fd-main" key={current}>
         {children}
       </main>

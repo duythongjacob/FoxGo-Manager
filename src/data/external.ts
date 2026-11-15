@@ -4,10 +4,13 @@
  *  - Open-Meteo (không cần key, CC BY 4.0): https://open-meteo.com
  *  - CoinGecko simple/price (không cần key): https://www.coingecko.com — Bitcoin, PAX Gold ≈ 1 oz vàng
  *  - ExchangeRate-API open access (không cần key): https://www.exchangerate-api.com — USD/VND
+ * Tính năng: docs/features/thanh-thong-so.md. Phân tích phản hồi (hàm thuần, có test) ở lib/weather.ts, lib/market.ts.
+ * Khóa localStorage: `foxdots.ext.*` (đệm), `foxdots.city` (thành phố) — giữ tên cũ để không mất cài đặt (FD-012).
  */
 import { parseCoinGecko, parseUsdVnd, type Market } from '@/lib/market'
 import { parseOpenMeteo, type City, type Weather } from '@/lib/weather'
 
+/** Kết quả gọi dịch vụ ngoài kèm cờ "đang dùng bản cũ". */
 export interface Fetched<T> {
   value: T
   /** true = lấy từ bản đã lưu do lỗi mạng (có thể cũ) */
@@ -30,6 +33,7 @@ function writeCache(key: string, value: unknown) {
   }
 }
 
+/** GET JSON, quá 8 giây thì hủy; không gửi cookie/referrer (nguồn không biết người dùng đang mở trang nào). */
 async function getJson(url: string, ms = 8000): Promise<unknown> {
   const ctl = new AbortController()
   const t = setTimeout(() => ctl.abort(), ms)
@@ -57,6 +61,7 @@ async function cached<T>(key: string, ttl: number, load: () => Promise<T | null>
   }
 }
 
+/** Thời tiết hiện tại + 3 ngày của thành phố. Đệm 30 phút, khóa theo tọa độ (đổi thành phố không lẫn đệm). */
 export function fetchWeather(city: City): Promise<Fetched<Weather>> {
   const url =
     'https://api.open-meteo.com/v1/forecast' +
@@ -69,6 +74,7 @@ export function fetchWeather(city: City): Promise<Fetched<Weather>> {
   )
 }
 
+/** Giá Bitcoin + PAX Gold (USD, VND, % 24 giờ). Đệm 10 phút — gói miễn phí CoinGecko giới hạn số lần gọi. */
 export function fetchMarket(): Promise<Fetched<Market>> {
   return cached('foxdots.ext.market', 10 * 60_000, async () =>
     parseCoinGecko(
@@ -80,14 +86,17 @@ export function fetchMarket(): Promise<Fetched<Market>> {
   )
 }
 
+/** Tỷ giá USD/VND. Đệm 6 giờ — nguồn chỉ cập nhật khoảng 1 lần/ngày. */
 export function fetchUsdVnd(): Promise<Fetched<{ rate: number; updated: number }>> {
   return cached('foxdots.ext.usdvnd', 6 * 3600_000, async () =>
     parseUsdVnd(await getJson('https://open.er-api.com/v6/latest/USD')),
   )
 }
 
+/** Thành phố thời tiết đã chọn (lưu tên, khi đọc đối chiếu với VN_CITIES). */
 const CITY_KEY = 'foxdots.city'
 
+/** Tên thành phố đã lưu, hoặc null nếu chưa chọn / không đọc được. */
 export function readCityName(): string | null {
   try {
     return localStorage.getItem(CITY_KEY)
@@ -96,6 +105,7 @@ export function readCityName(): string | null {
   }
 }
 
+/** Ghi tên thành phố đã chọn; lỗi lưu trữ thì chỉ áp dụng trong phiên. */
 export function saveCityName(name: string): void {
   try {
     localStorage.setItem(CITY_KEY, name)

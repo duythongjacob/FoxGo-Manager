@@ -6,7 +6,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 ### Thêm
 - Trang chủ (`#/`) tối giản theo màn khóa Fox.TàiChính: nền lưới chấm + vầng sáng, cáo trong khung kính, ô app dạng kính
   (app kế hoạch: viền đứt, mờ); chân trang "FoxGo 2026 by Thong Duy".
-- Thanh thông số dọc bên trái (màn hẹp: thẻ trên cùng): giờ + lời chào, thời tiết (chọn thành phố, 3 ngày — Open-Meteo),
+- Thanh thông số dọc bên trái (màn hẹp: ngăn kéo trượt từ trái): giờ + lời chào, thời tiết (chọn thành phố, 3 ngày — Open-Meteo),
   vàng thế giới quy đổi đ/lượng + Bitcoin (CoinGecko), USD/VND (ExchangeRate-API); khung chờ khi tải, đệm,
   dùng bản cũ khi mất mạng, nguồn trong tooltip.
 - Thanh thông số mặc định thu hẹp thành dải (giờ + nhiệt độ), mở rộng khi bấm và nhớ trên máy; ô chọn thành phố tối, tìm không dấu.
@@ -23,6 +23,9 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - Bỏ ô tìm app, câu nhắc theo giờ và lưới thẻ app cũ (`AppCard`).
 - Đổi tên thương hiệu Foxdots → **FoxGo** (FD-012): chân trang, tiêu đề tab, mô tả, manifest PWA, nhãn trợ năng.
 - Cấu hình Firebase Hosting, project `foxgo-aed1f` (FD-004).
+- Bộ tài liệu bảo trì: README chuẩn, `docs/LUONG_CODE.md` (kiến trúc + luồng), `docs/CAU_TRUC_THU_MUC.md` (cây thư mục,
+  `npm run check:tree` tự kiểm tra), `docs/BAO_TRI.md`, `docs/features/` (6 tính năng). Ghi chú đầu file + JSDoc cho toàn bộ code.
+- Bỏ hàm không còn dùng `filterApps`, `openable`, `countByStatus` và 2 SVG không dùng (`fox-foxdots`, `fox-vay-duoi`).
 
 ## [0.1.0] — 2026-11-14
 ### Thêm

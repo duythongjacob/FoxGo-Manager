@@ -21,33 +21,33 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 - `src/styles/global.css` = **bản token chuẩn** của hệ sinh thái. Đổi token → cập nhật `../docs/DESIGN_SYSTEM.md`.
 - Danh sách app: `src/data/apps.ts` (khớp `../docs/MA_APP.md`). Màu nhấn app chỉ dùng qua biến `--app-accent`.
 
-## Kiến trúc
-- `src/lib/` hàm thuần + test (`apps.ts`, `greeting.ts`, `theme.ts`, `route.ts` hash route, `weather.ts` + `market.ts`
-  chép từ Fox.TàiChính — mã WMO, phân tích phản hồi API, quy đổi vàng đ/lượng).
-- `src/data/` `apps.ts` danh sách app; `external.ts` gọi dịch vụ ngoài + đệm + thành phố đã chọn (`foxdots.city`).
-- `src/app/` Root (ConfigProvider AntD, chọn trang), `Layout.tsx` (nền lưới; thanh trên kính tối chỉ ở Giới thiệu), `useRoute.ts`.
-- `src/components/WxIcon.tsx` biểu tượng thời tiết SVG.
-- `src/features/launcher/` LauncherPage + InfoDock (thời tiết, giá) + `launcher.css` (gốc `lock.css`);
-  `src/features/landing/` LandingPage + `landing.css` (hero gốc `login.css`).
-- Linh vật trong `public/fox/` (đầu, toàn thân `*-toan-than.svg`, `bieu-cam/`) chép từ `Fox.Files/svg/`.
-- Khóa localStorage khác: `foxdots.dock` (thu nhỏ thanh thông số), `foxdots.city`, `foxdots.ext.*` (đệm dữ liệu ngoài).
-- Khóa localStorage `foxdots.theme` dùng ở cả `src/lib/theme.ts` và script đầu `index.html` — đổi thì đổi cả hai.
+## Kiến trúc & tài liệu
+Đọc trước khi sửa: `docs/LUONG_CODE.md` (kiến trúc, luồng), `docs/CAU_TRUC_THU_MUC.md` (bản đồ thư mục),
+`docs/BAO_TRI.md` (việc bảo trì), `docs/features/` (từng tính năng). Tóm tắt:
+- `src/lib/` hàm thuần + test (không import React/antd); `src/data/` danh sách app + **mọi lệnh gọi mạng** (`external.ts`);
+  `src/app/` Root, Layout, điều hướng, theme; `src/features/<trang>/` mỗi trang một thư mục; `src/components/` dùng chung ≥ 2 nơi.
+- Chiều phụ thuộc: `app/` → `features/` → `components/`, `data/` → `lib/` (không ngược lại).
+- Linh vật trong `public/fox/` chép từ `../Fox.Files/svg/` (sinh bằng `gen_fox.py`, không vẽ tay).
+- Khóa localStorage (giữ tên `foxdots.*` cũ — FD-012): `foxdots.theme` (ở **cả** `src/lib/theme.ts` và script `index.html`),
+  `foxdots.dock`, `foxdots.city`, `foxdots.ext.*`.
+
+## Tài liệu tính năng & ghi chú (bắt buộc)
+- Mỗi tính năng một file `docs/features/<ten>.md` (mẫu `../docs/templates/FEATURE.md`) + mục lục `docs/features/README.md`.
+  Viết cùng commit với code; đổi hành vi → sửa file. Repo GitHub công khai → không ghi dữ liệu cá nhân.
+- Thêm/đổi/xóa thư mục → `docs/CAU_TRUC_THU_MUC.md` (cây + bảng) cùng commit; `npm run check:tree` kiểm tra.
+- Ghi chú code theo `../docs/QUY_UOC_CODE.md#ghi-chú-trong-code`: đầu file (làm gì + link tài liệu tính năng),
+  JSDoc phần export, *vì sao* ở chỗ khó, hằng số có đơn vị/nguồn.
 
 ## Lệnh
 ```bash
 npm run dev        # http://localhost:5170
-npm run check      # tsc + eslint + vitest — phải sạch
+npm run check      # tsc + eslint + vitest + check:tree — phải sạch
 npm run build
 ```
 GitHub (công khai, anh duyệt 15/11/2026): https://github.com/duythongjacob/FoxGo-Manager — chỉ thư mục này, tách từ repo gốc:
 `git subtree split --prefix=FoxGo_Manager -b export` (chạy ở `..`) → `git push <url> export:main` → xóa nhánh `export`.
 Repo công khai → không commit dữ liệu cá nhân, khóa, `.env`.
 Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\`).
-
-## Tài liệu tính năng & ghi chú
-- Mỗi tính năng một file `docs/features/<ten>.md` (mẫu `../docs/templates/FEATURE.md`), mục lục `docs/features/README.md`.
-  Viết cùng commit với code; đổi hành vi → sửa file. Thư mục này nằm trong repo GitHub công khai → không ghi dữ liệu cá nhân.
-- Ghi chú code theo `../docs/QUY_UOC_CODE.md#ghi-chú-trong-code`: đầu file, JSDoc phần export, *vì sao* ở chỗ khó.
 
 ## Code style
 Như `../docs/QUY_UOC_CODE.md`: TS strict, alias `@/`, Prettier (không chấm phẩy, nháy đơn, 110 cột), giao diện xưng "bạn",

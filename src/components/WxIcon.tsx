@@ -1,7 +1,11 @@
 import type { ReactNode } from 'react'
 import type { WeatherIcon } from '@/lib/weather'
 
-/** Biểu tượng thời tiết vẽ bằng SVG, không dùng emoji (chép từ Fox.TàiChính `WeatherWidget.tsx`). */
+/**
+ * Biểu tượng thời tiết vẽ bằng SVG, không dùng emoji (chép từ Fox.TàiChính `WeatherWidget.tsx`).
+ * `kind` lấy từ describeWeather(); `night` đổi mặt trời thành mặt trăng.
+ * Màu cố định (không theo theme) vì là hình minh họa, luôn nằm trên nền tối của trang chủ.
+ */
 export default function WxIcon({
   kind,
   size = 28,

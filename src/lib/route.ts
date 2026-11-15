@@ -1,4 +1,8 @@
-/** Định tuyến bằng hash (#/gioi-thieu) — chạy được trên mọi hosting tĩnh, không cần cấu hình server. */
+/**
+ * Định tuyến bằng hash (#/gioi-thieu) — chạy trên mọi hosting tĩnh, không cần cấu hình rewrite ở server.
+ * Thêm trang: RouteId + 1 dòng ROUTES + nhánh chọn trang trong app/Root.tsx (docs/BAO_TRI.md).
+ * Tính năng: docs/features/dieu-huong.md.
+ */
 
 export type RouteId = 'home' | 'about'
 
@@ -8,6 +12,7 @@ export interface RouteDef {
   label: string
 }
 
+/** Bảng trang: `id` dùng trong code, `path` hiện sau dấu # trên thanh địa chỉ. */
 export const ROUTES: readonly RouteDef[] = [
   { id: 'home', path: '/', label: 'Trang chủ' },
   { id: 'about', path: '/gioi-thieu', label: 'Giới thiệu' },
@@ -28,6 +33,7 @@ export function parseRoute(hash: string): Route {
   return parts[1] ? { id: def.id, anchor: parts[1].toLowerCase() } : { id: def.id }
 }
 
+/** Tạo link tới trang (và mục): href('about', 'ff') → "#/gioi-thieu/ff". */
 export function href(id: RouteId, anchor?: string): string {
   const def = ROUTES.find((r) => r.id === id)!
   return `#${def.path}${anchor ? `/${anchor}` : ''}`

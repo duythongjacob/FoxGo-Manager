@@ -1,4 +1,5 @@
-/* ===== Trang chủ — tối giản theo màn khóa Fox.TàiChính (lock.css) ===== */
+/* ===== Trang chủ (#/) — tối giản theo màn khóa Fox.TàiChính (lock.css). Tài liệu: docs/features/trang-chu.md,
+   docs/features/thanh-thong-so.md. Tiền tố: .lc- (trang, ô app), .dk- (thanh thông số). Màu qua biến --h-*, --app-accent. ===== */
 .lc {
   position: relative;
   min-height: 100dvh;

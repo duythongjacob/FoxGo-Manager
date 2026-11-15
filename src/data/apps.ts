@@ -1,7 +1,8 @@
 import type { FoxApp } from '@/lib/apps'
 
 /**
- * Danh sách app Fox. Thêm app mới → thêm 1 mục ở đây + cập nhật docs/MA_APP.md.
+ * Danh sách app Fox. Thêm app mới → thêm 1 mục ở đây + cập nhật ../docs/MA_APP.md (các bước: docs/BAO_TRI.md).
+ * Tính năng: docs/features/danh-sach-app.md. Kiểu dữ liệu `FoxApp` ở lib/apps.ts.
  * Bundle web là công khai: chỉ link & mô tả chung, KHÔNG số liệu cá nhân.
  */
 export const APPS: FoxApp[] = [

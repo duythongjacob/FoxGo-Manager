@@ -1,3 +1,7 @@
+/**
+ * Điểm vào của app: nạp font + CSS token, vẽ <Root/> vào #root (index.html).
+ * Luồng chạy tổng thể: docs/LUONG_CODE.md.
+ */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 // Font cài sẵn trong node_modules (không tải từ Google) — đủ dấu tiếng Việt

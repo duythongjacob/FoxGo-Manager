@@ -1,5 +1,6 @@
-/** Lời chào & định dạng ngày giờ — hàm thuần, nhận Date để test được. */
+/** Lời chào & định dạng ngày giờ — hàm thuần, nhận Date/giờ làm tham số để test được. Dùng ở thanh thông số. */
 
+/** Lời chào theo giờ (0–23). Mốc: trước 5h khuya, 11h sáng, 13h trưa, 18h chiều, sau đó tối. */
 export function greeting(hour: number): string {
   if (hour < 5) return 'Khuya rồi'
   if (hour < 11) return 'Chào buổi sáng'

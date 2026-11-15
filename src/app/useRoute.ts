@@ -1,3 +1,4 @@
+/** Hook điều hướng: nghe sự kiện `hashchange`; logic tách đường dẫn ở lib/route.ts. Xem docs/features/dieu-huong.md. */
 import { useEffect, useState } from 'react'
 import { parseRoute, type Route } from '@/lib/route'
 
@@ -13,7 +14,7 @@ export function useRoute(): Route {
 
   useEffect(() => {
     if (route.anchor) {
-      // chờ trang mới vẽ xong rồi mới cuộn
+      // chờ trang mới vẽ xong rồi mới cuộn (gọi ngay thì phần tử đích chưa tồn tại; 30 ms ≈ 2 khung hình)
       const t = setTimeout(
         () => document.getElementById(route.anchor!)?.scrollIntoView({ block: 'start' }),
         30,

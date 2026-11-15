@@ -1,3 +1,7 @@
+/**
+ * Thanh thông số bên trái trang chủ — xem docs/features/thanh-thong-so.md.
+ * Gọi dịch vụ ngoài qua data/external.ts (đã có đệm); file này lo vòng làm mới, trạng thái tải/lỗi và hiển thị.
+ */
 import { useEffect, useState, type ReactNode } from 'react'
 import { ConfigProvider, Select, theme, type ThemeConfig } from 'antd'
 import {
@@ -14,7 +18,9 @@ import { formatDate, formatTime, greeting } from '@/lib/greeting'
 import { compactVnd, goldPerLuong, OZ_PER_LUONG, pct, usd, type Market } from '@/lib/market'
 import { cityByName, dayLabel, describeWeather, VN_CITIES, type Weather } from '@/lib/weather'
 
+/** Chu kỳ hỏi lại dịch vụ ngoài (đệm trong external.ts vẫn quyết định có gọi mạng thật hay không). */
 const REFRESH_MS = 10 * 60_000
+/** Thử lại sau lỗi giá thị trường (CoinGecko miễn phí hay trả 429). */
 const RETRY_MS = 60_000
 
 /** Ô chọn thành phố nằm trên nền tối của trang chủ → luôn dùng giao diện tối của AntD. */
@@ -23,6 +29,7 @@ const DARK: ThemeConfig = {
   token: { colorPrimary: '#2dd4bf', colorBgElevated: '#0d2f2b', borderRadiusLG: 12 },
 }
 
+/** Giờ hiện tại, tự cập nhật mỗi `intervalMs` (15 giây là đủ cho đồng hồ hh:mm). */
 function useNow(intervalMs: number): Date {
   const [now, setNow] = useState(() => new Date())
   useEffect(() => {
@@ -38,6 +45,7 @@ const isoDay = (d: Date) =>
 
 const hhmm = (ms: number) => formatTime(new Date(ms))
 
+/** % thay đổi 24 giờ có màu tăng/giảm; |v| ≤ 0,005% coi như đứng giá (không tô màu). */
 function Change({ v }: { v: number | null }) {
   if (v === null) return null
   const dir = v > 0.005 ? 'up' : v < -0.005 ? 'down' : ''
@@ -87,6 +95,7 @@ export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; 
   const [rate, setRate] = useState<{ rate: number; updated: number } | null>(null)
   const [rErr, setRErr] = useState(false)
 
+  // Thời tiết: tải ngay + mỗi 10 phút; đổi thành phố → chạy lại. `alive` chặn setState sau khi rời trang.
   useEffect(() => {
     let alive = true
     const load = () => {
@@ -108,6 +117,7 @@ export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; 
     }
   }, [city])
 
+  // Giá vàng/Bitcoin + tỷ giá: tải ngay + mỗi 10 phút; lỗi CoinGecko thì thử lại sau 1 phút.
   useEffect(() => {
     let alive = true
     let retry: ReturnType<typeof setTimeout> | undefined

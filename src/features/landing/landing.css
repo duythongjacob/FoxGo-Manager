@@ -1,4 +1,5 @@
-/* ===== Trang Giới thiệu FoxGo ===== */
+/* ===== Trang Giới thiệu (#/gioi-thieu) — tài liệu: docs/features/gioi-thieu.md. Tiền tố .ld-; hero gốc login.css của
+   Fox.TàiChính. Màu qua biến CSS (styles/global.css), màu app qua --app-accent. ===== */
 .ld-wrap {
   width: 100%;
   max-width: 1160px;

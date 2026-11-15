@@ -1,9 +1,10 @@
 /**
  * Giá thị trường — hàm thuần (chép từ Fox.TàiChính `lib/market.ts`, `lib/currency.ts`, FF-033/036).
  * CoinGecko simple/price: Bitcoin và PAX Gold (token bảo chứng 1 troy ounce vàng ≈ giá vàng thế giới).
- * ExchangeRate-API: tỷ giá theo USD.
+ * ExchangeRate-API: tỷ giá theo USD. Tính năng: docs/features/thanh-thong-so.md.
  */
 
+/** Giá một tài sản. */
 export interface Quote {
   usd: number
   vnd: number
@@ -12,10 +13,13 @@ export interface Quote {
 }
 export interface Market {
   btc: Quote
+  /** PAX Gold — 1 token = 1 troy ounce vàng */
   gold: Quote
+  /** Lần cập nhật giá mới nhất của nguồn (ms) */
   updated: number
 }
 
+/** Chuẩn hóa phản hồi CoinGecko simple/price; null nếu thiếu Bitcoin hoặc PAX Gold. */
 export function parseCoinGecko(json: unknown): Market | null {
   const j = json as Record<string, Record<string, number> | undefined>
   const q = (x?: Record<string, number>): Quote | null =>
