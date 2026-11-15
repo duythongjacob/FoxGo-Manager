@@ -39,6 +39,9 @@ npm run dev        # http://localhost:5170
 npm run check      # tsc + eslint + vitest — phải sạch
 npm run build
 ```
+GitHub (công khai, anh duyệt 15/11/2026): https://github.com/duythongjacob/FoxGo-Manager — chỉ thư mục này, tách từ repo gốc:
+`git subtree split --prefix=FoxdotsManager -b export` (chạy ở `..`) → `git push <url> export:main` → xóa nhánh `export`.
+Repo công khai → không commit dữ liệu cá nhân, khóa, `.env`.
 Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\`).
 
 ## Code style
