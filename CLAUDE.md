@@ -44,6 +44,11 @@ GitHub (công khai, anh duyệt 15/11/2026): https://github.com/duythongjacob/Fo
 Repo công khai → không commit dữ liệu cá nhân, khóa, `.env`.
 Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\`).
 
+## Tài liệu tính năng & ghi chú
+- Mỗi tính năng một file `docs/features/<ten>.md` (mẫu `../docs/templates/FEATURE.md`), mục lục `docs/features/README.md`.
+  Viết cùng commit với code; đổi hành vi → sửa file. Thư mục này nằm trong repo GitHub công khai → không ghi dữ liệu cá nhân.
+- Ghi chú code theo `../docs/QUY_UOC_CODE.md#ghi-chú-trong-code`: đầu file, JSDoc phần export, *vì sao* ở chỗ khó.
+
 ## Code style
 Như `../docs/QUY_UOC_CODE.md`: TS strict, alias `@/`, Prettier (không chấm phẩy, nháy đơn, 110 cột), giao diện xưng "bạn",
 không emoji làm icon, nút chỉ có icon có `aria-label`, kiểm tra sáng/tối và 375px.
