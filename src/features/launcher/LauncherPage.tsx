@@ -1,17 +1,26 @@
-/** Trang chủ (#/) — xem docs/features/trang-chu.md. CSS: launcher.css (tiền tố .lc- trang, .dk- thanh thông số). */
+/**
+ * Trang chủ (#/) — xem docs/features/trang-chu.md, cài đặt ô: docs/features/cai-dat.md.
+ * CSS: launcher.css (tiền tố .lc- trang, .dk- thanh thông số, .st- popup cài đặt).
+ */
 import { useMemo, useState, type CSSProperties } from 'react'
 import { APPS } from '@/data/apps'
+import { readPrefs, savePrefs } from '@/data/prefs'
 import { sortApps, STATUS_LABEL, type FoxApp } from '@/lib/apps'
+import type { Prefs, UserLink } from '@/lib/prefs'
 import Wordmark from '@/components/Wordmark'
 import InfoDock from './InfoDock'
+import SettingsModal from './SettingsModal'
+import { tileKey, tileName, tilesOf } from './tiles'
 import './launcher.css'
 
+/** Thuộc tính mở tab mới; noopener/noreferrer để trang được mở không điều khiển ngược lại tab này. */
+const newTabProps = (on: boolean) => (on ? { target: '_blank', rel: 'noopener noreferrer' } : {})
+
 /** Ô app dạng kính (như ảnh đại diện màn khóa). App "kế hoạch" không có link, hiển thị mờ. */
-function AppTile({ app }: { app: FoxApp }) {
+function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
   const live = app.status !== 'planned' && !!app.url
   const style = { '--app-accent': app.accent } as CSSProperties
-  // "Fox.TàiChính" → "Tài Chính"
-  const name = app.name.replace('Fox.', '').replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2')
+  const name = tileName({ kind: 'app', app })
   const inner = (
     <>
       <span className="lc-tile-glass" aria-hidden>
@@ -35,7 +44,13 @@ function AppTile({ app }: { app: FoxApp }) {
     </>
   )
   return live ? (
-    <a className="lc-tile" href={app.url} style={style} aria-label={`Mở ${app.name}`}>
+    <a
+      className="lc-tile"
+      href={app.url}
+      style={style}
+      aria-label={`Mở ${app.name}`}
+      {...newTabProps(newTab)}
+    >
       {inner}
     </a>
   ) : (
@@ -50,29 +65,62 @@ function AppTile({ app }: { app: FoxApp }) {
   )
 }
 
+/** Ô link người dùng tự thêm: chữ cái đầu trong khung kính (không tải favicon — không gọi dịch vụ ngoài). */
+function LinkTile({ link, newTab }: { link: UserLink; newTab: boolean }) {
+  const host = link.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  return (
+    <a
+      className="lc-tile is-link"
+      href={link.url}
+      title={host}
+      aria-label={`Mở ${link.name}`}
+      {...newTabProps(newTab)}
+    >
+      <span className="lc-tile-glass" aria-hidden>
+        <span className="lc-tile-letter">{link.name.charAt(0).toUpperCase()}</span>
+      </span>
+      <span className="lc-tile-name">{link.name}</span>
+      <span className="lc-tile-desc">{host.split('/')[0]}</span>
+    </a>
+  )
+}
+
 /**
  * Trang chủ — tối giản theo màn khóa Fox.TàiChính: thanh dọc bên trái là thông số (giờ, lời chào, thời tiết, giá),
- * giữa màn hình là chú cáo và các ô app.
+ * giữa màn hình là chú cáo và các ô app + link riêng (thứ tự, mở tab mới: popup Cài đặt).
  */
 export default function LauncherPage() {
   const apps = useMemo(() => sortApps(APPS), [])
+  const [prefs, setPrefs] = useState<Prefs>(readPrefs)
+  const tiles = useMemo(() => tilesOf(apps, prefs), [apps, prefs])
   // Luôn thu nhỏ khi mở trang (anh chọn 15/11/2026) — không nhớ lựa chọn mở giữa các lần vào
   const [collapsed, setCollapsed] = useState(true)
   const toggle = () => setCollapsed(!collapsed)
+  const [settings, setSettings] = useState(false)
+
+  const save = (p: Prefs) => {
+    setPrefs(p)
+    savePrefs(p)
+    setSettings(false)
+  }
 
   return (
     <div className="lc">
-      <InfoDock collapsed={collapsed} onToggle={toggle} />
+      <InfoDock collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
 
       <div className="lc-main">
         <h1 className="lc-logo">
           <Wordmark size={88} />
         </h1>
 
-        <nav className="lc-tiles" aria-label="Ứng dụng Fox">
-          {apps.map((a) => (
-            <AppTile key={a.code} app={a} />
-          ))}
+        <nav className="lc-tiles" aria-label="Ứng dụng Fox và link của bạn">
+          {tiles.map((t) =>
+            t.kind === 'app' ? (
+              <AppTile key={tileKey(t)} app={t.app} newTab={prefs.newTab} />
+            ) : (
+              <LinkTile key={tileKey(t)} link={t.link} newTab={prefs.newTab} />
+            ),
+          )}
         </nav>
       </div>
 
@@ -81,6 +129,14 @@ export default function LauncherPage() {
         <i aria-hidden />
         Thong Duy
       </footer>
+
+      <SettingsModal
+        open={settings}
+        prefs={prefs}
+        apps={apps}
+        onSave={save}
+        onClose={() => setSettings(false)}
+      />
     </div>
   )
 }

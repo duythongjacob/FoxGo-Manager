@@ -10,6 +10,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - `chay_local.bat`: nhấp đúp chạy trên máy (dev :5170 hoặc build + preview :4170).
 - Thanh thông số luôn thu nhỏ khi mở trang (không nhớ lựa chọn mở nữa).
 ### Thêm
+- Nút **Cài đặt** trên thanh thông số → popup: mở app/link trong tab mới, sắp xếp thứ tự ô, thêm/xóa link riêng
+  (hiện thành ô trên trang chủ). Lưu trên máy (`foxdots.prefs`).
 - Thanh thông số: dòng **Xăng RON95** (giá bán lẻ Petrolimex vùng 1, kỳ điều hành) — snapshot `src/data/fuel.json`
   tạo bằng `npm run fuel:update`, trình duyệt không gọi thêm dịch vụ nào.
 - Trang chủ (`#/`) tối giản theo màn khóa Fox.TàiChính: nền lưới chấm + vầng sáng, cáo trong khung kính, ô app dạng kính

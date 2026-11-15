@@ -57,7 +57,7 @@ Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, 
 | `src/` | Mã nguồn TypeScript/React | Luồng: `docs/LUONG_CODE.md` |
 | `src/app/` | `Root.tsx` (theme AntD + chọn trang), `Layout.tsx`, `useRoute.ts`, `themeStore.ts` | Không chứa logic nghiệp vụ |
 | `src/components/` | `Wordmark.tsx` (logo "Fox."), `WxIcon.tsx` (biểu tượng thời tiết SVG) | Chỉ đặt ở đây khi ≥ 2 nơi dùng |
-| `src/data/` | `apps.ts` (danh sách app), `external.ts` (gọi Open-Meteo/CoinGecko/ExchangeRate-API + đệm), `fuel.json` (snapshot giá xăng) | Mọi lệnh gọi mạng nằm ở đây |
+| `src/data/` | `apps.ts` (danh sách app), `external.ts` (gọi Open-Meteo/CoinGecko/ExchangeRate-API + đệm), `fuel.json` (snapshot giá xăng), `prefs.ts` (đọc/ghi thiết lập trang chủ) | Mọi lệnh gọi mạng nằm ở đây |
 | `src/features/` | Mỗi thư mục con = 1 trang (Page.tsx + CSS riêng + component riêng) | |
 | `src/features/launcher/` | Trang chủ: `LauncherPage.tsx`, `InfoDock.tsx` (thanh thông số), `launcher.css` | `docs/features/trang-chu.md`, `thanh-thong-so.md` |
 | `src/features/landing/` | Trang Giới thiệu: `LandingPage.tsx`, `landing.css` | `docs/features/gioi-thieu.md` |

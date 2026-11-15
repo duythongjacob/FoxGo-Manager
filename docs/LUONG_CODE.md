@@ -87,6 +87,7 @@ Không gửi dữ liệu cá nhân. Nguồn ghi trong tooltip của thanh (bắt
 | `foxdots.theme` | `system` · `light` · `dark` | `lib/theme.ts` (THEME_KEY), `app/themeStore.ts`, script đầu `index.html` |
 | `foxdots.city` | tên thành phố trong `VN_CITIES` | `data/external.ts` |
 | `foxdots.ext.*` | `{ at, value }` đệm dữ liệu ngoài | `data/external.ts` |
+| `foxdots.prefs` | `{ order, newTab, links }` thiết lập trang chủ (FD-005) | `data/prefs.ts`, kiểm tra ở `lib/prefs.ts` |
 
 Tên khóa giữ chữ `foxdots` cũ để người dùng không mất cài đặt; đổi tên phải kèm chuyển dữ liệu (FD-012).
 Mọi lệnh đọc/ghi bọc `try/catch`: trình duyệt chặn lưu trữ thì vẫn chạy, chỉ không nhớ.

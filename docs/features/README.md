@@ -7,7 +7,8 @@ Repo này công khai trên GitHub — không ghi dữ liệu cá nhân.
 | Tính năng | Mã | Trạng thái | File |
 |---|---|---|---|
 | Trang chủ (màn khóa, ô app) | FD-002 | Đang chạy | [trang-chu.md](trang-chu.md) |
-| Thanh thông số (giờ, thời tiết, vàng, USD, Bitcoin) | FD-002 | Đang chạy | [thanh-thong-so.md](thanh-thong-so.md) |
+| Thanh thông số (giờ, thời tiết, vàng, USD, Bitcoin, xăng) | FD-002 | Đang chạy | [thanh-thong-so.md](thanh-thong-so.md) |
+| Cài đặt trang chủ (thứ tự ô, tab mới, link riêng) | FD-005 | Đang chạy | [cai-dat.md](cai-dat.md) |
 | Trang Giới thiệu | FD-002 | Đang chạy | [gioi-thieu.md](gioi-thieu.md) |
 | Danh sách app | FD-002 | Đang chạy | [danh-sach-app.md](danh-sach-app.md) |
 | Điều hướng (hash route) | FD-002 | Đang chạy | [dieu-huong.md](dieu-huong.md) |

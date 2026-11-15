@@ -660,3 +660,141 @@ a.lc-tile:focus-visible .lc-tile-glass {
     height: 36px;
   }
 }
+
+/* ── FD-005: nút Cài đặt trên thanh thông số (cùng kiểu nút Giới thiệu, nằm ngay trên nó) ── */
+.dk-settings {
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+.dk-settings:focus-visible {
+  outline: 2px solid rgba(45, 212, 191, 0.7);
+  outline-offset: -2px;
+}
+.dk-settings + .dk-about {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.dk.is-collapsed .dk-settings {
+  padding-bottom: 16px;
+}
+.dk.is-collapsed .dk-settings + .dk-about::before {
+  display: none;
+}
+
+/* ── FD-005: ô link người dùng thêm (chữ cái đầu thay linh vật, màu nhấn FD) ── */
+.lc-tile.is-link {
+  --app-accent: #f97316;
+}
+.lc-tile-letter {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+
+/* ── FD-005: popup Cài đặt trang chủ (.st-) — theo giao diện sáng/tối của AntD ── */
+.st-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.st-title {
+  font-size: 13px;
+}
+.st-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.st-row > span {
+  display: flex;
+  flex-direction: column;
+}
+.st-hint {
+  font-size: 12px;
+}
+.st-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 300px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.st-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 6px;
+  border-radius: 8px;
+}
+.st-item:hover {
+  background: rgba(127, 127, 127, 0.1);
+}
+.st-ico {
+  flex: none;
+  width: 28px;
+  height: 28px;
+}
+.st-ico.is-letter {
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: #f97316;
+  border-radius: 30%;
+}
+.st-name {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 14px;
+}
+.st-name em {
+  overflow: hidden;
+  font-size: 12px;
+  font-style: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.6;
+}
+.st-gap {
+  flex: none;
+  width: 24px;
+}
+.st-add {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .st-add {
+    grid-template-columns: 1fr auto;
+  }
+  .st-add > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+.st-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 14px;
+}
+.st-reset {
+  margin-right: auto;
+  padding-left: 0;
+}

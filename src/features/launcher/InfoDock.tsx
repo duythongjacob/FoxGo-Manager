@@ -9,6 +9,7 @@ import {
   InfoCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  SettingOutlined,
 } from '@ant-design/icons'
 import WxIcon from '@/components/WxIcon'
 import { FUEL, fetchMarket, fetchUsdVnd, fetchWeather, readCityName, saveCityName } from '@/data/external'
@@ -91,7 +92,16 @@ function Stat({
  * Thanh dọc bên trái trang chủ: giờ + lời chào, thời tiết (Open-Meteo), vàng thế giới quy đổi đ/lượng
  * + Bitcoin (CoinGecko), USD/VND (ExchangeRate-API). Chỉ để tham khảo. Không gửi dữ liệu cá nhân.
  */
-export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
+export default function InfoDock({
+  collapsed,
+  onToggle,
+  onSettings,
+}: {
+  collapsed: boolean
+  onToggle: () => void
+  /** Mở popup Cài đặt trang chủ (FD-005) */
+  onSettings: () => void
+}) {
   const now = useNow(15_000)
   const [city, setCity] = useState(() => cityByName(readCityName()))
   const [w, setW] = useState<Weather | null>(null)
@@ -304,6 +314,16 @@ export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; 
           </ul>
         </div>
 
+        <button
+          type="button"
+          className="dk-about dk-settings"
+          onClick={onSettings}
+          aria-label="Cài đặt trang chủ"
+          title={collapsed ? 'Cài đặt' : undefined}
+        >
+          <SettingOutlined aria-hidden />
+          <span className="dk-about-text">Cài đặt</span>
+        </button>
         <a
           className="dk-about"
           href={href('about')}

@@ -31,7 +31,7 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 - Chiều phụ thuộc: `app/` → `features/` → `components/`, `data/` → `lib/` (không ngược lại).
 - Linh vật trong `public/fox/` chép từ `../Fox.Files/svg/` (sinh bằng `gen_fox.py`, không vẽ tay).
 - Khóa localStorage (giữ tên `foxdots.*` cũ — FD-012): `foxdots.theme` (ở **cả** `src/lib/theme.ts` và script `index.html`),
-  `foxdots.city`, `foxdots.ext.*`.
+  `foxdots.city`, `foxdots.ext.*`, `foxdots.prefs` (thiết lập trang chủ — FD-005).
 
 ## Tài liệu tính năng & ghi chú (bắt buộc)
 - Mỗi tính năng một file `docs/features/<ten>.md` (mẫu `../docs/templates/FEATURE.md`) + mục lục `docs/features/README.md`.

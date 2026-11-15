@@ -1,0 +1,60 @@
+# Cài đặt trang chủ (thứ tự ô, tab mới, link riêng)
+
+> Mã: `FD-005` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+
+## Mục đích
+Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng lên đầu, mở trong tab mới, thêm link ngoài hệ Fox
+(mail, YouTube…) thành ô ngay cạnh các app.
+
+## Cách dùng / hành vi
+- Nút **Cài đặt** (bánh răng) ở cuối thanh thông số, ngay trên "Giới thiệu". Có ở cả dạng thu nhỏ (chỉ icon) lẫn mở rộng.
+- Bấm vào → popup "Cài đặt trang chủ":
+  - **Mở trong tab mới** (công tắc): bật → mọi ô app/link mở tab mới (`target="_blank"`, `rel="noopener noreferrer"`).
+  - **Thứ tự ô**: danh sách mọi ô (app + link), nút mũi tên lên/xuống để đổi chỗ; link có thêm nút xóa (app thì không xóa được).
+  - **Thêm link**: tên (không bắt buộc, tối đa 24 ký tự) + địa chỉ → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
+    (`youtube.com` → "youtube"). Link sai → báo đỏ dưới ô.
+  - **Khôi phục mặc định**: trả thứ tự về mặc định + tắt tab mới; **giữ** các link đã thêm.
+  - **Hủy** / dấu X / bấm nền: bỏ mọi thay đổi. **Lưu**: áp dụng ngay + ghi vào máy.
+- Ô link trên trang chủ: chữ cái đầu trong khung kính màu cam FD, dưới là tên + tên miền; rê chuột thấy địa chỉ.
+- Màn 375px: popup gần full màn, ô "Tên" xuống dòng riêng. Popup theo giao diện sáng/tối đang chọn.
+
+## Quy tắc nghiệp vụ
+- Thứ tự mặc định: app theo `sortApps` (đang chạy → đang xây → kế hoạch), sau đó link theo lúc thêm.
+- Đã lưu thứ tự: ô có trong danh sách đã lưu đứng trước đúng thứ tự đó; ô mới (app mới thêm vào `apps.ts`) xếp cuối.
+- Link chỉ nhận `http`/`https` (chặn `javascript:`, `data:`… vì gắn thẳng vào `<a>`); thiếu giao thức → thêm `https://`;
+  tên miền phải có dấu chấm (trừ `localhost`).
+- Tối đa 24 link (dữ liệu sửa tay quá giới hạn bị cắt khi đọc).
+
+## Dữ liệu
+| Dữ liệu | Lưu ở đâu | Khóa | Ghi chú |
+|---|---|---|---|
+| Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url}[] }`; `order` gồm `app:<mã>` / `link:<id>` |
+
+Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không tải favicon của link (sẽ phải gọi dịch vụ ngoài).
+
+## Mã nguồn
+| File | Vai trò |
+|---|---|
+| `src/features/launcher/SettingsModal.tsx` | Popup, bản nháp, thêm/xóa/sắp xếp |
+| `src/features/launcher/tiles.ts` | Kiểu `Tile` (app \| link), `tilesOf`, `tileKey`, `tileName` |
+| `src/features/launcher/LauncherPage.tsx` | Giữ thiết lập, vẽ `AppTile` / `LinkTile` |
+| `src/features/launcher/InfoDock.tsx` | Nút Cài đặt (`onSettings`) |
+| `src/lib/prefs.ts` (+ test) | `parsePrefs`, `normalizeUrl`, `nameFromUrl`, `applyOrder`, `move` |
+| `src/data/prefs.ts` | `readPrefs` / `savePrefs` (localStorage) |
+| `src/features/launcher/launcher.css` | `.dk-settings`, `.lc-tile.is-link`, `.st-*` |
+
+## Kiểm thử
+- Tự động: `prefs.test.ts` — chuẩn hóa link (chặn `javascript:`), dữ liệu hỏng/trùng/quá giới hạn, sắp thứ tự, đổi chỗ.
+- Tay (đã chạy 15/11/2026 bằng Edge headless): thêm `youtube.com` → đưa lên đầu → bật tab mới → Lưu → tải lại trang:
+  ô youtube đứng đầu, `target=_blank`; popup ở 375px.
+- Còn nên thử: giao diện sáng; Hủy sau khi sửa → không đổi gì.
+
+## Giới hạn & việc còn lại
+- Chưa kéo-thả (dùng nút lên/xuống — dễ dùng bằng bàn phím/điện thoại).
+- Chưa ẩn app, chưa sửa tên link đã thêm (xóa rồi thêm lại).
+- Phím tắt `/` để tìm (phần còn lại của FD-005) chưa làm.
+
+## Lịch sử
+| Ngày | Phiên bản | Thay đổi |
+|---|---|---|
+| 15/11/2026 | chưa phát hành | Bản đầu: tab mới, thứ tự ô, thêm/xóa link |
