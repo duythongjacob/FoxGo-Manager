@@ -10,7 +10,7 @@ const pkg = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url
 /** Đường dẫn thật (đúng chữ hoa ổ đĩa) — tránh Vite coi file là "ngoài root" trên Windows (bài học từ Fox.TàiChính). */
 const real = (u: URL) => fs.realpathSync.native(fileURLToPath(u))
 
-// FoxdotsManager: trang tổng hợp các app Fox. Chỉ link + mô tả chung, không đọc dữ liệu cá nhân, không gọi dịch vụ ngoài.
+// FoxGo_Manager: trang tổng hợp các app Fox. Chỉ link + mô tả chung, không đọc dữ liệu cá nhân, không gọi dịch vụ ngoài.
 export default defineConfig(({ mode }) => ({
   root: real(new URL('.', import.meta.url)),
   plugins: [react()],

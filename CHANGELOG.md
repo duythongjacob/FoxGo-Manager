@@ -1,4 +1,4 @@
-# Nhật ký thay đổi — FoxdotsManager
+# Nhật ký thay đổi — FoxGo_Manager
 
 Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo SemVer.
 

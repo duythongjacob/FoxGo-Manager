@@ -1,5 +1,5 @@
 /* ===== Token màu Fox (sáng / tối) — BẢN CHUẨN để chép cho app mới (docs/DESIGN_SYSTEM.md).
-   Nguồn: fox-taichinh/app/src/styles/global.css. Component dùng biến, không mã màu cứng. ===== */
+   Nguồn: FoxGo_Finance/app/src/styles/global.css. Component dùng biến, không mã màu cứng. ===== */
 :root {
   --accent-a: #0f766e;
   --accent-b: #14b8a6;
