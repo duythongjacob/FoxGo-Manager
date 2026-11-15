@@ -1,15 +1,24 @@
-# FoxdotsManager
+# FoxGo Manager
 
-Trang tổng hợp các app Fox — ghim làm trang chủ trình duyệt.
+Trang tổng hợp các app Fox — ghim làm trang chủ trình duyệt. Bản chạy: **https://foxgo.web.app**
+
+Vite + React + Ant Design. Chỉ chứa link và mô tả chung các app, không đọc dữ liệu cá nhân.
+Thời tiết / giá vàng / Bitcoin / USD lấy từ Open-Meteo, CoinGecko, ExchangeRate-API.
 
 ```bash
 npm install
 npm run dev      # http://localhost:5170
+npm run check    # tsc + eslint + vitest
+npm run build
 ```
-Hoặc bấm đúp `../start_manager.bat`.
 
-**Ghim làm trang chủ** (Chrome/Edge): Cài đặt → *Khi khởi động* → *Mở một trang cụ thể* → `http://localhost:5170`;
-và *Giao diện* → *Hiện nút Trang chủ* → cùng địa chỉ. Trang chỉ mở được khi `start_manager.bat` đang chạy —
-bản luôn mở được sẽ có ở FD-004 (Firebase Hosting).
+**Ghim làm trang chủ** (Chrome/Edge): Cài đặt → *Khi khởi động* → *Mở một trang cụ thể* → `https://foxgo.web.app`;
+và *Giao diện* → *Hiện nút Trang chủ* → cùng địa chỉ.
 
-Thêm app: sửa `src/data/apps.ts` (và `../docs/MA_APP.md`).
+**Deploy** (Firebase Hosting, site `foxgo` trong project `foxgo-aed1f`):
+```bash
+npm run build
+npx firebase-tools deploy --only hosting --project foxgo-aed1f
+```
+
+Thêm app: sửa `src/data/apps.ts`.

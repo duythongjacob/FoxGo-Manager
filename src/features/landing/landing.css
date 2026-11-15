@@ -1,0 +1,838 @@
+/* ===== Trang Giới thiệu FoxGo ===== */
+.ld-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.ld-muted {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---------- Nút ---------- */
+.ld-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ld-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+.ld-btn.primary {
+  border: 0;
+  color: #062a26;
+  background: linear-gradient(135deg, #99f6e4, #2dd4bf);
+  box-shadow: 0 12px 32px -10px rgba(45, 212, 191, 0.75);
+}
+.ld-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(45, 212, 191, 0.9);
+}
+.ld-btn.ghost {
+  color: var(--h-ink);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+.ld-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.ld-btn.solid {
+  align-self: flex-start;
+  height: 42px;
+  margin-top: 6px;
+  border: 0;
+  color: #fff;
+  background: var(--app-accent);
+  box-shadow: 0 10px 24px -10px var(--app-accent);
+}
+.ld-btn.solid:hover {
+  transform: translateY(-1px);
+}
+
+/* ---------- Hero tràn viền ---------- */
+.ld-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--h-ink);
+  background: var(--h-bg);
+  padding: clamp(48px, 8vw, 96px) 0 clamp(72px, 10vw, 120px);
+}
+.ld-hero::after {
+  /* chuyển mềm xuống nền trang */
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 80px;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--h-bg) 60%, transparent));
+  pointer-events: none;
+}
+.ld-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.ld-hero-bg .fd-blob {
+  opacity: 0.55;
+}
+.ld-hero-bg .fd-blob.b2 {
+  opacity: 0.3;
+}
+.ld-hero-bg .fd-blob.b3 {
+  opacity: 0.4;
+}
+.ld-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 78%);
+}
+.ld-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 40px;
+}
+.ld-hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  animation: ld-rise 0.7s ease-out both;
+}
+.ld-pill {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--h-g1);
+  background: rgba(45, 212, 191, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.28);
+}
+.ld-hero h1 {
+  margin: 0;
+  font-size: clamp(34px, 4.6vw, 58px);
+  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.ld-hero-lead {
+  margin: 0;
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--h-muted);
+}
+.ld-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+  color: var(--h-muted);
+}
+.ld-trust .anticon {
+  margin-right: 4px;
+  color: var(--h-g1);
+}
+
+/* quỹ đạo linh vật */
+.ld-orbit {
+  --size: min(440px, 80vw);
+  position: relative;
+  justify-self: center;
+  width: var(--size);
+  height: var(--size);
+  animation: ld-rise 0.8s 0.15s ease-out both;
+}
+.ld-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+}
+.ld-ring.r1 {
+  inset: 0;
+}
+.ld-ring.r2 {
+  inset: 22%;
+  border-style: solid;
+  border-color: rgba(94, 234, 212, 0.18);
+}
+.ld-core {
+  position: absolute;
+  inset: 26%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.28), transparent 60%),
+    radial-gradient(circle, rgba(45, 212, 191, 0.32), rgba(15, 118, 110, 0.12) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 80px rgba(45, 212, 191, 0.35);
+}
+.ld-core img {
+  width: 76%;
+  height: auto;
+  margin-top: 6%;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+.ld-spin {
+  position: absolute;
+  inset: 0;
+  animation: ld-spin 80s linear infinite;
+}
+.ld-planet {
+  --r: calc(var(--size) / 2);
+  --a: calc(360deg / var(--n) * var(--i) - 90deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 30%;
+  transform: rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a)));
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.32),
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0.16)
+    ),
+    color-mix(in srgb, var(--app-accent) 40%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 12px 28px -12px rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.ld-planet img {
+  animation: ld-spin 80s linear infinite reverse;
+}
+.ld-planet.is-planned img {
+  opacity: 0.8;
+}
+.ld-float {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0b1f1c;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  white-space: nowrap;
+}
+.ld-float .anticon {
+  color: #0f766e;
+}
+.ld-float.f1 {
+  top: 8%;
+  left: -6%;
+  animation:
+    ld-pop 0.5s 0.9s ease-out both,
+    ld-bob 5s 1.6s ease-in-out infinite;
+}
+.ld-float.f2 {
+  bottom: 6%;
+  right: -4%;
+  animation:
+    ld-pop 0.5s 1.2s ease-out both,
+    ld-bob 6s 2s ease-in-out infinite reverse;
+}
+.ld-float.f2 .anticon {
+  color: #f97316;
+}
+@keyframes ld-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ld-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@keyframes ld-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.9);
+  }
+}
+@keyframes ld-bob {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ---------- Thân trang ---------- */
+.ld-body {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 9vw, 112px);
+  padding-top: clamp(56px, 8vw, 96px);
+  padding-bottom: 32px;
+}
+.ld-section {
+  scroll-margin-top: 80px;
+}
+.ld-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+.ld-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fox-ink);
+}
+.ld-head h2 {
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  scroll-margin-top: 80px;
+}
+.ld-head .ld-muted {
+  font-size: 16px;
+}
+
+/* ---------- Bento app ---------- */
+.ld-bento {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.ld-bento-main,
+.ld-bento-item {
+  position: relative;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 80px;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.ld-bento-main:hover,
+.ld-bento-item:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--border));
+  box-shadow: 0 18px 40px -16px color-mix(in srgb, var(--app-accent) 40%, transparent);
+}
+.ld-bento-main {
+  grid-column: span 2;
+  grid-row: span 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      70% 90% at 100% 100%,
+      color-mix(in srgb, var(--app-accent) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(50% 60% at 0% 0%, var(--fox-soft), transparent 70%), var(--surface);
+}
+.ld-bento-main-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+}
+.ld-bento-main h3 {
+  margin: 4px 0 0;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.ld-bento-main-art {
+  display: flex;
+  align-items: flex-end;
+  padding: 24px 24px 0 0;
+}
+.ld-bento-main-art img {
+  display: block;
+  width: 190px;
+  height: auto;
+  filter: drop-shadow(0 18px 24px color-mix(in srgb, var(--app-accent) 35%, transparent));
+}
+.ld-tagrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ld-area {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--app-accent);
+}
+:root[data-theme='dark'] .ld-area {
+  color: color-mix(in srgb, var(--app-accent) 55%, #fff);
+}
+.ld-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ld-checks li {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ld-checks .anticon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  font-size: 11px;
+  color: #fff;
+  background: var(--app-accent);
+}
+.ld-bento-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+}
+.ld-bento-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 30%;
+  background: color-mix(in srgb, var(--app-accent) 14%, transparent);
+}
+:root[data-theme='dark'] .ld-bento-icon {
+  background: color-mix(in srgb, var(--app-accent) 24%, transparent);
+}
+.ld-bento-item h3 {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.ld-bento-item .ld-muted {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.ld-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ld-dots li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.ld-dots li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--app-accent);
+}
+
+/* ---------- Nguyên tắc (2 cột) ---------- */
+.ld-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 48px;
+  align-items: start;
+}
+.ld-split-side {
+  position: sticky;
+  top: 96px;
+}
+.ld-split-fox {
+  display: block;
+  margin-top: 8px;
+}
+.ld-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+.ld-rules li {
+  display: flex;
+  gap: 16px;
+  padding: 24px 16px 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ld-rules li:nth-child(odd) {
+  padding-right: 24px;
+}
+.ld-rule-no {
+  flex: none;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--fox-ink);
+  padding-top: 3px;
+}
+.ld-rules h3 {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.ld-rule-icon {
+  padding-top: 2px;
+  color: var(--primary);
+}
+.ld-rules .ld-muted {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* ---------- Linh vật ---------- */
+.ld-fox {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 48px);
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(60% 80% at 100% 0%, var(--fox-soft), transparent 70%),
+    radial-gradient(50% 70% at 0% 100%, var(--primary-soft), transparent 70%), var(--surface);
+  box-shadow: var(--shadow);
+}
+.ld-fox .ld-head {
+  margin-bottom: 18px;
+}
+.ld-quotes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.ld-quotes q {
+  padding: 10px 16px;
+  border-radius: 16px 16px 16px 4px;
+  font-size: 14px;
+  color: var(--fox-ink);
+  background: var(--fox-soft);
+  quotes: '“' '”';
+}
+.ld-faces {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ld-faces li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 6px 10px;
+  border-radius: 18px;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
+}
+.ld-faces li:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--fox) 40%, var(--border));
+}
+.ld-faces img {
+  display: block;
+}
+
+/* ---------- Lộ trình (bước nối nhau) ---------- */
+.ld-road {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ld-road::before {
+  content: '';
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--border) 40%);
+}
+.ld-road li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ld-road-dot {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--surface);
+  border: 2px solid var(--border);
+}
+.ld-road li.is-now .ld-road-dot {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 6px var(--primary-soft);
+}
+.ld-road-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ld-road-step em {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--pos);
+  background: var(--pos-soft);
+}
+.ld-road h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.ld-road .ld-muted {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* ---------- Kêu gọi cuối ---------- */
+.ld-final {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: 28px;
+  color: var(--h-ink);
+  background: var(--h-bg);
+  box-shadow: 0 30px 60px -30px rgba(6, 42, 38, 0.6);
+}
+.ld-final-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 660px;
+}
+.ld-final h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.02em;
+}
+.ld-final p {
+  margin: 0;
+  color: var(--h-muted);
+  line-height: 1.6;
+}
+.ld-final-fox {
+  flex: none;
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.35));
+}
+
+/* ---------- Màn vừa & nhỏ ---------- */
+@media (max-width: 960px) {
+  .ld-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .ld-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ld-bento-main {
+    grid-row: auto;
+  }
+  .ld-split {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .ld-split-side {
+    position: static;
+  }
+  .ld-split-fox {
+    display: none;
+  }
+  .ld-fox {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .ld-wrap {
+    padding: 0 16px;
+  }
+  .ld-orbit {
+    --size: min(300px, 76vw);
+  }
+  .ld-planet {
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+  }
+  .ld-planet img {
+    width: 32px;
+    height: 32px;
+  }
+  .ld-float.f1 {
+    left: -2%;
+    top: 0;
+  }
+  .ld-float.f2 {
+    right: -2%;
+    bottom: 0;
+  }
+  .ld-bento {
+    grid-template-columns: 1fr;
+  }
+  .ld-bento-main {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+  .ld-bento-main-body {
+    padding: 22px;
+  }
+  .ld-bento-main h3 {
+    font-size: 24px;
+  }
+  .ld-bento-main-art {
+    justify-content: center;
+    padding: 0;
+  }
+  .ld-bento-main-art img {
+    width: 140px;
+  }
+  .ld-rules {
+    grid-template-columns: 1fr;
+  }
+  .ld-rules li,
+  .ld-rules li:nth-child(odd) {
+    padding: 20px 0;
+  }
+  .ld-faces {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .ld-faces img {
+    width: 40px;
+    height: 40px;
+  }
+  .ld-road {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ld-road::before {
+    top: 20px;
+    bottom: 20px;
+    left: 19px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--primary), var(--border) 40%);
+  }
+  .ld-road li {
+    padding-left: 56px;
+  }
+  .ld-road-dot {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .ld-final {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+  .ld-final-fox {
+    align-self: center;
+    width: 100px;
+    height: auto;
+  }
+}

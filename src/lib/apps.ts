@@ -13,9 +13,15 @@ export interface FoxApp {
   name: string
   /** Mảng cuộc sống, hiển thị nhỏ trên thẻ */
   area: string
+  /** Mô tả rất ngắn (2–3 từ) dưới tên trên trang chủ */
+  tagline?: string
   desc: string
   /** Linh vật của app trong public/fox/ (sinh từ Fox.Files) */
   mascot: string
+  /** Linh vật toàn thân (trang Ứng dụng) */
+  fullBody?: string
+  /** Tính năng chính (trang Ứng dụng) — mô tả chung, không số liệu */
+  highlights?: string[]
   /** Màu nhấn riêng — chỉ dùng cho icon/viền thẻ */
   accent: string
   status: AppStatus

@@ -1,0 +1,290 @@
+import { useEffect, useState, type ReactNode } from 'react'
+import { ConfigProvider, Select, theme, type ThemeConfig } from 'antd'
+import {
+  EnvironmentOutlined,
+  InfoCircleOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from '@ant-design/icons'
+import WxIcon from '@/components/WxIcon'
+import { fetchMarket, fetchUsdVnd, fetchWeather, readCityName, saveCityName } from '@/data/external'
+import { normalize } from '@/lib/apps'
+import { href } from '@/lib/route'
+import { formatDate, formatTime, greeting } from '@/lib/greeting'
+import { compactVnd, goldPerLuong, OZ_PER_LUONG, pct, usd, type Market } from '@/lib/market'
+import { cityByName, dayLabel, describeWeather, VN_CITIES, type Weather } from '@/lib/weather'
+
+const REFRESH_MS = 10 * 60_000
+const RETRY_MS = 60_000
+
+/** Ô chọn thành phố nằm trên nền tối của trang chủ → luôn dùng giao diện tối của AntD. */
+const DARK: ThemeConfig = {
+  algorithm: theme.darkAlgorithm,
+  token: { colorPrimary: '#2dd4bf', colorBgElevated: '#0d2f2b', borderRadiusLG: 12 },
+}
+
+function useNow(intervalMs: number): Date {
+  const [now, setNow] = useState(() => new Date())
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), intervalMs)
+    return () => clearInterval(t)
+  }, [intervalMs])
+  return now
+}
+
+/** Ngày theo giờ máy, dạng YYYY-MM-DD (khớp `daily.time` của Open-Meteo với timezone=auto). */
+const isoDay = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
+const hhmm = (ms: number) => formatTime(new Date(ms))
+
+function Change({ v }: { v: number | null }) {
+  if (v === null) return null
+  const dir = v > 0.005 ? 'up' : v < -0.005 ? 'down' : ''
+  return <span className={`dk-chg ${dir}`}>{pct(v)}</span>
+}
+
+/** Một dòng giá: nhãn bên trái, giá trị + biến động bên phải. */
+function Stat({
+  label,
+  value,
+  change,
+  failed,
+}: {
+  label: string
+  value?: ReactNode
+  change?: ReactNode
+  failed: boolean
+}) {
+  return (
+    <li className="dk-stat">
+      <span className="dk-label">{label}</span>
+      {value !== undefined ? (
+        <span className="dk-stat-val">
+          <b className="dk-value">{value}</b>
+          {change}
+        </span>
+      ) : failed ? (
+        <span className="dk-wait is-failed">Chưa tải được</span>
+      ) : (
+        <span className="dk-skel" style={{ width: 84 }} aria-label="Đang tải" />
+      )}
+    </li>
+  )
+}
+
+/**
+ * Thanh dọc bên trái trang chủ: giờ + lời chào, thời tiết (Open-Meteo), vàng thế giới quy đổi đ/lượng
+ * + Bitcoin (CoinGecko), USD/VND (ExchangeRate-API). Chỉ để tham khảo. Không gửi dữ liệu cá nhân.
+ */
+export default function InfoDock({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
+  const now = useNow(15_000)
+  const [city, setCity] = useState(() => cityByName(readCityName()))
+  const [w, setW] = useState<Weather | null>(null)
+  const [wErr, setWErr] = useState(false)
+  const [m, setM] = useState<Market | null>(null)
+  const [mErr, setMErr] = useState(false)
+  const [rate, setRate] = useState<{ rate: number; updated: number } | null>(null)
+  const [rErr, setRErr] = useState(false)
+
+  useEffect(() => {
+    let alive = true
+    const load = () => {
+      fetchWeather(city)
+        .then((r) => {
+          if (!alive) return
+          setW(r.value)
+          setWErr(false)
+        })
+        .catch(() => {
+          if (alive) setWErr(true)
+        })
+    }
+    load()
+    const t = setInterval(load, REFRESH_MS)
+    return () => {
+      alive = false
+      clearInterval(t)
+    }
+  }, [city])
+
+  useEffect(() => {
+    let alive = true
+    let retry: ReturnType<typeof setTimeout> | undefined
+    const load = () => {
+      clearTimeout(retry)
+      fetchMarket()
+        .then((r) => {
+          if (!alive) return
+          setM(r.value)
+          setMErr(false)
+        })
+        .catch(() => {
+          if (!alive) return
+          setMErr(true)
+          // CoinGecko miễn phí hay trả 429 (quá nhiều yêu cầu) → thử lại sớm, không đợi chu kỳ 10 phút
+          retry = setTimeout(load, RETRY_MS)
+        })
+      fetchUsdVnd()
+        .then((r) => {
+          if (!alive) return
+          setRate(r.value)
+          setRErr(false)
+        })
+        .catch(() => {
+          if (alive) setRErr(true)
+        })
+    }
+    load()
+    const t = setInterval(load, REFRESH_MS)
+    return () => {
+      alive = false
+      clearInterval(t)
+      clearTimeout(retry)
+    }
+  }, [])
+
+  const onCity = (name: string) => {
+    const c = cityByName(name)
+    setCity(c)
+    setW(null)
+    saveCityName(c.name)
+  }
+
+  const [weekday, date] = formatDate(now).split(', ')
+  const wx = w ? describeWeather(w.code) : null
+  const today = isoDay(now)
+  // vàng: ưu tiên quy đổi theo tỷ giá ExchangeRate-API; chưa có thì dùng giá VND của CoinGecko
+  const goldLuong = m ? (rate ? goldPerLuong(m.gold.usd, rate.rate) : m.gold.vnd * OZ_PER_LUONG) : null
+  // Nguồn bắt buộc ghi (Open-Meteo CC BY 4.0, ExchangeRate-API) — để trong tooltip, không chiếm chỗ trên giao diện
+  const source =
+    'Nguồn: Open-Meteo · CoinGecko (PAX Gold ≈ 1 oz vàng thế giới, chưa gồm chênh lệch vàng miếng trong nước) · ' +
+    `ExchangeRate-API${m ? ` · cập nhật ${hhmm(m.updated)}` : ''}. Chỉ để tham khảo.`
+
+  const cityOptions = VN_CITIES.map((c) => ({ value: c.name, label: c.name }))
+
+  return (
+    <>
+      {/* Nền mờ (chỉ điện thoại) + nút menu luôn có sẵn; chỉ đổi class → chuyển động bằng CSS transition */}
+      <div className={`dk-backdrop${collapsed ? '' : ' is-open'}`} onClick={onToggle} aria-hidden />
+      <button
+        type="button"
+        className={`dk-toggle${collapsed ? '' : ' is-open'}`}
+        onClick={onToggle}
+        aria-expanded={!collapsed}
+        aria-controls="fd-dock"
+        aria-label={collapsed ? 'Mở rộng thanh thông số' : 'Thu nhỏ thanh thông số'}
+      >
+        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </button>
+      <aside
+        id="fd-dock"
+        className={`dk${collapsed ? ' is-collapsed' : ''}`}
+        aria-label="Giờ, thời tiết và giá thị trường"
+        title={source}
+      >
+        {/* Dựng cả hai dạng một lần, ẩn/hiện bằng CSS → bấm thu/mở không phải dựng lại (tránh giật) */}
+        <div className="dk-rail" aria-hidden={!collapsed}>
+          <b className="dk-rail-time">{formatTime(now)}</b>
+          {w && wx && (
+            <span className="dk-rail-wx" title={`${city.name}: ${wx.text}`}>
+              <WxIcon kind={wx.icon} night={!w.isDay} size={22} />
+              {Math.round(w.temp)}°
+            </span>
+          )}
+        </div>
+        <div className="dk-full" aria-hidden={collapsed}>
+          <div className="dk-block">
+            <b className="dk-time">{formatTime(now)}</b>
+            <span className="dk-date">
+              {weekday}, {date} · {greeting(now.getHours())}
+            </span>
+          </div>
+
+          <div className="dk-block">
+            <div className="dk-wx-row">
+              <div className="dk-wx-now">
+                {w && wx ? (
+                  <>
+                    <WxIcon kind={wx.icon} night={!w.isDay} size={18} />
+                    <b className="dk-temp">{Math.round(w.temp)}°</b>
+                    <span className="dk-wx-text">{wx.text}</span>
+                  </>
+                ) : wErr ? (
+                  <span className="dk-wait is-failed">Chưa tải được thời tiết</span>
+                ) : (
+                  <span
+                    className="dk-skel"
+                    style={{ width: 110, height: 18 }}
+                    aria-label="Đang tải thời tiết"
+                  />
+                )}
+              </div>
+              <ConfigProvider theme={DARK}>
+                <Select
+                  className="dk-city"
+                  popupClassName="dk-city-pop"
+                  variant="borderless"
+                  size="small"
+                  showSearch
+                  value={city.name}
+                  options={cityOptions}
+                  onChange={onCity}
+                  filterOption={(input, opt) =>
+                    normalize(String(opt?.label ?? '')).includes(normalize(input))
+                  }
+                  suffixIcon={<EnvironmentOutlined />}
+                  popupMatchSelectWidth={200}
+                  placement="bottomRight"
+                  aria-label="Chọn thành phố"
+                />
+              </ConfigProvider>
+            </div>
+            {w && w.days.length > 0 && (
+              <ul className="dk-days" aria-label="Dự báo 3 ngày">
+                {w.days.map((d) => (
+                  <li key={d.date} title={describeWeather(d.code).text}>
+                    <span>{dayLabel(d.date, today)}</span>
+                    <span className="dk-range">
+                      {Math.round(d.max)}° <i>{Math.round(d.min)}°</i>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <ul className="dk-block dk-stats">
+            <Stat
+              label="Vàng"
+              value={goldLuong !== null ? `${compactVnd(goldLuong)}/lượng` : undefined}
+              change={m && <Change v={m.gold.change24h} />}
+              failed={mErr}
+            />
+            <Stat
+              label="USD"
+              value={rate ? `${Math.round(rate.rate).toLocaleString('en-US')} đ` : undefined}
+              failed={rErr}
+            />
+            <Stat
+              label="Bitcoin"
+              value={m ? usd(m.btc.usd) : undefined}
+              change={m && <Change v={m.btc.change24h} />}
+              failed={mErr}
+            />
+          </ul>
+        </div>
+
+        <a
+          className="dk-about"
+          href={href('about')}
+          aria-label="Giới thiệu FoxGo"
+          title={collapsed ? 'Giới thiệu' : undefined}
+        >
+          <InfoCircleOutlined aria-hidden />
+          <span className="dk-about-text">Giới thiệu</span>
+        </a>
+      </aside>
+    </>
+  )
+}

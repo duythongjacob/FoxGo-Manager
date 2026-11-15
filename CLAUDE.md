@@ -3,19 +3,34 @@
 Đọc cùng `../CLAUDE.md` và `../docs/` (quy trình, DoD, design system). File này chỉ nói về code trong `FoxdotsManager/`.
 
 ## Mục đích
-Trang tổng hợp các app Fox, ghim làm homepage trình duyệt: lời chào + đồng hồ, tìm nhanh, lưới thẻ app (đang chạy / sắp ra mắt).
+Trang tổng hợp các app Fox, ghim làm homepage trình duyệt. Hai trang (hash route, không thanh tab):
+**Trang chủ** `#/` — tối giản kiểu màn khóa Fox.TàiChính: thanh thông số dọc bên trái (giờ, lời chào, thời tiết, vàng/USD/Bitcoin),
+giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
+**Giới thiệu** `#/gioi-thieu` — landing page (vào từ nút "Giới thiệu" góc trên trang chủ).
 
 ## Nguyên tắc
 - **Chỉ link + mô tả chung.** Không đọc, không hiển thị số liệu cá nhân của app nào (cho tới FD-008 có PRD được duyệt).
   Bundle là công khai khi deploy.
-- Không gọi dịch vụ ngoài, không analytics, không tải font/CDN — font Be Vietnam Pro từ node_modules.
+- Không analytics, không tải font/CDN — font Be Vietnam Pro từ node_modules.
+- **Dịch vụ ngoài được duyệt (anh duyệt 14/11/2026, giống Fox.TàiChính)** — chỉ trong `src/data/external.ts`:
+  Open-Meteo (`api.open-meteo.com`, thời tiết — chỉ gửi tọa độ thành phố chọn từ danh sách), CoinGecko
+  (`api.coingecko.com`, Bitcoin + PAX Gold ≈ vàng thế giới), ExchangeRate-API (`open.er-api.com`, USD/VND).
+  Không gửi dữ liệu cá nhân, có đệm localStorage (`foxdots.ext.*`), ghi nguồn (tooltip của thanh thông số — bắt buộc theo giấy phép Open-Meteo/ExchangeRate-API). Thêm dịch vụ khác → hỏi anh.
+- **Firebase project `foxgo-aed1f`** (anh tạo 15/11/2026): chỉ dùng **Hosting** (FD-004, site `foxgo` → https://foxgo.web.app; deploy: `npm run build` rồi `npx firebase-tools deploy --only hosting`) — trang tĩnh, không cần SDK `firebase`
+  trong bundle. Không `getAnalytics`, không Firestore/Auth cho tới FD-007 có PRD.
 - `src/styles/global.css` = **bản token chuẩn** của hệ sinh thái. Đổi token → cập nhật `../docs/DESIGN_SYSTEM.md`.
 - Danh sách app: `src/data/apps.ts` (khớp `../docs/MA_APP.md`). Màu nhấn app chỉ dùng qua biến `--app-accent`.
 
 ## Kiến trúc
-- `src/lib/` hàm thuần + test (`apps.ts` lọc/sắp xếp, `greeting.ts` lời chào/ngày giờ, `theme.ts` sáng/tối).
-- `src/app/` Root (ConfigProvider AntD, chế độ sáng/tối), `themeStore.ts` (localStorage, bọc try/catch).
-- `src/features/home/` HomePage + AppCard.
+- `src/lib/` hàm thuần + test (`apps.ts`, `greeting.ts`, `theme.ts`, `route.ts` hash route, `weather.ts` + `market.ts`
+  chép từ Fox.TàiChính — mã WMO, phân tích phản hồi API, quy đổi vàng đ/lượng).
+- `src/data/` `apps.ts` danh sách app; `external.ts` gọi dịch vụ ngoài + đệm + thành phố đã chọn (`foxdots.city`).
+- `src/app/` Root (ConfigProvider AntD, chọn trang), `Layout.tsx` (nền lưới; thanh trên kính tối chỉ ở Giới thiệu), `useRoute.ts`.
+- `src/components/WxIcon.tsx` biểu tượng thời tiết SVG.
+- `src/features/launcher/` LauncherPage + InfoDock (thời tiết, giá) + `launcher.css` (gốc `lock.css`);
+  `src/features/landing/` LandingPage + `landing.css` (hero gốc `login.css`).
+- Linh vật trong `public/fox/` (đầu, toàn thân `*-toan-than.svg`, `bieu-cam/`) chép từ `Fox.Files/svg/`.
+- Khóa localStorage khác: `foxdots.dock` (thu nhỏ thanh thông số), `foxdots.city`, `foxdots.ext.*` (đệm dữ liệu ngoài).
 - Khóa localStorage `foxdots.theme` dùng ở cả `src/lib/theme.ts` và script đầu `index.html` — đổi thì đổi cả hai.
 
 ## Lệnh

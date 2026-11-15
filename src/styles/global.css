@@ -83,37 +83,138 @@ body {
   }
 }
 
+/* ===== Màu nền tối kiểu màn đăng nhập / khóa Fox.TàiChính (dùng cho băng tiêu đề & tab Ứng dụng) ===== */
+:root {
+  --h-bg: #062a26;
+  --h-ink: #eafaf6;
+  --h-muted: rgba(234, 250, 246, 0.72);
+  --h-b1: #0f766e;
+  --h-b2: #f97316;
+  --h-b3: #14b8a6;
+  --h-g1: #5eead4;
+  --h-g2: #a5b4fc;
+  --grid-line: rgba(15, 118, 110, 0.07);
+}
+:root[data-theme='dark'] {
+  --grid-line: rgba(255, 255, 255, 0.045);
+}
+
 /* ===== Khung trang ===== */
 .fd-page {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(80% 50% at 0% 0%, color-mix(in srgb, var(--fox) 9%, transparent), transparent 60%),
-    radial-gradient(
-      70% 50% at 100% 0%,
-      color-mix(in srgb, var(--accent-b) 10%, transparent),
-      transparent 60%
-    ),
-    var(--bg);
+  isolation: isolate;
 }
+/* nền cố định: lưới ô vuông mờ dần + 3 vầng sáng trôi chậm */
+.fd-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--bg);
+  pointer-events: none;
+}
+.fd-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 25%, transparent 75%);
+}
+.fd-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+.fd-blob.b1 {
+  width: 520px;
+  height: 520px;
+  left: -160px;
+  top: -200px;
+  background: var(--h-b1);
+  opacity: 0.16;
+  animation: fd-drift-1 20s ease-in-out infinite alternate;
+}
+.fd-blob.b2 {
+  width: 420px;
+  height: 420px;
+  right: -140px;
+  top: 10%;
+  background: var(--h-b2);
+  opacity: 0.1;
+  animation: fd-drift-2 24s ease-in-out infinite alternate;
+}
+.fd-blob.b3 {
+  width: 440px;
+  height: 440px;
+  left: 30%;
+  bottom: -240px;
+  background: var(--h-b3);
+  opacity: 0.12;
+  animation: fd-drift-1 26s ease-in-out infinite alternate-reverse;
+}
+:root[data-theme='dark'] .fd-bg .fd-blob {
+  opacity: 0.18;
+}
+@keyframes fd-drift-1 {
+  to {
+    transform: translate(100px, 70px) scale(1.1);
+  }
+}
+@keyframes fd-drift-2 {
+  to {
+    transform: translate(-90px, 60px) scale(0.92);
+  }
+}
+
 .fd-top {
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px max(16px, calc((100% - 1080px) / 2));
-  background: var(--glass-bg);
-  border-bottom: 1px solid var(--glass-border);
+  gap: 12px;
+  padding: 10px max(16px, calc((100% - 1160px) / 2 + 20px));
+  color: var(--h-ink);
+  background: color-mix(in srgb, var(--h-bg) 82%, transparent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+.fd-top-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--h-ink);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  transition: background 0.15s ease;
+}
+.fd-top-link:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.fd-top .ant-btn {
+  color: var(--h-ink);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 .fd-brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: inherit;
+  text-decoration: none;
 }
 .fd-brand img {
   border-radius: 9px;
@@ -125,86 +226,93 @@ body {
 }
 .fd-main {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 24px 16px 32px;
+  padding: 24px 16px 40px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 56px;
   flex: 1;
+  animation: fd-page-in 0.22s ease-out both;
+}
+@keyframes fd-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }
 
-/* ===== Hero (theo .fx-hero của Fox.TàiChính) ===== */
-.fd-hero {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 22px 24px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background:
-    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--fox) 16%, transparent), transparent 55%),
-    var(--surface);
-  box-shadow: var(--shadow);
+/* Trang chủ: toàn màn tối kiểu màn khóa */
+.fd-page.is-immersive {
+  color-scheme: dark;
+  color: #fff;
 }
-.fd-hero-fox {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  background: var(--surface);
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--fox) 28%, transparent);
+.fd-page.is-immersive .fd-bg {
+  background: var(--h-bg);
 }
-.fd-hero-fox img {
-  display: block;
+.fd-page.is-immersive .fd-bg .fd-blob {
+  opacity: 0.5;
 }
-.fd-hero-body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.fd-page.is-immersive .fd-bg .fd-blob.b2 {
+  opacity: 0.32;
+  top: auto;
+  bottom: -120px;
 }
-.fd-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--fox-ink);
+.fd-page.is-immersive .fd-bg .fd-blob.b3 {
+  opacity: 0.3;
+  left: 45%;
+  top: 35%;
+  bottom: auto;
 }
-.fd-hero-line {
-  display: flex;
+.fd-page.is-immersive .fd-bg-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 20%, transparent 70%);
+}
+.fd-page.is-immersive .fd-main,
+.fd-page.is-landing .fd-main {
+  max-width: none;
+  padding: 0;
+  gap: 0;
+}
+
+/* ===== Logo chữ "Fox." (src/components/Wordmark.tsx) ===== */
+.wm {
+  display: inline-flex;
   align-items: baseline;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-}
-.fd-clock {
-  font-size: 40px;
+  font-size: var(--wm-size, 24px);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
 }
-.fd-greet {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 600;
+.wm-dot {
+  flex: none;
+  width: 0.2em;
+  height: 0.2em;
+  margin-left: 0.07em;
+  border-radius: 50%;
+  background: var(--fox);
+  box-shadow: 0 0 0.35em color-mix(in srgb, var(--fox) 55%, transparent);
 }
-.fd-lead {
-  margin: 0;
-  font-size: 15.5px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--muted);
+
+/* ===== Chữ gradient (tiêu đề hero) ===== */
+.fd-gradient-text {
+  background: linear-gradient(90deg, #5eead4, #fdba74, #5eead4);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fd-shine 6s linear infinite;
 }
-.fd-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+@keyframes fd-shine {
+  to {
+    background-position: 200% center;
+  }
 }
-.fd-chip,
+/* ===== Nhãn trạng thái ===== */
 .fd-status {
   display: inline-flex;
   align-items: center;
@@ -228,195 +336,22 @@ body {
   border: 1px solid var(--border);
 }
 
-/* ===== Tìm kiếm ===== */
-.fd-search.ant-input-affix-wrapper {
-  border-radius: 999px;
-  padding-inline: 18px;
-  box-shadow: var(--shadow);
-}
-
-/* ===== Lưới thẻ app ===== */
-.fd-h2 {
-  margin: 0 0 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.fd-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-.fd-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 18px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
-}
-.fd-card:not(.is-planned):hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--app-accent) 45%, var(--border));
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--app-accent) 16%, transparent);
-}
-.fd-card:not(.is-planned):focus-within {
-  border-color: var(--app-accent);
-}
-.fd-card.is-planned {
-  background: var(--surface-2);
-  box-shadow: none;
-}
-.fd-card.is-planned .fd-card-icon img {
-  opacity: 0.75;
-  filter: saturate(0.7);
-}
-.fd-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-.fd-card-icon {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--app-accent) 13%, transparent);
-}
-.fd-card-icon img {
-  display: block;
-  width: 46px;
-  height: 46px;
-}
-:root[data-theme='dark'] .fd-card-icon {
-  background: color-mix(in srgb, var(--app-accent) 22%, transparent);
-}
-.fd-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-.fd-card-area {
-  font-size: 12px;
-  color: var(--muted);
-}
-.fd-card-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  text-decoration: none;
-}
-.fd-card-title:focus-visible {
-  outline: none;
-}
-/* cả thẻ bấm được, link phụ vẫn bấm riêng */
-.fd-stretch::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius);
-}
-.fd-stretch:focus-visible::after {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-.fd-card-desc {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-.fd-card-links {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: auto;
-}
-.fd-card-links a {
-  padding: 3px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--primary);
-  text-decoration: none;
-  background: var(--surface);
-}
-.fd-card-links a:hover {
-  background: var(--primary-soft);
-}
-
-/* ===== Trạng thái rỗng ===== */
-.fd-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 40px 16px;
-  text-align: center;
-  color: var(--muted);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-}
-.fd-empty p {
-  margin: 0;
-}
-.fd-empty-icon {
-  font-size: 28px;
-  color: var(--fox);
-}
-
 .fd-foot {
-  padding: 16px;
+  padding: 20px 16px;
   text-align: center;
   font-size: 12.5px;
   color: var(--muted);
 }
 
-/* ===== Mobile ===== */
-@media (max-width: 520px) {
+@media (max-width: 640px) {
+  .fd-top {
+    gap: 10px;
+  }
+  .fd-brand-name {
+    display: none;
+  }
   .fd-main {
+    gap: 40px;
     padding-top: 16px;
-    gap: 18px;
-  }
-  .fd-hero {
-    padding: 16px;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .fd-hero-fox {
-    width: 60px;
-    height: 60px;
-  }
-  .fd-hero-fox img {
-    width: 44px;
-    height: auto;
-  }
-  .fd-clock {
-    font-size: 30px;
-  }
-  .fd-greet {
-    font-size: 18px;
-  }
-  .fd-lead {
-    font-size: 14px;
-  }
-  .fd-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
   }
 }

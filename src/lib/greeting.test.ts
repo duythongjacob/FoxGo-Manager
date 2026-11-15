@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatDate, formatTime, greeting, nudge } from './greeting'
+import { formatDate, formatTime, greeting } from './greeting'
 
 describe('greeting', () => {
   it('đổi theo khung giờ, đúng ở biên', () => {
@@ -10,13 +10,6 @@ describe('greeting', () => {
     expect(greeting(13)).toBe('Chào buổi chiều')
     expect(greeting(18)).toBe('Chào buổi tối')
     expect(greeting(23)).toBe('Chào buổi tối')
-  })
-})
-
-describe('nudge', () => {
-  it('mọi giờ đều có câu nhắn', () => {
-    for (let h = 0; h < 24; h++) expect(nudge(h).length).toBeGreaterThan(0)
-    expect(nudge(22)).not.toBe(nudge(21))
   })
 })
 

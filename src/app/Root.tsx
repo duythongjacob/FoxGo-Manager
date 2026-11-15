@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { App as AntApp, ConfigProvider, theme } from 'antd'
 import viVN from 'antd/locale/vi_VN'
-import HomePage from '@/features/home/HomePage'
+import LandingPage from '@/features/landing/LandingPage'
+import LauncherPage from '@/features/launcher/LauncherPage'
 import { nextMode, resolveDark, type ThemeMode } from '@/lib/theme'
+import Layout from './Layout'
 import { readMode, saveMode, systemPrefersDark } from './themeStore'
+import { useRoute } from './useRoute'
 
 const FONT = "'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif"
 
@@ -11,6 +14,7 @@ export default function Root() {
   const [mode, setMode] = useState<ThemeMode>(readMode)
   const [prefersDark, setPrefersDark] = useState(systemPrefersDark)
   const dark = resolveDark(mode, prefersDark)
+  const route = useRoute()
 
   useEffect(() => {
     if (typeof matchMedia !== 'function') return
@@ -44,7 +48,9 @@ export default function Root() {
       }}
     >
       <AntApp>
-        <HomePage mode={mode} onCycleMode={cycleMode} />
+        <Layout current={route.id} mode={mode} onCycleMode={cycleMode}>
+          {route.id === 'home' ? <LauncherPage /> : <LandingPage />}
+        </Layout>
       </AntApp>
     </ConfigProvider>
   )

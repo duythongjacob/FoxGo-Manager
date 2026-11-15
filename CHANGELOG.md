@@ -3,6 +3,26 @@
 Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo SemVer.
 
 ## [Chưa phát hành]
+### Thêm
+- Trang chủ (`#/`) tối giản theo màn khóa Fox.TàiChính: nền lưới chấm + vầng sáng, cáo trong khung kính, ô app dạng kính
+  (app kế hoạch: viền đứt, mờ); chân trang "FoxGo 2026 by Thong Duy".
+- Thanh thông số dọc bên trái (màn hẹp: thẻ trên cùng): giờ + lời chào, thời tiết (chọn thành phố, 3 ngày — Open-Meteo),
+  vàng thế giới quy đổi đ/lượng + Bitcoin (CoinGecko), USD/VND (ExchangeRate-API); khung chờ khi tải, đệm,
+  dùng bản cũ khi mất mạng, nguồn trong tooltip.
+- Thanh thông số mặc định thu hẹp thành dải (giờ + nhiệt độ), mở rộng khi bấm và nhớ trên máy; ô chọn thành phố tối, tìm không dấu.
+- Logo chữ "Fox." (chữ đậm khít + chấm cam) ở giữa trang chủ và thanh đầu trang Giới thiệu.
+- "Giới thiệu" nằm ở đáy thanh thông số (thu hẹp: chỉ biểu tượng), gạch chia mảnh mờ hai đầu; chân trang "FoxDots® │ Thong Duy".
+- Ô app có mô tả ngắn mờ bên dưới tên; rê chuột/Tab vào ô hiện thẻ 3 đầu mục nổi bật (vạch màu nhấn, viền mảnh); điện thoại: lưới 3 cột.
+- Tên app tách chữ ("Tài Chính"); khối thời tiết gọn một hàng (nhiệt độ + thành phố); điện thoại: thanh thông số ẩn sau nút menu, mở thành ngăn kéo trượt trái.
+- Thu/mở thanh thông số mượt: dựng sẵn một lần, máy tính giãn 64→280px đè lên nội dung (không đẩy bố cục), điện thoại trượt bằng transform; bỏ làm mờ kính trên ngăn kéo.
+- Trang chủ không cho bôi đen chữ / kéo hình (như màn khóa); giá thị trường tự thử lại sau 1 phút khi lỗi (CoinGecko hay trả 429).
+- Trang Giới thiệu (`#/gioi-thieu`): hero tràn viền (lưới + vầng sáng theo màn đăng nhập Fox.TàiChính) với cáo giữa quỹ đạo
+  6 linh vật app, bento hệ sinh thái, 6 nguyên tắc, linh vật Fox (8 biểu cảm), lộ trình dạng bước, băng kêu gọi cuối.
+- Định tuyến bằng hash (chạy trên hosting tĩnh); token `--grid-line`, `--h-*`.
+### Đổi
+- Bỏ ô tìm app, câu nhắc theo giờ và lưới thẻ app cũ (`AppCard`).
+- Đổi tên thương hiệu Foxdots → **FoxGo** (FD-012): chân trang, tiêu đề tab, mô tả, manifest PWA, nhãn trợ năng.
+- Cấu hình Firebase Hosting, project `foxgo-aed1f` (FD-004).
 
 ## [0.1.0] — 2026-11-14
 ### Thêm
