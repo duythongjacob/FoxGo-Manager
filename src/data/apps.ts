@@ -39,13 +39,19 @@ export const APPS: FoxApp[] = [
     mascot: '/fox/fox-congviec.svg',
     fullBody: '/fox/fox-congviec-toan-than.svg',
     highlights: [
-      'Hộp thu: ghi một câu, tự tách hạn và dự án',
-      'Hôm nay: tối đa 3 việc chính theo ma trận Eisenhower',
-      'Phiên tập trung Pomodoro 25/5',
-      'Tổng kết tuần: xong, trễ, dời',
+      'Ghi việc bằng một câu tiếng Việt (“gửi báo cáo thứ 6 9h !cao”)',
+      'Hôm nay & Big 3 — 3 việc quan trọng nhất mỗi ngày',
+      'Inbox, dự án, việc con, checklist, tiến độ %',
+      'Đồng bộ máy tính và điện thoại, dùng được khi mất mạng',
     ],
     accent: '#2563eb',
-    status: 'planned',
+    // Đang xây v0.1 (FW-000) — chưa có bản web; thêm url 'https://foxgo-work.web.app' + status 'live' khi phát hành
+    status: 'building',
+    version: '0.1',
+    extra: [
+      { label: 'Trên máy', url: 'http://localhost:5175' },
+      { label: 'Test', url: 'http://localhost:5176' },
+    ],
     tags: ['todo', 'viec can lam', 'du an', 'pomodoro'],
   },
   {

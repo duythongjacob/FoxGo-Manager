@@ -44,3 +44,4 @@ Cách thêm app: [../BAO_TRI.md](../BAO_TRI.md).
 |---|---|---|
 | 14/11/2026 | 0.1.0 | Bản đầu (6 app) |
 | 15/11/2026 | chưa phát hành | Thêm `tagline`, `fullBody`, `highlights`; bỏ hàm tìm/đếm không còn dùng |
+| 15/11/2026 | chưa phát hành | Fox.CôngViệc chuyển "Đang xây" v0.1 (FW-000), tính năng chính theo bản thật |

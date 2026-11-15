@@ -25,6 +25,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - Cấu hình Firebase Hosting, project `foxgo-aed1f` (FD-004).
 - Bộ tài liệu bảo trì: README chuẩn, `docs/LUONG_CODE.md` (kiến trúc + luồng), `docs/CAU_TRUC_THU_MUC.md` (cây thư mục,
   `npm run check:tree` tự kiểm tra), `docs/BAO_TRI.md`, `docs/features/` (6 tính năng). Ghi chú đầu file + JSDoc cho toàn bộ code.
+- Fox.CôngViệc: trạng thái "Đang xây" v0.1, cập nhật tính năng chính.
 - Bỏ hàm không còn dùng `filterApps`, `openable`, `countByStatus` và 2 SVG không dùng (`fox-foxdots`, `fox-vay-duoi`).
 
 ## [0.1.0] — 2026-11-14
