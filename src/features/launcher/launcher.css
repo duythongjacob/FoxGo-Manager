@@ -8,7 +8,7 @@
   align-items: center;
   gap: 32px;
   padding: 56px 16px 16px;
-  color: #fff;
+  color: var(--lc-ink);
   /* như màn khóa: không bôi đen / chọn chữ khi bấm, kéo chuột */
   user-select: none;
   -webkit-user-select: none;
@@ -71,13 +71,13 @@
   margin-top: auto;
   text-align: center;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(var(--lc-rgb), 0.4);
 }
 
 /* ---------- Logo chữ "Fox." ---------- */
 .lc-logo {
   margin: 0;
-  color: #fff;
+  color: var(--lc-ink);
   animation: lc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -96,7 +96,7 @@
   align-items: center;
   gap: 8px;
   width: 96px;
-  color: #fff;
+  color: var(--lc-ink);
   text-decoration: none;
 }
 .lc-tile-glass {
@@ -106,10 +106,10 @@
   height: 60px;
   border-radius: 30%;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04) 55%),
+    linear-gradient(145deg, rgba(var(--lc-rgb), 0.24), rgba(var(--lc-rgb), 0.04) 55%),
     color-mix(in srgb, var(--app-accent) 32%, transparent);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(var(--lc-rgb), 0.22);
+  box-shadow: inset 0 1px 0 rgba(var(--lc-rgb), 0.4);
   transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .lc-tile-glass img {
@@ -121,7 +121,7 @@ a.lc-tile,
 a.lc-tile:hover,
 a.lc-tile:visited,
 a.lc-tile:active {
-  color: #fff;
+  color: var(--lc-ink);
 }
 a.lc-tile:hover .lc-tile-glass,
 a.lc-tile:focus-visible .lc-tile-glass {
@@ -143,10 +143,10 @@ a.lc-tile:focus-visible .lc-tile-glass {
   font-weight: 400;
   letter-spacing: 0.01em;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(var(--lc-rgb), 0.42);
 }
 .lc-tile.is-planned .lc-tile-desc {
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(var(--lc-rgb), 0.28);
 }
 /* thẻ đầu mục nổi bật — chỉ hiện khi rê chuột / chọn bằng phím */
 .lc-tile {
@@ -164,9 +164,9 @@ a.lc-tile:focus-visible .lc-tile-glass {
   padding: 12px 14px 14px;
   border-radius: 14px;
   text-align: left;
-  background: rgba(6, 34, 31, 0.86);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.7);
+  background: var(--lc-pop-bg);
+  border: 1px solid rgba(var(--lc-rgb), 0.14);
+  box-shadow: 0 18px 40px -14px var(--lc-shadow-c);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   backdrop-filter: blur(16px) saturate(150%);
   opacity: 0;
@@ -187,8 +187,8 @@ a.lc-tile:focus-visible .lc-tile-glass {
   width: 9px;
   height: 9px;
   background: inherit;
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 1px solid rgba(var(--lc-rgb), 0.14);
+  border-top: 1px solid rgba(var(--lc-rgb), 0.14);
   transform: translateX(-50%) rotate(45deg);
 }
 .lc-tile:hover .lc-pop,
@@ -206,22 +206,22 @@ a.lc-tile:focus-visible .lc-tile-glass {
   margin-bottom: 2px;
   font-size: 12.5px;
   font-weight: 600;
-  color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--lc-ink);
+  border-bottom: 1px solid rgba(var(--lc-rgb), 0.1);
 }
 .lc-pop-head em {
   font-style: normal;
   font-size: 10.5px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(var(--lc-rgb), 0.45);
   white-space: nowrap;
 }
 .lc-pop-item {
   padding: 1px 0 1px 10px;
   font-size: 12px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.78);
-  border-left: 2px solid color-mix(in srgb, var(--app-accent) 70%, #fff);
+  color: rgba(var(--lc-rgb), 0.78);
+  border-left: 2px solid color-mix(in srgb, var(--app-accent) 70%, var(--lc-ink));
 }
 /* màn cảm ứng không có rê chuột → không hiện thẻ */
 @media (hover: none) {
@@ -232,7 +232,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
 
 .lc-tile.is-planned .lc-tile-glass {
   background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border: 1px dashed rgba(var(--lc-rgb), 0.18);
   box-shadow: none;
 }
 .lc-tile.is-planned img {
@@ -240,7 +240,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   filter: grayscale(0.5);
 }
 .lc-tile.is-planned .lc-tile-name {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(var(--lc-rgb), 0.45);
 }
 
 /* ===== Thanh thông số (dọc bên trái trên màn rộng) ===== */
@@ -255,7 +255,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   padding: 20px 24px;
 }
 .dk-block + .dk-block {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(var(--lc-rgb), 0.08);
 }
 
 /* giờ */
@@ -265,12 +265,12 @@ a.lc-tile:focus-visible .lc-tile-glass {
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  color: #fff;
+  color: var(--lc-ink);
 }
 .dk-date {
   margin-top: 2px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(var(--lc-rgb), 0.6);
 }
 
 /* thời tiết */
@@ -298,7 +298,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
 }
 .dk-wx-text {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(var(--lc-rgb), 0.6);
   white-space: nowrap;
 }
 .dk-city.ant-select {
@@ -315,17 +315,17 @@ a.lc-tile:focus-visible .lc-tile-glass {
   font-size: 11px;
 }
 .dk-city .ant-select-selection-item {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(var(--lc-rgb), 0.65);
 }
 .dk-city:hover .ant-select-selection-item {
-  color: #fff;
+  color: var(--lc-ink);
 }
 .dk-city .ant-select-arrow {
   color: var(--h-g1);
 }
 .dk-city-pop {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.35);
 }
 .dk-days {
   display: flex;
@@ -340,15 +340,15 @@ a.lc-tile:focus-visible .lc-tile-glass {
   justify-content: space-between;
   font-size: 12px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(var(--lc-rgb), 0.5);
 }
 .dk-range {
-  color: #fff;
+  color: var(--lc-ink);
   font-variant-numeric: tabular-nums;
 }
 .dk-range i {
   font-style: normal;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(var(--lc-rgb), 0.45);
 }
 
 /* giá */
@@ -365,7 +365,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
 }
 .dk-label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(var(--lc-rgb), 0.6);
 }
 .dk-stat-val {
   display: flex;
@@ -382,17 +382,17 @@ a.lc-tile:focus-visible .lc-tile-glass {
 .dk-chg {
   font-size: 11.5px;
   font-variant-numeric: tabular-nums;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(var(--lc-rgb), 0.5);
 }
 .dk-chg.up {
-  color: #86efac;
+  color: var(--lc-up);
 }
 .dk-chg.down {
-  color: #fca5a5;
+  color: var(--lc-down);
 }
 .dk-wait {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(var(--lc-rgb), 0.4);
 }
 /* nút thu nhỏ / mở rộng */
 .dk-toggle {
@@ -408,7 +408,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(var(--lc-rgb), 0.5);
   font-size: 15px;
   cursor: pointer;
   transition:
@@ -416,8 +416,8 @@ a.lc-tile:focus-visible .lc-tile-glass {
     color 0.15s ease;
 }
 .dk-toggle:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--lc-ink);
+  background: rgba(var(--lc-rgb), 0.08);
 }
 .dk-rail {
   display: flex;
@@ -436,7 +436,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   align-items: center;
   gap: 2px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(var(--lc-rgb), 0.75);
 }
 
 /* Giới thiệu — đáy thanh thông số */
@@ -448,13 +448,13 @@ a.lc-tile:focus-visible .lc-tile-glass {
   padding: 16px 24px 18px;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(var(--lc-rgb), 0.55);
   text-decoration: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(var(--lc-rgb), 0.08);
   transition: color 0.15s ease;
 }
 .dk-about:hover {
-  color: #fff;
+  color: var(--lc-ink);
 }
 .dk-about .anticon {
   font-size: 15px;
@@ -474,7 +474,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   display: block;
   width: 26px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--lc-rgb), 0.28), transparent);
 }
 .dk.is-collapsed .dk-rail::before {
   margin-bottom: 2px;
@@ -500,9 +500,9 @@ a.lc-tile:focus-visible .lc-tile-glass {
     width: 280px;
     overflow: hidden;
     padding-top: 56px;
-    background: rgba(5, 30, 27, 0.94);
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 24px 0 60px -30px rgba(0, 0, 0, 0.8);
+    background: var(--lc-dock-bg);
+    border-right: 1px solid rgba(var(--lc-rgb), 0.08);
+    box-shadow: 24px 0 60px -30px var(--lc-shadow-c);
     transition:
       width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
       background-color 0.32s ease,
@@ -510,7 +510,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   }
   .dk.is-collapsed {
     width: 64px;
-    background: rgba(0, 0, 0, 0.12);
+    background: var(--lc-rail-bg);
     box-shadow: none;
   }
   .dk-full {
@@ -544,9 +544,9 @@ a.lc-tile:focus-visible .lc-tile-glass {
   border-radius: 6px;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.16),
-    rgba(255, 255, 255, 0.06)
+    rgba(var(--lc-rgb), 0.06),
+    rgba(var(--lc-rgb), 0.16),
+    rgba(var(--lc-rgb), 0.06)
   );
   background-size: 200% 100%;
   animation: dk-shimmer 1.4s ease-in-out infinite;
@@ -560,7 +560,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
   }
 }
 .dk-wait.is-failed {
-  color: rgba(253, 186, 116, 0.8);
+  color: var(--lc-warn);
 }
 
 /* màn hẹp (điện thoại): thanh thông số là ngăn kéo trượt từ trái, chỉ còn nút menu */
@@ -573,7 +573,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
     position: fixed;
     inset: 0;
     z-index: 19;
-    background: rgba(0, 0, 0, 0.45);
+    background: var(--lc-backdrop);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -592,9 +592,9 @@ a.lc-tile:focus-visible .lc-tile-glass {
     overflow-y: auto;
     padding-top: 64px;
     border-radius: 0 20px 20px 0;
-    background: #072622;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 18px 0 50px -20px rgba(0, 0, 0, 0.7);
+    background: var(--lc-drawer-bg);
+    border-right: 1px solid rgba(var(--lc-rgb), 0.1);
+    box-shadow: 18px 0 50px -20px var(--lc-shadow-c);
     transform: translateX(-105%);
     visibility: hidden;
     transition:
@@ -617,9 +617,9 @@ a.lc-tile:focus-visible .lc-tile-glass {
     width: 38px;
     height: 38px;
     border-radius: 12px;
-    color: rgba(255, 255, 255, 0.85);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(var(--lc-rgb), 0.85);
+    background: rgba(var(--lc-rgb), 0.08);
+    border: 1px solid rgba(var(--lc-rgb), 0.14);
   }
   .dk-toggle.is-open {
     background: transparent;
@@ -631,7 +631,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
     justify-content: flex-start;
     gap: 10px;
     padding: 16px 24px 18px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(var(--lc-rgb), 0.08);
   }
   .dk.is-collapsed .dk-about::before {
     display: none;
@@ -668,11 +668,11 @@ a.lc-tile:focus-visible .lc-tile-glass {
   text-align: left;
   background: none;
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(var(--lc-rgb), 0.08);
   cursor: pointer;
 }
 .dk-settings:focus-visible {
-  outline: 2px solid rgba(45, 212, 191, 0.7);
+  outline: 2px solid var(--lc-focus);
   outline-offset: -2px;
 }
 .dk-settings + .dk-about {
@@ -695,106 +695,320 @@ a.lc-tile:focus-visible .lc-tile-glass {
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
-  color: #fff;
+  color: var(--lc-ink);
 }
 
-/* ── FD-005: popup Cài đặt trang chủ (.st-) — theo giao diện sáng/tối của AntD ── */
+/* ── Giao diện sáng của trang chủ: ô app thành thẻ trắng có viền nhẹ, chữ phụ đậm hơn cho đủ tương phản ── */
+:root[data-theme='light'] .lc-tile-glass {
+  background: linear-gradient(160deg, #fff 30%, color-mix(in srgb, var(--app-accent) 12%, #fff));
+  border: 1px solid color-mix(in srgb, var(--app-accent) 16%, #e7ebea);
+  box-shadow:
+    0 1px 2px rgba(16, 32, 29, 0.05),
+    0 8px 20px -10px color-mix(in srgb, var(--app-accent) 45%, transparent);
+}
+:root[data-theme='light'] .lc-tile.is-planned .lc-tile-glass {
+  background: #fff;
+  border: 1px dashed #d5dcda;
+  box-shadow: none;
+}
+:root[data-theme='light'] .lc-tile-letter {
+  color: var(--fox-ink);
+}
+:root[data-theme='light'] .lc-tile-desc,
+:root[data-theme='light'] .lc-foot,
+:root[data-theme='light'] .dk-date,
+:root[data-theme='light'] .dk-wx-text,
+:root[data-theme='light'] .dk-label,
+:root[data-theme='light'] .dk-days li,
+:root[data-theme='light'] .dk-chg {
+  color: var(--muted);
+}
+:root[data-theme='light'] .lc-tile.is-planned .lc-tile-desc,
+:root[data-theme='light'] .lc-tile.is-planned .lc-tile-name {
+  color: #94a3a0;
+}
+:root[data-theme='light'] .dk-chg.up {
+  color: var(--lc-up);
+}
+:root[data-theme='light'] .dk-chg.down {
+  color: var(--lc-down);
+}
+:root[data-theme='light'] .lc-pop-item {
+  border-left-color: color-mix(in srgb, var(--app-accent) 70%, #fff);
+}
+:root[data-theme='light'] .dk-city .ant-select-arrow {
+  color: var(--primary);
+}
+:root[data-theme='light'] .dk {
+  border-right-color: var(--border);
+}
+
+/* ── FD-005: popup Cài đặt trang chủ (.st-) — theo token sáng/tối (global.css) ── */
+.st-modal .ant-modal-content {
+  padding: 0;
+  overflow: hidden;
+}
+.st-modal .ant-modal-header {
+  margin: 0;
+  padding: 18px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.st-modal .ant-modal-close {
+  top: 20px;
+}
+.st-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.st-title > span:last-child {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.st-title small {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.st-title-ico {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 17px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: 10px;
+}
+.st-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: min(64vh, 620px);
+  padding: 20px 24px;
+  overflow-y: auto;
+}
 .st-sec {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
 }
-.st-title {
-  font-size: 13px;
+.st-sec-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+.st-sec-head h3 {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.st-count {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.st-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
 .st-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
+  padding: 14px 16px;
 }
-.st-row > span {
+.st-row-text {
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
+.st-row-text b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.st-row-text span,
 .st-hint {
-  font-size: 12px;
+  font-size: 12.5px;
+  color: var(--muted);
 }
 .st-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  max-height: 300px;
+  /* không cuộn riêng — cả thân popup (.st-body) cuộn một lần */
   margin: 0;
-  padding: 0;
-  overflow-y: auto;
+  padding: 4px;
   list-style: none;
 }
 .st-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 4px 4px 6px;
-  border-radius: 8px;
+  gap: 10px;
+  padding: 8px 6px 8px 8px;
+  border-radius: 9px;
+  transition: background 0.12s ease;
+}
+.st-item + .st-item {
+  box-shadow: 0 -1px 0 var(--border);
 }
 .st-item:hover {
-  background: rgba(127, 127, 127, 0.1);
+  background: var(--surface);
+  box-shadow: none;
+}
+.st-item:hover + .st-item {
+  box-shadow: none;
+}
+.st-idx {
+  flex: none;
+  width: 18px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--muted);
 }
 .st-ico {
+  display: grid;
   flex: none;
-  width: 28px;
-  height: 28px;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 30%;
+  background: color-mix(in srgb, var(--app-accent, var(--primary)) 14%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--app-accent, var(--primary)) 22%, var(--border));
+}
+.st-ico img {
+  display: block;
 }
 .st-ico.is-letter {
-  display: grid;
-  place-items: center;
   font-size: 14px;
   font-weight: 700;
   color: #fff;
-  background: #f97316;
-  border-radius: 30%;
+  background: var(--fox);
+  border-color: transparent;
 }
 .st-name {
   display: flex;
   flex: 1;
   flex-direction: column;
   min-width: 0;
-  font-size: 14px;
 }
-.st-name em {
+.st-name b {
+  font-size: 14px;
+  font-weight: 600;
+}
+.st-name em,
+.st-name b {
   overflow: hidden;
-  font-size: 12px;
-  font-style: normal;
   white-space: nowrap;
   text-overflow: ellipsis;
-  opacity: 0.6;
+}
+.st-name em {
+  font-size: 12px;
+  font-style: normal;
+  color: var(--muted);
+}
+.st-chip {
+  flex: none;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.st-chip.is-link {
+  color: var(--fox-ink);
+  background: var(--fox-soft);
+  border-color: transparent;
+}
+.st-actions {
+  display: flex;
+  flex: none;
+  gap: 2px;
 }
 .st-gap {
   flex: none;
   width: 24px;
 }
+.st-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+}
 .st-add {
   display: grid;
-  grid-template-columns: 1fr 1.4fr auto;
+  grid-template-columns: 1fr 1.5fr auto;
   gap: 8px;
 }
-@media (max-width: 480px) {
+.st-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+}
+.st-reset {
+  margin-right: auto;
+  color: var(--muted);
+}
+:root[data-theme='dark'] .st-card,
+:root[data-theme='dark'] .st-foot {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+:root[data-theme='dark'] .st-modal .ant-modal-header,
+:root[data-theme='dark'] .st-item + .st-item {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+:root[data-theme='dark'] .st-item:hover,
+:root[data-theme='dark'] .st-chip {
+  background: rgba(255, 255, 255, 0.05);
+}
+@media (max-width: 520px) {
+  .st-body {
+    padding: 16px;
+  }
+  .st-modal .ant-modal-header {
+    padding: 16px;
+  }
+  .st-foot {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+  .st-reset {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .st-foot > .ant-btn:not(.st-reset) {
+    flex: 1;
+  }
+  .st-row {
+    flex-wrap: wrap;
+  }
+  .st-chip {
+    display: none;
+  }
+  .st-idx {
+    display: none;
+  }
   .st-add {
     grid-template-columns: 1fr auto;
   }
   .st-add > :first-child {
     grid-column: 1 / -1;
   }
-}
-.st-foot {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding-top: 14px;
-}
-.st-reset {
-  margin-right: auto;
-  padding-left: 0;
 }

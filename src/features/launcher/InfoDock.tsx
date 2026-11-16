@@ -25,11 +25,13 @@ const REFRESH_MS = 10 * 60_000
 /** Thử lại sau lỗi giá thị trường (CoinGecko miễn phí hay trả 429). */
 const RETRY_MS = 60_000
 
-/** Ô chọn thành phố nằm trên nền tối của trang chủ → luôn dùng giao diện tối của AntD. */
+/** Ô chọn thành phố: nền tối của trang chủ cần giao diện tối của AntD với màu nền xanh đậm khớp thanh thông số. */
 const DARK: ThemeConfig = {
   algorithm: theme.darkAlgorithm,
   token: { colorPrimary: '#2dd4bf', colorBgElevated: '#0d2f2b', borderRadiusLG: 12 },
 }
+/** Giao diện sáng: dùng theme mặc định (đã cấu hình ở Root), chỉ bo góc khớp. */
+const LIGHT: ThemeConfig = { token: { borderRadiusLG: 12 } }
 
 /** Giờ hiện tại, tự cập nhật mỗi `intervalMs` (15 giây là đủ cho đồng hồ hh:mm). */
 function useNow(intervalMs: number): Date {
@@ -93,10 +95,13 @@ function Stat({
  * + Bitcoin (CoinGecko), USD/VND (ExchangeRate-API). Chỉ để tham khảo. Không gửi dữ liệu cá nhân.
  */
 export default function InfoDock({
+  dark,
   collapsed,
   onToggle,
   onSettings,
 }: {
+  /** Trang đang ở giao diện tối? */
+  dark: boolean
   collapsed: boolean
   onToggle: () => void
   /** Mở popup Cài đặt trang chủ (FD-005) */
@@ -247,7 +252,7 @@ export default function InfoDock({
                   />
                 )}
               </div>
-              <ConfigProvider theme={DARK}>
+              <ConfigProvider theme={dark ? DARK : LIGHT}>
                 <Select
                   className="dk-city"
                   popupClassName="dk-city-pop"

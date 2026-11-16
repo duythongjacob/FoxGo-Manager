@@ -8,15 +8,17 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 
 ## Cách dùng / hành vi
 - Nút **Cài đặt** (bánh răng) ở cuối thanh thông số, ngay trên "Giới thiệu". Có ở cả dạng thu nhỏ (chỉ icon) lẫn mở rộng.
-- Bấm vào → popup "Cài đặt trang chủ":
+- Bấm vào → popup "Cài đặt trang chủ" (đầu popup: icon + tiêu đề + "Chỉ lưu trên trình duyệt này"; nội dung chia nhóm có nhãn, mỗi nhóm một khung viền):
+  - **Giao diện → Chế độ màu**: Hệ thống / Sáng / Tối (khóa `foxdots.theme`, dùng chung với nút trên trang Giới thiệu).
   - **Mở trong tab mới** (công tắc): bật → mọi ô app/link mở tab mới (`target="_blank"`, `rel="noopener noreferrer"`).
-  - **Thứ tự ô**: danh sách mọi ô (app + link), nút mũi tên lên/xuống để đổi chỗ; link có thêm nút xóa (app thì không xóa được).
-  - **Thêm link**: tên (không bắt buộc, tối đa 24 ký tự) + địa chỉ → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
+  - **Ô trên trang chủ** (đếm số ô): mỗi dòng có số thứ tự, icon, tên + mô tả ngắn (app) / địa chỉ (link), nhãn trạng thái
+    (Đang chạy/Đang xây/Kế hoạch hoặc Link), nút lên/xuống; link có thêm nút xóa (app thì không xóa được).
+  - **Thêm link riêng** (đếm x/24): tên (không bắt buộc, tối đa 24 ký tự) + địa chỉ → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
     (`youtube.com` → "youtube"). Link sai → báo đỏ dưới ô.
-  - **Khôi phục mặc định**: trả thứ tự về mặc định + tắt tab mới; **giữ** các link đã thêm.
-  - **Hủy** / dấu X / bấm nền: bỏ mọi thay đổi. **Lưu**: áp dụng ngay + ghi vào máy.
+  - **Khôi phục mặc định**: trả thứ tự về mặc định, tắt tab mới, giao diện về "Hệ thống"; **giữ** các link đã thêm.
+  - **Hủy** / dấu X / bấm nền: bỏ mọi thay đổi. **Lưu thay đổi** (chỉ bật khi có thay đổi): áp dụng ngay + ghi vào máy.
 - Ô link trên trang chủ: chữ cái đầu trong khung kính màu cam FD, dưới là tên + tên miền; rê chuột thấy địa chỉ.
-- Màn 375px: popup gần full màn, ô "Tên" xuống dòng riêng. Popup theo giao diện sáng/tối đang chọn.
+- Màn 375px: popup gần full màn, ô "Tên" xuống dòng riêng, ẩn số thứ tự và nhãn trạng thái, nút Hủy/Lưu chia đôi hàng dưới. Popup theo giao diện sáng/tối đang chọn.
 
 ## Quy tắc nghiệp vụ
 - Thứ tự mặc định: app theo `sortApps` (đang chạy → đang xây → kế hoạch), sau đó link theo lúc thêm.
@@ -28,6 +30,7 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 ## Dữ liệu
 | Dữ liệu | Lưu ở đâu | Khóa | Ghi chú |
 |---|---|---|---|
+| Chế độ giao diện | localStorage | `foxdots.theme` | xem [giao-dien-sang-toi.md](giao-dien-sang-toi.md) |
 | Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url}[] }`; `order` gồm `app:<mã>` / `link:<id>` |
 
 Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không tải favicon của link (sẽ phải gọi dịch vụ ngoài).
@@ -58,3 +61,4 @@ Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không t�
 | Ngày | Phiên bản | Thay đổi |
 |---|---|---|
 | 15/11/2026 | chưa phát hành | Bản đầu: tab mới, thứ tự ô, thêm/xóa link |
+| 16/11/2026 | chưa phát hành | Làm lại giao diện popup (nhóm có nhãn, nhãn trạng thái, Lưu chỉ bật khi có thay đổi), thêm mục Giao diện |

@@ -242,10 +242,49 @@ body {
   }
 }
 
-/* Trang chủ: toàn màn tối kiểu màn khóa */
+/* Trang chủ: toàn màn kiểu màn khóa — tối = xanh đậm (mặc định), sáng = nền trắng sạch.
+   Biến --lc-* dùng trong features/launcher/launcher.css; chữ/đường kẻ = rgba(var(--lc-rgb), độ mờ). */
 .fd-page.is-immersive {
+  --lc-rgb: 255, 255, 255;
+  --lc-ink: #fff;
+  --lc-dock-bg: rgba(5, 30, 27, 0.94);
+  --lc-rail-bg: rgba(0, 0, 0, 0.12);
+  --lc-drawer-bg: #072622;
+  --lc-pop-bg: rgba(6, 34, 31, 0.86);
+  --lc-shadow-c: rgba(0, 0, 0, 0.7);
+  --lc-backdrop: rgba(0, 0, 0, 0.45);
+  --lc-up: #86efac;
+  --lc-down: #fca5a5;
+  --lc-warn: rgba(253, 186, 116, 0.8);
+  --lc-focus: rgba(45, 212, 191, 0.7);
   color-scheme: dark;
-  color: #fff;
+  color: var(--lc-ink);
+}
+:root[data-theme='light'] .fd-page.is-immersive {
+  --lc-rgb: 16, 32, 29;
+  --lc-ink: #10201d;
+  --lc-dock-bg: rgba(255, 255, 255, 0.97);
+  --lc-rail-bg: rgba(255, 255, 255, 0.7);
+  --lc-drawer-bg: #ffffff;
+  --lc-pop-bg: rgba(255, 255, 255, 0.97);
+  --lc-shadow-c: rgba(16, 32, 29, 0.16);
+  --lc-backdrop: rgba(16, 32, 29, 0.22);
+  --lc-up: #15803d;
+  --lc-down: #b91c1c;
+  --lc-warn: #b45309;
+  --lc-focus: rgba(15, 118, 110, 0.55);
+  color-scheme: light;
+}
+:root[data-theme='light'] .fd-page.is-immersive .fd-bg {
+  background: #ffffff;
+}
+/* sáng: vầng màu rất nhạt — chỉ gợi chút xanh/cam, nền vẫn trắng sạch */
+:root[data-theme='light'] .fd-page.is-immersive .fd-bg .fd-blob.b1 {
+  opacity: 0.035;
+}
+:root[data-theme='light'] .fd-page.is-immersive .fd-bg .fd-blob.b2,
+:root[data-theme='light'] .fd-page.is-immersive .fd-bg .fd-blob.b3 {
+  opacity: 0.025;
 }
 .fd-page.is-immersive .fd-bg {
   background: var(--h-bg);
@@ -268,6 +307,15 @@ body {
   background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1.4px);
   background-size: 22px 22px;
   mask-image: radial-gradient(ellipse at 50% 45%, #000 20%, transparent 70%);
+}
+/* sáng: lưới ô vuông xanh nhạt trên nền trắng, mờ dần ra rìa (như trang Giới thiệu) */
+:root[data-theme='light'] .fd-page.is-immersive .fd-bg-grid {
+  background-image:
+    linear-gradient(rgba(15, 118, 110, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-position: center center;
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 78%);
 }
 .fd-page.is-immersive .fd-main,
 .fd-page.is-landing .fd-main {

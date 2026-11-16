@@ -35,11 +35,11 @@ export default function Root() {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
 
-  const cycleMode = () => {
-    const m = nextMode(mode)
+  const changeMode = (m: ThemeMode) => {
     setMode(m)
     saveMode(m)
   }
+  const cycleMode = () => changeMode(nextMode(mode))
 
   return (
     <ConfigProvider
@@ -49,6 +49,8 @@ export default function Root() {
         token: {
           // Khớp --accent-a / --accent-b trong styles/global.css (AntD cần mã màu thật, không đọc biến CSS)
           colorPrimary: dark ? '#2dd4bf' : '#0f766e',
+          // Tối: popup/menu nền xanh đậm (khớp --h-bg trang chủ) thay vì xám mặc định của AntD
+          ...(dark && { colorBgElevated: '#0c2724', colorBorderSecondary: '#1d3a36' }),
           borderRadius: 10,
           borderRadiusLG: 14,
           fontFamily: FONT,
@@ -57,7 +59,11 @@ export default function Root() {
     >
       <AntApp>
         <Layout current={route.id} mode={mode} onCycleMode={cycleMode}>
-          {route.id === 'home' ? <LauncherPage /> : <LandingPage />}
+          {route.id === 'home' ? (
+            <LauncherPage mode={mode} dark={dark} onMode={changeMode} />
+          ) : (
+            <LandingPage />
+          )}
         </Layout>
       </AntApp>
     </ConfigProvider>

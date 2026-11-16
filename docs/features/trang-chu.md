@@ -7,7 +7,7 @@ Trang mở đầu trình duyệt (ghim làm homepage): nhìn giờ/thời tiết
 Tối giản theo màn khóa của Fox.TàiChính.
 
 ## Cách dùng / hành vi
-- Đường dẫn `#/` (hoặc đường dẫn lạ). Toàn màn nền tối + lưới chấm, **không** có thanh trên.
+- Đường dẫn `#/` (hoặc đường dẫn lạ). Toàn màn + lưới chấm, **không** có thanh trên. Nền theo giao diện: tối = xanh đậm kiểu màn khóa, sáng = trắng sạch + lưới ô vuông nhạt, ô app thành thẻ trắng viền nhẹ (đổi trong Cài đặt → Giao diện).
 - Giữa màn: logo chữ "Fox." lớn, dưới là các **ô app** dạng kính (linh vật + tên + mô tả 2–3 từ).
   - App đang chạy: bấm mở link chính (`url`), rê chuột hiện thẻ nổi 3 tính năng chính.
   - App kế hoạch: ô mờ viền đứt, không bấm được, thẻ nổi ghi "Sắp ra mắt".

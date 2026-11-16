@@ -7,6 +7,7 @@ import { APPS } from '@/data/apps'
 import { readPrefs, savePrefs } from '@/data/prefs'
 import { sortApps, STATUS_LABEL, type FoxApp } from '@/lib/apps'
 import type { Prefs, UserLink } from '@/lib/prefs'
+import type { ThemeMode } from '@/lib/theme'
 import Wordmark from '@/components/Wordmark'
 import InfoDock from './InfoDock'
 import SettingsModal from './SettingsModal'
@@ -87,9 +88,20 @@ function LinkTile({ link, newTab }: { link: UserLink; newTab: boolean }) {
 
 /**
  * Trang chủ — tối giản theo màn khóa Fox.TàiChính: thanh dọc bên trái là thông số (giờ, lời chào, thời tiết, giá),
- * giữa màn hình là chú cáo và các ô app + link riêng (thứ tự, mở tab mới: popup Cài đặt).
+ * giữa màn hình là chú cáo và các ô app + link riêng (thứ tự, mở tab mới, giao diện: popup Cài đặt).
+ * Nền theo chế độ: tối = xanh đậm kiểu màn khóa, sáng = trắng sạch (biến --lc-* trong styles/global.css).
  */
-export default function LauncherPage() {
+export default function LauncherPage({
+  mode,
+  dark,
+  onMode,
+}: {
+  /** Chế độ giao diện đang chọn (để popup Cài đặt hiển thị và đổi) */
+  mode: ThemeMode
+  /** Chế độ thực tế đang tối? (ô chọn thành phố đổi theme AntD theo đây) */
+  dark: boolean
+  onMode: (m: ThemeMode) => void
+}) {
   const apps = useMemo(() => sortApps(APPS), [])
   const [prefs, setPrefs] = useState<Prefs>(readPrefs)
   const tiles = useMemo(() => tilesOf(apps, prefs), [apps, prefs])
@@ -98,15 +110,16 @@ export default function LauncherPage() {
   const toggle = () => setCollapsed(!collapsed)
   const [settings, setSettings] = useState(false)
 
-  const save = (p: Prefs) => {
+  const save = (p: Prefs, m: ThemeMode) => {
     setPrefs(p)
     savePrefs(p)
+    if (m !== mode) onMode(m)
     setSettings(false)
   }
 
   return (
     <div className="lc">
-      <InfoDock collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
+      <InfoDock dark={dark} collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
 
       <div className="lc-main">
         <h1 className="lc-logo">
@@ -133,6 +146,7 @@ export default function LauncherPage() {
       <SettingsModal
         open={settings}
         prefs={prefs}
+        mode={mode}
         apps={apps}
         onSave={save}
         onClose={() => setSettings(false)}
