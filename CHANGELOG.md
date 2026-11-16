@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.3.0] — 2026-11-16
+
 ### Đổi (16/11/2026)
 - Trang chủ: ô app/link bỏ linh vật và khung kính, chỉ còn tên + mô tả, ngăn cách bằng đường kẻ dọc mảnh mờ dần hai đầu;
   rê chuột hiện gạch chân màu nhấn của app.
