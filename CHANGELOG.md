@@ -3,6 +3,11 @@
 Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo SemVer.
 
 ## [Chưa phát hành]
+
+_(chưa có thay đổi)_
+
+## [0.2.0] — 2026-11-16
+
 ### Đổi (16/11/2026)
 - Trang Giới thiệu làm lại toàn bộ: nền trắng, chữ lớn, nhấn xanh ngọc Fox; 8 mục kể chuyện bằng chuyển động
   (thư viện `motion`) — hero có dashboard minh họa "đang chạy", sơ đồ hệ sinh thái nối dần theo cuộn, 6 tính năng mỗi
