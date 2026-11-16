@@ -14,7 +14,7 @@ Việc bảo trì: [BAO_TRI.md](BAO_TRI.md).
  │     │                                                                │
  │ src/app/      Root ── theme AntD, nghe hệ thống đổi sáng/tối         │
  │               │  └─ useRoute() ── đọc location.hash                  │
- │               Layout ── nền + thanh trên/chân trang (trang Giới thiệu)│
+ │               Layout ── nền + thanh trên (trang Giới thiệu)           │
  │     │                                                                │
  │ src/features/ launcher/ (#/)            landing/ (#/gioi-thieu)      │
  │               LauncherPage + InfoDock   LandingPage                  │
@@ -50,7 +50,7 @@ Chỉ `data/external.ts` được gọi mạng.
  bấm link href('about','ff') = "#/gioi-thieu/ff"
    → trình duyệt đổi hash → sự kiện hashchange
    → useRoute: parseRoute → { id: 'about', anchor: 'ff' }
-   → Root vẽ LandingPage; Layout đổi key → hiệu ứng vào trang
+   → Root vẽ LandingPage (nạp lười — file JS riêng kèm thư viện motion); Layout đổi key → hiệu ứng vào trang
    → sau 30 ms cuộn tới phần tử id="ff" (không có anchor → cuộn lên đầu)
 ```
 Đường dẫn lạ → trang chủ. Hash route chạy trên mọi hosting tĩnh, không cần cấu hình server.

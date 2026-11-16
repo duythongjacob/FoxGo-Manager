@@ -172,6 +172,7 @@ body {
   }
 }
 
+/* Thanh trên trang Giới thiệu: kính sáng theo token (sáng/tối), đổi dạng khi cuộn (Layout thêm .is-scrolled). */
 .fd-top {
   position: sticky;
   top: 0;
@@ -179,35 +180,55 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px max(16px, calc((100% - 1160px) / 2 + 20px));
-  color: var(--h-ink);
-  background: color-mix(in srgb, var(--h-bg) 82%, transparent);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  height: 64px;
+  padding: 0 max(16px, calc((100% - 1160px) / 2 + 20px));
+  color: var(--text);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
-.fd-top-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--h-ink);
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  transition: background 0.15s ease;
-}
-.fd-top-link:hover {
-  background: rgba(255, 255, 255, 0.16);
+.fd-top.is-scrolled {
+  background: var(--glass-bg);
+  border-bottom-color: var(--glass-border);
+  /* bóng rất nhẹ — chủ yếu là đường viền dưới, không tạo dải tối dưới thanh */
+  box-shadow: 0 6px 20px -16px rgba(16, 32, 29, 0.16);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 .fd-top .ant-btn {
-  color: var(--h-ink);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  margin-left: auto;
+  color: var(--muted);
+  background: transparent;
+  border-color: var(--border);
+}
+/* nút "Trang chủ": viền mảnh, chữ giãn nhẹ — rê chuột thì lấp đầy màu chữ (đảo màu), không icon */
+.fd-top-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+.fd-top-cta:hover,
+.fd-top-cta:focus-visible {
+  color: var(--bg);
+  background: var(--text);
+  border-color: var(--text);
 }
 .fd-brand {
   display: flex;
@@ -215,14 +236,44 @@ body {
   gap: 10px;
   color: inherit;
   text-decoration: none;
+  /* logo hiện ra khi vào trang: mở dần từ trái sang */
+  animation: fd-brand-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* Giữ màu chữ khi rê/bấm/đã ghé — kiểu `a:hover`/`a:active` của AntD (độ ưu tiên cao hơn .fd-brand) tô xanh link */
+.fd-brand:hover,
+.fd-brand:active,
+.fd-brand:focus,
+.fd-brand:visited {
+  color: inherit;
+}
+.fd-brand:focus-visible {
+  outline: 2px solid var(--accent-a);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+@keyframes fd-brand-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 .fd-brand img {
-  border-radius: 9px;
+  border-radius: 8px;
 }
 .fd-brand-name {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
+}
+/* Trang Giới thiệu: nền trắng sạch (tối: nền surface), không vầng màu */
+.fd-page.is-landing .fd-bg {
+  background: var(--surface);
+}
+.fd-page.is-landing .fd-bg > * {
+  display: none;
 }
 .fd-main {
   width: 100%;
@@ -324,7 +375,7 @@ body {
   gap: 0;
 }
 
-/* ===== Logo chữ "Fox." (src/components/Wordmark.tsx) ===== */
+/* ===== Logo chữ "Fox." / "Fox.Go" (src/components/Wordmark.tsx) ===== */
 .wm {
   display: inline-flex;
   align-items: baseline;
@@ -344,6 +395,13 @@ body {
   border-radius: 50%;
   background: var(--fox);
   box-shadow: 0 0 0.35em color-mix(in srgb, var(--fox) 55%, transparent);
+}
+/* "Go" nhỏ bằng ~một nửa "Fox", cùng đường chân chữ, sát ngay sau dấu chấm cam */
+.wm-go {
+  margin-left: 0.06em;
+  font-size: 0.52em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 /* ===== Chữ gradient (tiêu đề hero) ===== */
@@ -384,22 +442,64 @@ body {
   border: 1px solid var(--border);
 }
 
-.fd-foot {
-  padding: 20px 16px;
-  text-align: center;
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
 @media (max-width: 640px) {
   .fd-top {
     gap: 10px;
-  }
-  .fd-brand-name {
-    display: none;
   }
   .fd-main {
     gap: 40px;
     padding-top: 16px;
   }
+}
+
+/* ---------- Màn chờ trang Giới thiệu (components/Preloader.tsx) ----------
+   Ở đây (không phải landing.css) vì nó hiện ngay khi file JS trang Giới thiệu còn đang tải. */
+html.pl-lock {
+  overflow: hidden;
+}
+.pl-root {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s;
+}
+.pl-root.is-done {
+  opacity: 0;
+  visibility: hidden;
+}
+.pl-box {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  color: var(--text);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pl-root.is-done .pl-box {
+  transform: translateY(-12px) scale(0.97);
+}
+.pl-bar {
+  width: 180px;
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 99px;
+  background: var(--border);
+  overflow: hidden;
+}
+.pl-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b));
+  transform-origin: left;
+  transition: transform 0.35s ease-out;
+}
+.pl-text {
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }

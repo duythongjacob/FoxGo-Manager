@@ -1,7 +1,7 @@
-/** Khung trang dùng chung: nền, thanh trên + chân trang (chỉ trang Giới thiệu). Xem docs/features/dieu-huong.md. */
-import type { ReactNode } from 'react'
+/** Khung trang dùng chung: nền + thanh trên (chỉ trang Giới thiệu). Xem docs/features/dieu-huong.md. */
+import { useEffect, useState, type ReactNode } from 'react'
 import { Button, Tooltip } from 'antd'
-import { ArrowLeftOutlined, DesktopOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons'
+import { DesktopOutlined, MoonOutlined, SunOutlined } from '@ant-design/icons'
 import Wordmark from '@/components/Wordmark'
 import { href, type RouteId } from '@/lib/route'
 import { MODE_LABEL, nextMode, type ThemeMode } from '@/lib/theme'
@@ -16,12 +16,26 @@ interface Props {
   children: ReactNode
 }
 
+/** Đã cuộn khỏi đỉnh trang chưa (thanh trên đổi sang dạng kính có viền + bóng). */
+function useScrolled(enabled: boolean) {
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    if (!enabled) return
+    const on = () => setScrolled(window.scrollY > 8)
+    on()
+    window.addEventListener('scroll', on, { passive: true })
+    return () => window.removeEventListener('scroll', on)
+  }, [enabled])
+  return scrolled
+}
+
 /**
- * Khung chung: nền lưới + vầng sáng (theo màn đăng nhập Fox.TàiChính).
- * Trang chủ: toàn màn tối kiểu màn khóa, không thanh trên. Giới thiệu: thanh trên kính tối + chân trang.
+ * Khung chung. Trang chủ: toàn màn kiểu màn khóa, không thanh trên.
+ * Giới thiệu: thanh trên kính sáng (logo, sáng/tối, nút về trang chủ — không menu mục, anh chọn 16/11/2026); chân trang do trang tự vẽ.
  */
 export default function Layout({ current, mode, onCycleMode, children }: Props) {
   const home = current === 'home'
+  const scrolled = useScrolled(!home)
   return (
     <div className={`fd-page${home ? ' is-immersive' : ' is-landing'}`}>
       <div className="fd-bg" aria-hidden>
@@ -32,12 +46,9 @@ export default function Layout({ current, mode, onCycleMode, children }: Props) 
       </div>
 
       {!home && (
-        <header className="fd-top">
-          <a className="fd-brand" href={href('about')} aria-label="FoxGo — giới thiệu">
-            <Wordmark size={26} />
-          </a>
-          <a className="fd-top-link" href={href('home')}>
-            <ArrowLeftOutlined /> Trang chủ
+        <header className={`fd-top${scrolled ? ' is-scrolled' : ''}`}>
+          <a className="fd-brand" href={href('about')} aria-label="FoxGo — về đầu trang giới thiệu">
+            <Wordmark size={26} go />
           </a>
           <Tooltip
             title={`Giao diện: ${MODE_LABEL[mode]} — bấm để chuyển sang ${MODE_LABEL[nextMode(mode)]}`}
@@ -49,6 +60,9 @@ export default function Layout({ current, mode, onCycleMode, children }: Props) 
               aria-label={`Giao diện: ${MODE_LABEL[mode]}. Chuyển sang ${MODE_LABEL[nextMode(mode)]}`}
             />
           </Tooltip>
+          <a className="fd-top-cta" href={href('home')}>
+            Mở trang chủ
+          </a>
         </header>
       )}
 
@@ -56,14 +70,6 @@ export default function Layout({ current, mode, onCycleMode, children }: Props) 
       <main className="fd-main" key={current}>
         {children}
       </main>
-
-      {!home && (
-        <footer className="fd-foot">
-          FoxGo<sup>®</sup>
-          <i aria-hidden />
-          Thong Duy
-        </footer>
-      )}
     </div>
   )
 }

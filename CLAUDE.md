@@ -12,6 +12,8 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 - **Chỉ link + mô tả chung.** Không đọc, không hiển thị số liệu cá nhân của app nào (cho tới FD-008 có PRD được duyệt).
   Bundle là công khai khi deploy.
 - Không analytics, không tải font/CDN — font Be Vietnam Pro từ node_modules.
+- Thư viện hoạt ảnh `motion` (anh duyệt 16/11/2026) **chỉ** dùng trong `src/features/landing/` — trang Giới thiệu nạp lười
+  để trang chủ không phải tải nó. Trang Giới thiệu bám sản phẩm thật: không nút/link tới chỗ chưa có, số liệu minh họa là số mẫu.
 - **Dịch vụ ngoài được duyệt (anh duyệt 14/11/2026, giống Fox.TàiChính)** — chỉ trong `src/data/external.ts`:
   Open-Meteo (`api.open-meteo.com`, thời tiết — chỉ gửi tọa độ thành phố chọn từ danh sách), CoinGecko
   (`api.coingecko.com`, Bitcoin + PAX Gold ≈ vàng thế giới), ExchangeRate-API (`open.er-api.com`, USD/VND).

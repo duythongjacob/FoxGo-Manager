@@ -4,6 +4,26 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 ### Đổi (16/11/2026)
+- Trang Giới thiệu làm lại toàn bộ: nền trắng, chữ lớn, nhấn xanh ngọc Fox; 8 mục kể chuyện bằng chuyển động
+  (thư viện `motion`) — hero có dashboard minh họa "đang chạy", sơ đồ hệ sinh thái nối dần theo cuộn, 6 tính năng mỗi
+  cái một giao diện riêng, dashboard tự lắp ghép, quy trình 4 bước dạng tab tự chuyển, chữ trôi + đường line chuyển động,
+  chân trang riêng. Mỗi tính năng ghi app thật + trạng thái thật; số liệu minh họa là số mẫu. Tôn trọng "giảm chuyển động".
+- Logo chữ "Fox.Go" (Fox lớn, chấm cam, Go nhỏ) thay logo hình cáo trên trang Giới thiệu — tên thương hiệu chỉ vẽ ở
+  `Wordmark` để sau này đổi dễ. Mục Hệ sinh thái kể câu chuyện từng app (khoảnh khắc đời thường + kết nối theo lộ trình).
+- Thanh trên trang Giới thiệu: kính sáng, logo + sáng/tối + nút "Mở trang chủ" (viền mảnh, không icon, rê chuột đảo màu);
+  không menu mục.
+- Trang Giới thiệu bỏ hình cáo: sơ đồ Hệ sinh thái là vòng tròn chữ, đường nối có xung sáng chạy dọc; thẻ app chỉ chấm
+  màu + tên (bỏ "Đang xây"/"Sắp có"); mục Về FoxGo thay 3 khung thiết bị bằng chữ lớn trôi ngang + đường line chuyển động;
+  bỏ cáo vẫy tay ở phần kêu gọi cuối.
+- Kêu gọi cuối trang Giới thiệu: thêm câu chuyện "Vì sao có Fox", khẩu hiệu "Fox — …" tự đổi lần lượt (gồm "Bớt áp lực,
+  giảm stress mỗi ngày."), hàng lợi ích. Chân trang làm lại chuyên nghiệp hơn: nền lưới chấm, dải mời về trang chủ,
+  cột Trạng thái (số app đang chạy / đang xây / kế hoạch), chữ "Fox." lớn mờ dần, số phiên bản.
+- Mục Hệ sinh thái đổi tiêu đề thành "Kết nối.", mô tả viết lại thành 3 đoạn (chữ nhỏ hơn để vừa khung ghim).
+  Hình "rối → thẳng" khối Vì sao có Fox thêm icon công cụ to nhỏ rải lộn xộn, mờ dần khi các đường vào hàng.
+- Thanh trên trang Giới thiệu khi cuộn: bóng nhẹ hơn (trước hơi đậm, tạo dải tối). Tiêu đề hiện từng dòng không còn
+  cắt dấu tiếng Việt hai tầng (ố, ộ, ẩ).
+- Favicon / icon cài app: chữ "Fox." trắng, chấm cam trên nền xanh đậm (thay mặt cáo).
+- Trang Giới thiệu nạp lười (file JS riêng) — trang chủ không phải tải thư viện hoạt ảnh.
 - Trang chủ theo giao diện sáng/tối: **tối** giữ nền xanh đậm kiểu màn khóa; **sáng** nền trắng sạch + lưới ô vuông
   xanh nhạt, vầng màu rất nhạt, ô app thành thẻ trắng viền mảnh. Chọn chế độ trong Cài đặt → Giao diện.
 - Popup Cài đặt làm lại: tiêu đề có icon, nội dung chia nhóm có nhãn (Giao diện / Khi mở ứng dụng / Ô trên trang chủ /

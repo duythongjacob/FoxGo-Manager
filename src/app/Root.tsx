@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { App as AntApp, ConfigProvider, theme } from 'antd'
 import viVN from 'antd/locale/vi_VN'
-import LandingPage from '@/features/landing/LandingPage'
+import Preloader, { PRELOAD_START } from '@/components/Preloader'
 import LauncherPage from '@/features/launcher/LauncherPage'
 import { nextMode, resolveDark, type ThemeMode } from '@/lib/theme'
 import Layout from './Layout'
@@ -15,6 +15,12 @@ import { useRoute } from './useRoute'
 
 /** Font Be Vietnam Pro cài trong node_modules (main.tsx) — không tải từ Google (quy tắc: không CDN). */
 const FONT = "'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif"
+
+/**
+ * Trang Giới thiệu nạp lười (tách file JS riêng): nó kéo theo thư viện hoạt ảnh `motion`, còn trang chủ — trang mở đầu
+ * trình duyệt — cần mở nhanh nhất có thể.
+ */
+const LandingPage = lazy(() => import('@/features/landing/LandingPage'))
 
 /** Component gốc: theo dõi hệ thống đổi sáng/tối, gắn `data-theme` lên <html> để CSS token đổi màu. */
 export default function Root() {
@@ -62,7 +68,9 @@ export default function Root() {
           {route.id === 'home' ? (
             <LauncherPage mode={mode} dark={dark} onMode={changeMode} />
           ) : (
-            <LandingPage />
+            <Suspense fallback={<Preloader progress={PRELOAD_START} />}>
+              <LandingPage />
+            </Suspense>
           )}
         </Layout>
       </AntApp>

@@ -14,7 +14,8 @@ export function useRoute(): Route {
 
   useEffect(() => {
     if (route.anchor) {
-      // chờ trang mới vẽ xong rồi mới cuộn (gọi ngay thì phần tử đích chưa tồn tại; 30 ms ≈ 2 khung hình)
+      // Đổi mục trên trang đang mở: chờ ~2 khung hình rồi cuộn. Vào thẳng link có mục khi trang chưa nạp xong
+      // (Giới thiệu nạp lười) → phần tử chưa có, trang đó tự cuộn khi dựng xong (LandingPage).
       const t = setTimeout(
         () => document.getElementById(route.anchor!)?.scrollIntoView({ block: 'start' }),
         30,
