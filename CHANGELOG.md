@@ -4,7 +4,12 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Đổi (16/11/2026)
+- Trang chủ: ô app/link bỏ linh vật và khung kính, chỉ còn tên + mô tả, ngăn cách bằng đường kẻ dọc mảnh mờ dần hai đầu;
+  rê chuột hiện gạch chân màu nhấn của app.
+- Cài đặt → Ô trên trang chủ: bỏ icon và nhãn trạng thái (Đang chạy/Kế hoạch…). Thêm link riêng có trường **Mô tả**
+  (không bắt buộc, tối đa 32 ký tự) — hiện dưới tên ô thay cho tên miền.
+- Thanh thông số khi mở rộng: bóng đổ gọn hơn, lớp phủ nền (màn hẹp) nhạt hơn.
 
 ## [0.2.0] — 2026-11-16
 

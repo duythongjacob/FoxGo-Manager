@@ -1,6 +1,6 @@
 # Cài đặt trang chủ (thứ tự ô, tab mới, link riêng)
 
-> Mã: `FD-005` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-005` · PRD: — · Cập nhật: 16/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng lên đầu, mở trong tab mới, thêm link ngoài hệ Fox
@@ -11,14 +11,15 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 - Bấm vào → popup "Cài đặt trang chủ" (đầu popup: icon + tiêu đề + "Chỉ lưu trên trình duyệt này"; nội dung chia nhóm có nhãn, mỗi nhóm một khung viền):
   - **Giao diện → Chế độ màu**: Hệ thống / Sáng / Tối (khóa `foxdots.theme`, dùng chung với nút trên trang Giới thiệu).
   - **Mở trong tab mới** (công tắc): bật → mọi ô app/link mở tab mới (`target="_blank"`, `rel="noopener noreferrer"`).
-  - **Ô trên trang chủ** (đếm số ô): mỗi dòng có số thứ tự, icon, tên + mô tả ngắn (app) / địa chỉ (link), nhãn trạng thái
-    (Đang chạy/Đang xây/Kế hoạch hoặc Link), nút lên/xuống; link có thêm nút xóa (app thì không xóa được).
-  - **Thêm link riêng** (đếm x/24): tên (không bắt buộc, tối đa 24 ký tự) + địa chỉ → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
+  - **Ô trên trang chủ** (đếm số ô): mỗi dòng có số thứ tự, tên + mô tả ngắn (app) / mô tả hoặc địa chỉ (link),
+    nút lên/xuống (không icon, không nhãn trạng thái); link có thêm nút xóa (app thì không xóa được).
+  - **Thêm link riêng** (đếm x/24): tên (không bắt buộc, tối đa 24 ký tự) + mô tả (không bắt buộc, tối đa 32 ký tự)
+    + link → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
     (`youtube.com` → "youtube"). Link sai → báo đỏ dưới ô.
   - **Khôi phục mặc định**: trả thứ tự về mặc định, tắt tab mới, giao diện về "Hệ thống"; **giữ** các link đã thêm.
   - **Hủy** / dấu X / bấm nền: bỏ mọi thay đổi. **Lưu thay đổi** (chỉ bật khi có thay đổi): áp dụng ngay + ghi vào máy.
-- Ô link trên trang chủ: chữ cái đầu trong khung kính màu cam FD, dưới là tên + tên miền; rê chuột thấy địa chỉ.
-- Màn 375px: popup gần full màn, ô "Tên" xuống dòng riêng, ẩn số thứ tự và nhãn trạng thái, nút Hủy/Lưu chia đôi hàng dưới. Popup theo giao diện sáng/tối đang chọn.
+- Ô link trên trang chủ: cùng kiểu chữ với ô app (tên + mô tả, không có mô tả thì tên miền; gạch chân cam FD khi rê chuột); rê chuột thấy địa chỉ.
+- Màn 375px: popup gần full màn, ô "Tên" và "Mô tả" mỗi ô một dòng, ẩn số thứ tự, nút Hủy/Lưu chia đôi hàng dưới. Popup theo giao diện sáng/tối đang chọn.
 
 ## Quy tắc nghiệp vụ
 - Thứ tự mặc định: app theo `sortApps` (đang chạy → đang xây → kế hoạch), sau đó link theo lúc thêm.
@@ -31,7 +32,7 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 | Dữ liệu | Lưu ở đâu | Khóa | Ghi chú |
 |---|---|---|---|
 | Chế độ giao diện | localStorage | `foxdots.theme` | xem [giao-dien-sang-toi.md](giao-dien-sang-toi.md) |
-| Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url}[] }`; `order` gồm `app:<mã>` / `link:<id>` |
+| Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url,desc?}[] }`; `order` gồm `app:<mã>` / `link:<id>` |
 
 Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không tải favicon của link (sẽ phải gọi dịch vụ ngoài).
 
@@ -62,3 +63,4 @@ Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không t�
 |---|---|---|
 | 15/11/2026 | chưa phát hành | Bản đầu: tab mới, thứ tự ô, thêm/xóa link |
 | 16/11/2026 | chưa phát hành | Làm lại giao diện popup (nhóm có nhãn, nhãn trạng thái, Lưu chỉ bật khi có thay đổi), thêm mục Giao diện |
+| 16/11/2026 | chưa phát hành | Danh sách ô bỏ icon và nhãn trạng thái; thêm link có trường Mô tả |

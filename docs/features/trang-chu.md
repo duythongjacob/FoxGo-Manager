@@ -1,28 +1,28 @@
 # Trang chủ
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: — · Cập nhật: 16/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Trang mở đầu trình duyệt (ghim làm homepage): nhìn giờ/thời tiết/giá trong một giây và bấm vào app Fox cần dùng.
 Tối giản theo màn khóa của Fox.TàiChính.
 
 ## Cách dùng / hành vi
-- Đường dẫn `#/` (hoặc đường dẫn lạ). Toàn màn + lưới chấm, **không** có thanh trên. Nền theo giao diện: tối = xanh đậm kiểu màn khóa, sáng = trắng sạch + lưới ô vuông nhạt, ô app thành thẻ trắng viền nhẹ (đổi trong Cài đặt → Giao diện).
-- Giữa màn: logo chữ "Fox." lớn, dưới là các **ô app** dạng kính (linh vật + tên + mô tả 2–3 từ).
-  - App đang chạy: bấm mở link chính (`url`), rê chuột hiện thẻ nổi 3 tính năng chính.
-  - App kế hoạch: ô mờ viền đứt, không bấm được, thẻ nổi ghi "Sắp ra mắt".
+- Đường dẫn `#/` (hoặc đường dẫn lạ). Toàn màn + lưới chấm, **không** có thanh trên. Nền theo giao diện: tối = xanh đậm kiểu màn khóa, sáng = trắng sạch + lưới ô vuông nhạt (đổi trong Cài đặt → Giao diện).
+- Giữa màn: logo chữ "Fox." lớn, dưới là các **ô app** chỉ có chữ (tên + mô tả 2–3 từ), ngăn cách bằng đường kẻ dọc mảnh mờ dần hai đầu (ô đầu hàng không có kẻ); lưới 6 cột.
+  - App đang chạy: bấm mở link chính (`url`), rê chuột hiện gạch chân màu nhấn dưới tên + thẻ nổi 3 tính năng chính.
+  - App kế hoạch: chữ mờ, không bấm được, thẻ nổi ghi "Sắp ra mắt".
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
 - Bên trái: **thanh thông số** — xem [thanh-thong-so.md](thanh-thong-so.md).
 - Chân trang: "FoxGo® | Thong Duy".
 - Màn hình:
   - ≥ 1080px: thanh thông số cố định bên trái (dải 64px, mở rộng 280px đè lên nội dung).
   - < 1080px: thanh thành ngăn kéo trượt từ trái + nền mờ, chỉ còn nút menu.
-  - ≤ 520px: ô app xếp lưới 3 cột.
+  - ≤ 520px: ô app xếp lưới 3 cột (đường kẻ theo 3 cột).
   - Thiết bị cảm ứng (`hover: none`): không hiện thẻ nổi.
 
 ## Quy tắc nghiệp vụ
 - Tên trên ô: bỏ tiền tố "Fox." và tách chữ: "Fox.TàiChính" → "Tài Chính".
-- Màu nhấn của app chỉ đi qua biến CSS `--app-accent` (viền/ánh sáng ô).
+- Màu nhấn của app chỉ đi qua biến CSS `--app-accent` (gạch chân khi rê chuột, viền đầu mục thẻ nổi).
 
 ## Dữ liệu
 | Dữ liệu | Lưu ở đâu | Khóa / đường dẫn | Ghi chú |
@@ -33,7 +33,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
 | File | Vai trò |
 |---|---|
 | `src/features/launcher/LauncherPage.tsx` | Trang: logo, ô app (`AppTile`), chân trang, trạng thái thu/mở thanh |
-| `src/features/launcher/launcher.css` | Bố cục màn khóa, ô kính, thẻ nổi, responsive (tiền tố `.lc-`) |
+| `src/features/launcher/launcher.css` | Bố cục màn khóa, ô chữ + đường kẻ, thẻ nổi, responsive (tiền tố `.lc-`) |
 | `src/components/Wordmark.tsx` | Logo chữ "Fox." |
 | `src/lib/apps.ts` (+ test) | `sortApps`, `STATUS_LABEL` |
 | `src/app/Layout.tsx` | Chế độ `is-immersive` (ẩn thanh trên ở trang chủ) |
@@ -53,3 +53,4 @@ Tối giản theo màn khóa của Fox.TàiChính.
 | 14/11/2026 | 0.1.0 | Bản đầu: lời chào, đồng hồ, tìm nhanh, lưới thẻ app |
 | 15/11/2026 | chưa phát hành | Làm lại kiểu màn khóa, bỏ ô tìm & thẻ app cũ; đổi tên FoxGo |
 | 15/11/2026 | chưa phát hành | Thanh thông số luôn thu nhỏ khi mở; ô Fox.CôngViệc bấm được (bản trên máy) |
+| 16/11/2026 | chưa phát hành | Bỏ linh vật/khung kính ở ô app, ngăn cách bằng đường kẻ mảnh |

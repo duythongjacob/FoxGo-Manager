@@ -17,16 +17,13 @@ import './launcher.css'
 /** Thuộc tính mở tab mới; noopener/noreferrer để trang được mở không điều khiển ngược lại tab này. */
 const newTabProps = (on: boolean) => (on ? { target: '_blank', rel: 'noopener noreferrer' } : {})
 
-/** Ô app dạng kính (như ảnh đại diện màn khóa). App "kế hoạch" không có link, hiển thị mờ. */
+/** Ô app chỉ có chữ (tên + mô tả), ngăn cách bằng đường kẻ mảnh trong CSS. App "kế hoạch" không có link, hiển thị mờ. */
 function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
   const live = app.status !== 'planned' && !!app.url
   const style = { '--app-accent': app.accent } as CSSProperties
   const name = tileName({ kind: 'app', app })
   const inner = (
     <>
-      <span className="lc-tile-glass" aria-hidden>
-        <img src={app.mascot} alt="" width={44} height={44} />
-      </span>
       <span className="lc-tile-name">{name}</span>
       {app.tagline && <span className="lc-tile-desc">{app.tagline}</span>}
       {app.highlights && app.highlights.length > 0 && (
@@ -66,7 +63,7 @@ function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
   )
 }
 
-/** Ô link người dùng tự thêm: chữ cái đầu trong khung kính (không tải favicon — không gọi dịch vụ ngoài). */
+/** Ô link người dùng tự thêm: tên + mô tả (không có thì tên miền), cùng kiểu chữ với ô app (không tải favicon — không gọi dịch vụ ngoài). */
 function LinkTile({ link, newTab }: { link: UserLink; newTab: boolean }) {
   const host = link.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
   return (
@@ -77,11 +74,8 @@ function LinkTile({ link, newTab }: { link: UserLink; newTab: boolean }) {
       aria-label={`Mở ${link.name}`}
       {...newTabProps(newTab)}
     >
-      <span className="lc-tile-glass" aria-hidden>
-        <span className="lc-tile-letter">{link.name.charAt(0).toUpperCase()}</span>
-      </span>
       <span className="lc-tile-name">{link.name}</span>
-      <span className="lc-tile-desc">{host.split('/')[0]}</span>
+      <span className="lc-tile-desc">{link.desc ?? host.split('/')[0]}</span>
     </a>
   )
 }

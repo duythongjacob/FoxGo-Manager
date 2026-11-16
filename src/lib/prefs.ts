@@ -8,6 +8,8 @@ export interface UserLink {
   id: string
   name: string
   url: string
+  /** Mô tả ngắn hiện dưới tên trên trang chủ (không có → hiện tên miền) */
+  desc?: string
 }
 
 export interface Prefs {
@@ -23,6 +25,7 @@ export const DEFAULT_PREFS: Prefs = { order: [], newTab: false, links: [] }
 /** Giới hạn để dữ liệu hỏng/lạ không làm vỡ trang (localStorage có thể bị sửa tay). */
 export const MAX_LINKS = 24
 export const MAX_NAME = 24
+export const MAX_DESC = 32
 
 /** Khóa thứ tự của một app / một link. */
 export const appKey = (code: string) => `app:${code}`
@@ -66,7 +69,9 @@ export function parsePrefs(raw: unknown): Prefs {
       if (typeof x?.id !== 'string' || typeof x.name !== 'string' || typeof x.url !== 'string') continue
       const url = normalizeUrl(x.url)
       const name = x.name.trim().slice(0, MAX_NAME)
-      if (url && name && !links.some((l) => l.id === x.id)) links.push({ id: x.id, name, url })
+      if (!url || !name || links.some((l) => l.id === x.id)) continue
+      const desc = typeof x.desc === 'string' ? x.desc.trim().slice(0, MAX_DESC) : ''
+      links.push(desc ? { id: x.id, name, url, desc } : { id: x.id, name, url })
     }
   }
   const order = Array.isArray(r.order)

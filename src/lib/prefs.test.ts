@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyOrder, MAX_LINKS, move, nameFromUrl, normalizeUrl, parsePrefs } from './prefs'
+import { applyOrder, MAX_DESC, MAX_LINKS, move, nameFromUrl, normalizeUrl, parsePrefs } from './prefs'
 
 describe('prefs (FD-005)', () => {
   it('normalizeUrl: thêm https, chỉ nhận http/https', () => {
@@ -34,6 +34,17 @@ describe('prefs (FD-005)', () => {
     expect(p.links).toEqual([{ id: 'a', name: 'Mail', url: 'https://mail.google.com/' }])
     const many = Array.from({ length: 40 }, (_, i) => ({ id: `${i}`, name: 'n', url: 'a.vn' }))
     expect(parsePrefs({ links: many }).links).toHaveLength(MAX_LINKS)
+  })
+  it('parsePrefs: giữ mô tả link (cắt độ dài), bỏ mô tả rỗng/sai kiểu', () => {
+    const p = parsePrefs({
+      links: [
+        { id: 'a', name: 'A', url: 'a.com', desc: '  Video  ' },
+        { id: 'b', name: 'B', url: 'b.com', desc: '   ' },
+        { id: 'c', name: 'C', url: 'c.com', desc: 5 },
+        { id: 'd', name: 'D', url: 'd.com', desc: 'x'.repeat(100) },
+      ],
+    })
+    expect(p.links.map((l) => l.desc)).toEqual(['Video', undefined, undefined, 'x'.repeat(MAX_DESC)])
   })
   it('applyOrder: theo order, mục mới ở cuối giữ thứ tự gốc, khóa thừa bị bỏ', () => {
     const items = ['a', 'b', 'c', 'd']

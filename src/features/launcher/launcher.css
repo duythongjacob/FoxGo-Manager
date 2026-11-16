@@ -81,41 +81,60 @@
   animation: lc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ---------- Ô app ---------- */
+/* ---------- Ô app: chỉ chữ, ngăn cách bằng đường kẻ dọc mảnh ----------
+   Lưới cố định 6 cột (3 cột ở ≤ 520px) để biết ô nào đầu hàng → ô đầu hàng không có đường kẻ bên trái.
+   Đổi số cột thì đổi cả :nth-child(6n + 1) / (3n + 1) bên dưới. */
 .lc-tiles {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
   justify-content: center;
-  gap: 22px 8px;
-  max-width: 680px;
+  row-gap: 26px;
+  max-width: 900px;
   animation: lc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 .lc-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  width: 96px;
+  gap: 5px;
+  min-width: 112px;
+  padding: 6px 22px 10px;
   color: var(--lc-ink);
   text-decoration: none;
 }
-.lc-tile-glass {
-  display: grid;
-  place-items: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 30%;
-  background:
-    linear-gradient(145deg, rgba(var(--lc-rgb), 0.24), rgba(var(--lc-rgb), 0.04) 55%),
-    color-mix(in srgb, var(--app-accent) 32%, transparent);
-  border: 1px solid rgba(var(--lc-rgb), 0.22);
-  box-shadow: inset 0 1px 0 rgba(var(--lc-rgb), 0.4);
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+/* đường kẻ dọc mờ dần hai đầu, nằm bên trái mọi ô trừ ô đầu hàng */
+.lc-tile:not(:nth-child(6n + 1))::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(var(--lc-rgb), 0.2) 30%, rgba(var(--lc-rgb), 0.2) 70%, transparent);
 }
-.lc-tile-glass img {
-  display: block;
-  width: 40px;
-  height: 40px;
+/* gạch chân màu nhấn của app, mọc từ giữa khi rê chuột / chọn bằng phím */
+.lc-tile-name {
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+.lc-tile-name::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: -3px;
+  height: 1px;
+  background: color-mix(in srgb, var(--app-accent) 80%, var(--lc-ink));
+  transition:
+    left 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    right 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+a.lc-tile:hover .lc-tile-name::after,
+a.lc-tile:focus-visible .lc-tile-name::after {
+  left: 0;
+  right: 0;
 }
 a.lc-tile,
 a.lc-tile:hover,
@@ -123,23 +142,13 @@ a.lc-tile:visited,
 a.lc-tile:active {
   color: var(--lc-ink);
 }
-a.lc-tile:hover .lc-tile-glass,
-a.lc-tile:focus-visible .lc-tile-glass {
-  transform: translateY(-3px) scale(1.05);
-}
 a.lc-tile:focus-visible {
-  outline: none;
-}
-a.lc-tile:focus-visible .lc-tile-glass {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--h-g1) 50%, transparent);
-}
-.lc-tile-name {
-  font-size: 12.5px;
-  font-weight: 500;
+  outline: 2px solid color-mix(in srgb, var(--h-g1) 50%, transparent);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 .lc-tile-desc {
-  margin-top: -5px;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -230,15 +239,6 @@ a.lc-tile:focus-visible .lc-tile-glass {
   }
 }
 
-.lc-tile.is-planned .lc-tile-glass {
-  background: transparent;
-  border: 1px dashed rgba(var(--lc-rgb), 0.18);
-  box-shadow: none;
-}
-.lc-tile.is-planned img {
-  opacity: 0.4;
-  filter: grayscale(0.5);
-}
 .lc-tile.is-planned .lc-tile-name {
   color: rgba(var(--lc-rgb), 0.45);
 }
@@ -502,7 +502,8 @@ a.lc-tile:focus-visible .lc-tile-glass {
     padding-top: 56px;
     background: var(--lc-dock-bg);
     border-right: 1px solid rgba(var(--lc-rgb), 0.08);
-    box-shadow: 24px 0 60px -30px var(--lc-shadow-c);
+    /* bóng gọn, không tỏa rộng sang nội dung (anh góp ý 16/11/2026) */
+    box-shadow: 6px 0 18px -12px var(--lc-shadow-c);
     transition:
       width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
       background-color 0.32s ease,
@@ -594,7 +595,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
     border-radius: 0 20px 20px 0;
     background: var(--lc-drawer-bg);
     border-right: 1px solid rgba(var(--lc-rgb), 0.1);
-    box-shadow: 18px 0 50px -20px var(--lc-shadow-c);
+    box-shadow: 6px 0 18px -12px var(--lc-shadow-c);
     transform: translateX(-105%);
     visibility: hidden;
     transition:
@@ -639,25 +640,33 @@ a.lc-tile:focus-visible .lc-tile-glass {
 }
 @media (max-width: 520px) {
   .lc-tiles {
-    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px 8px;
+    row-gap: 20px;
     width: 100%;
     max-width: 360px;
+  }
+  /* 3 cột: ô đầu hàng là 3n + 1 thay cho 6n + 1 */
+  .lc-tile:nth-child(6n + 1)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8%;
+    bottom: 8%;
+    width: 1px;
+    background: linear-gradient(transparent, rgba(var(--lc-rgb), 0.2) 30%, rgba(var(--lc-rgb), 0.2) 70%, transparent);
+  }
+  .lc-tile:nth-child(3n + 1)::before {
+    content: none;
   }
   .lc-logo .wm {
     --wm-size: 64px !important;
   }
   .lc-tile {
-    width: auto;
+    min-width: 0;
+    padding: 6px 8px 10px;
   }
-  .lc-tile-glass {
-    width: 54px;
-    height: 54px;
-  }
-  .lc-tile-glass img {
-    width: 36px;
-    height: 36px;
+  .lc-tile-name {
+    font-size: 14px;
   }
 }
 
@@ -687,33 +696,12 @@ a.lc-tile:focus-visible .lc-tile-glass {
   display: none;
 }
 
-/* ── FD-005: ô link người dùng thêm (chữ cái đầu thay linh vật, màu nhấn FD) ── */
+/* ── FD-005: ô link người dùng thêm (màu nhấn FD cho gạch chân) ── */
 .lc-tile.is-link {
   --app-accent: #f97316;
 }
-.lc-tile-letter {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--lc-ink);
-}
 
-/* ── Giao diện sáng của trang chủ: ô app thành thẻ trắng có viền nhẹ, chữ phụ đậm hơn cho đủ tương phản ── */
-:root[data-theme='light'] .lc-tile-glass {
-  background: linear-gradient(160deg, #fff 30%, color-mix(in srgb, var(--app-accent) 12%, #fff));
-  border: 1px solid color-mix(in srgb, var(--app-accent) 16%, #e7ebea);
-  box-shadow:
-    0 1px 2px rgba(16, 32, 29, 0.05),
-    0 8px 20px -10px color-mix(in srgb, var(--app-accent) 45%, transparent);
-}
-:root[data-theme='light'] .lc-tile.is-planned .lc-tile-glass {
-  background: #fff;
-  border: 1px dashed #d5dcda;
-  box-shadow: none;
-}
-:root[data-theme='light'] .lc-tile-letter {
-  color: var(--fox-ink);
-}
+/* ── Giao diện sáng của trang chủ: chữ phụ đậm hơn cho đủ tương phản ── */
 :root[data-theme='light'] .lc-tile-desc,
 :root[data-theme='light'] .lc-foot,
 :root[data-theme='light'] .dk-date,
@@ -876,26 +864,6 @@ a.lc-tile:focus-visible .lc-tile-glass {
   text-align: right;
   color: var(--muted);
 }
-.st-ico {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 30%;
-  background: color-mix(in srgb, var(--app-accent, var(--primary)) 14%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--app-accent, var(--primary)) 22%, var(--border));
-}
-.st-ico img {
-  display: block;
-}
-.st-ico.is-letter {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  background: var(--fox);
-  border-color: transparent;
-}
 .st-name {
   display: flex;
   flex: 1;
@@ -917,22 +885,6 @@ a.lc-tile:focus-visible .lc-tile-glass {
   font-style: normal;
   color: var(--muted);
 }
-.st-chip {
-  flex: none;
-  padding: 1px 8px;
-  font-size: 11px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-}
-.st-chip.is-link {
-  color: var(--fox-ink);
-  background: var(--fox-soft);
-  border-color: transparent;
-}
 .st-actions {
   display: flex;
   flex: none;
@@ -948,10 +900,17 @@ a.lc-tile:focus-visible .lc-tile-glass {
   gap: 8px;
   padding: 14px 16px;
 }
+/* Tên | Mô tả (2 cột trên), Link | nút Thêm (dưới) */
 .st-add {
   display: grid;
-  grid-template-columns: 1fr 1.5fr auto;
+  grid-template-columns: 1fr 1fr auto;
   gap: 8px;
+}
+.st-add > .st-add-desc {
+  grid-column: 2 / -1;
+}
+.st-add > .st-add-url {
+  grid-column: 1 / 3;
 }
 .st-foot {
   display: flex;
@@ -974,8 +933,7 @@ a.lc-tile:focus-visible .lc-tile-glass {
 :root[data-theme='dark'] .st-item + .st-item {
   border-color: rgba(255, 255, 255, 0.08);
 }
-:root[data-theme='dark'] .st-item:hover,
-:root[data-theme='dark'] .st-chip {
+:root[data-theme='dark'] .st-item:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 @media (max-width: 520px) {
@@ -999,16 +957,17 @@ a.lc-tile:focus-visible .lc-tile-glass {
   .st-row {
     flex-wrap: wrap;
   }
-  .st-chip {
-    display: none;
-  }
   .st-idx {
     display: none;
   }
   .st-add {
     grid-template-columns: 1fr auto;
   }
-  .st-add > :first-child {
+  .st-add > :first-child,
+  .st-add > .st-add-desc {
     grid-column: 1 / -1;
+  }
+  .st-add > .st-add-url {
+    grid-column: 1;
   }
 }

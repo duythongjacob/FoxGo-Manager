@@ -303,7 +303,7 @@ body {
   --lc-drawer-bg: #072622;
   --lc-pop-bg: rgba(6, 34, 31, 0.86);
   --lc-shadow-c: rgba(0, 0, 0, 0.7);
-  --lc-backdrop: rgba(0, 0, 0, 0.45);
+  --lc-backdrop: rgba(0, 0, 0, 0.25);
   --lc-up: #86efac;
   --lc-down: #fca5a5;
   --lc-warn: rgba(253, 186, 116, 0.8);
@@ -319,7 +319,7 @@ body {
   --lc-drawer-bg: #ffffff;
   --lc-pop-bg: rgba(255, 255, 255, 0.97);
   --lc-shadow-c: rgba(16, 32, 29, 0.16);
-  --lc-backdrop: rgba(16, 32, 29, 0.22);
+  --lc-backdrop: rgba(16, 32, 29, 0.1);
   --lc-up: #15803d;
   --lc-down: #b91c1c;
   --lc-warn: #b45309;

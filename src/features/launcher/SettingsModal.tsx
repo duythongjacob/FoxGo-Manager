@@ -3,7 +3,7 @@
  * Sửa trên bản nháp; chỉ khi bấm "Lưu thay đổi" mới áp dụng + ghi localStorage (Hủy = bỏ hết thay đổi).
  * Gồm: giao diện (sáng/tối/theo hệ thống), mở tab mới, thứ tự ô, thêm link riêng.
  */
-import { useState, type CSSProperties, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Button, Input, Modal, Segmented, Switch, Tooltip, Typography } from 'antd'
 import {
   ArrowDownOutlined,
@@ -16,10 +16,11 @@ import {
   SunOutlined,
   UndoOutlined,
 } from '@ant-design/icons'
-import { STATUS_LABEL, type FoxApp } from '@/lib/apps'
+import type { FoxApp } from '@/lib/apps'
 import {
   DEFAULT_PREFS,
   linkKey,
+  MAX_DESC,
   MAX_LINKS,
   MAX_NAME,
   move,
@@ -29,7 +30,7 @@ import {
   type UserLink,
 } from '@/lib/prefs'
 import type { ThemeMode } from '@/lib/theme'
-import { tileKey, tileName, tilesOf, type Tile } from './tiles'
+import { tileKey, tileName, tilesOf } from './tiles'
 
 /** id ngắn cho link mới — chỉ cần không trùng trong máy này. */
 const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6)
@@ -42,19 +43,6 @@ const MODE_OPTIONS = [
   { value: 'light', label: 'Sáng', icon: <SunOutlined /> },
   { value: 'dark', label: 'Tối', icon: <MoonOutlined /> },
 ]
-
-/** Ảnh nhỏ đầu dòng: linh vật của app hoặc chữ cái đầu của link. */
-function TileIcon({ tile }: { tile: Tile }) {
-  return tile.kind === 'app' ? (
-    <span className="st-ico" style={{ '--app-accent': tile.app.accent } as CSSProperties} aria-hidden>
-      <img src={tile.app.mascot} alt="" width={24} height={24} />
-    </span>
-  ) : (
-    <span className="st-ico is-letter" aria-hidden>
-      {tile.link.name.charAt(0).toUpperCase()}
-    </span>
-  )
-}
 
 /** Một nhóm cài đặt: nhãn nhỏ phía trên + khung viền chứa nội dung. */
 function Section({ label, extra, children }: { label: string; extra?: ReactNode; children: ReactNode }) {
@@ -102,6 +90,7 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
   const [initialOrder] = useState<string[]>(() => tilesOf(apps, prefs).map(tileKey))
   const [order, setOrder] = useState<string[]>(initialOrder)
   const [name, setName] = useState('')
+  const [desc, setDesc] = useState('')
   const [url, setUrl] = useState('')
   const [err, setErr] = useState<string | null>(null)
 
@@ -116,10 +105,13 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
     const u = normalizeUrl(url)
     if (!u) return setErr('Link chưa đúng — VD: youtube.com hoặc https://mail.google.com')
     if (links.length >= MAX_LINKS) return setErr(`Tối đa ${MAX_LINKS} link`)
-    const link = { id: newId(), name: (name.trim() || nameFromUrl(u)).slice(0, MAX_NAME), url: u }
+    const d = desc.trim().slice(0, MAX_DESC)
+    const link: UserLink = { id: newId(), name: (name.trim() || nameFromUrl(u)).slice(0, MAX_NAME), url: u }
+    if (d) link.desc = d
     setLinks([...links, link])
     setOrder([...order, linkKey(link.id)])
     setName('')
+    setDesc('')
     setUrl('')
     setErr(null)
   }
@@ -166,17 +158,13 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
                   <span className="st-idx" aria-hidden>
                     {i + 1}
                   </span>
-                  <TileIcon tile={t} />
                   <span className="st-name">
                     <b>{n}</b>
                     <em>
                       {t.kind === 'link'
-                        ? t.link.url.replace(/^https?:\/\//, '')
+                        ? (t.link.desc ?? t.link.url.replace(/^https?:\/\//, ''))
                         : (t.app.tagline ?? t.app.name)}
                     </em>
-                  </span>
-                  <span className={`st-chip${t.kind === 'link' ? ' is-link' : ''}`}>
-                    {t.kind === 'link' ? 'Link' : STATUS_LABEL[t.app.status]}
                   </span>
                   <span className="st-actions">
                     <Button
@@ -234,7 +222,15 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
                 aria-label="Tên link"
               />
               <Input
-                placeholder="Địa chỉ, VD: youtube.com"
+                placeholder="Mô tả (không bắt buộc)"
+                value={desc}
+                maxLength={MAX_DESC}
+                onChange={(e) => setDesc(e.target.value)}
+                aria-label="Mô tả link"
+                className="st-add-desc"
+              />
+              <Input
+                placeholder="Link, VD: youtube.com"
                 value={url}
                 status={err ? 'error' : undefined}
                 onChange={(e) => {
@@ -243,6 +239,7 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
                 }}
                 onPressEnter={addLink}
                 aria-label="Địa chỉ link"
+                className="st-add-url"
               />
               <Button icon={<PlusOutlined />} onClick={addLink} disabled={!url.trim()}>
                 Thêm
