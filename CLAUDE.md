@@ -19,13 +19,13 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
   (GET `giaxanghomnay.com` từ máy) → `src/data/fuel.json` đóng gói; chạy trước mỗi lần deploy.
   Không gửi dữ liệu cá nhân, có đệm localStorage (`foxdots.ext.*`), ghi nguồn (tooltip của thanh thông số — bắt buộc theo giấy phép Open-Meteo/ExchangeRate-API). Thêm dịch vụ khác → hỏi anh.
 - **Firebase project `foxgo-aed1f`** (anh tạo 15/11/2026): chỉ dùng **Hosting** (FD-004, site `foxgo` → https://foxgo.web.app; deploy: `npm run build` rồi `npx firebase-tools deploy --only hosting`) — trang tĩnh, không cần SDK `firebase`
-  trong bundle. Không `getAnalytics`, không Firestore/Auth cho tới FD-007 có PRD.
+  trong bundle (deploy qua `npm run deploy`, có chốt chặn). Không `getAnalytics`, không Firestore/Auth cho tới FD-007 có PRD.
 - `src/styles/global.css` = **bản token chuẩn** của hệ sinh thái. Đổi token → cập nhật `../docs/DESIGN_SYSTEM.md`.
 - Danh sách app: `src/data/apps.ts` (khớp `../docs/MA_APP.md`). Màu nhấn app chỉ dùng qua biến `--app-accent`.
 
 ## Kiến trúc & tài liệu
 Đọc trước khi sửa: `docs/LUONG_CODE.md` (kiến trúc, luồng), `docs/CAU_TRUC_THU_MUC.md` (bản đồ thư mục),
-`docs/BAO_TRI.md` (việc bảo trì), `docs/features/` (từng tính năng). Tóm tắt:
+`docs/BAO_TRI.md` (việc bảo trì), `docs/QUY_TRINH.md` (quy trình code, release), `docs/features/` (từng tính năng). Tóm tắt:
 - `src/lib/` hàm thuần + test (không import React/antd); `src/data/` danh sách app + **mọi lệnh gọi mạng** (`external.ts`);
   `src/app/` Root, Layout, điều hướng, theme; `src/features/<trang>/` mỗi trang một thư mục; `src/components/` dùng chung ≥ 2 nơi.
 - Chiều phụ thuộc: `app/` → `features/` → `components/`, `data/` → `lib/` (không ngược lại).
@@ -45,7 +45,10 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 npm run dev        # http://localhost:5170
 npm run check      # tsc + eslint + vitest + check:tree — phải sạch
 npm run build
+npm run release -- <patch|minor|major>   # trên master, cây sạch → tăng version, chốt CHANGELOG, tag fd-vX.Y.Z
+npm run deploy     # chốt chặn (master + tag) → build → Firebase Hosting
 ```
+**Quy trình code** (như Fox.TàiChính): `docs/QUY_TRINH.md` — nhánh `feature/FD-xxx-…` → DoD → gộp `--no-ff` → release → deploy.
 GitHub (công khai, anh duyệt 15/11/2026): https://github.com/duythongjacob/FoxGo-Manager — chỉ thư mục này, tách từ repo gốc:
 `git subtree split --prefix=FoxGo_Manager -b export` (chạy ở `..`) → `git push <url> export:main` → xóa nhánh `export`.
 Repo công khai → không commit dữ liệu cá nhân, khóa, `.env`.

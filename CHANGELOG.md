@@ -3,6 +3,15 @@
 Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo SemVer.
 
 ## [Chưa phát hành]
+### Đổi (16/11/2026)
+- Trang chủ theo giao diện sáng/tối: **tối** giữ nền xanh đậm kiểu màn khóa; **sáng** nền trắng sạch + lưới ô vuông
+  xanh nhạt, vầng màu rất nhạt, ô app thành thẻ trắng viền mảnh. Chọn chế độ trong Cài đặt → Giao diện.
+- Popup Cài đặt làm lại: tiêu đề có icon, nội dung chia nhóm có nhãn (Giao diện / Khi mở ứng dụng / Ô trên trang chủ /
+  Thêm link riêng), nhãn trạng thái từng ô, danh sách không cuộn riêng, nút "Lưu thay đổi" chỉ bật khi có thay đổi.
+  Khi tối, popup AntD nền xanh đậm thay vì xám.
+### Thêm (16/11/2026)
+- Quy trình code như Fox.TàiChính: `npm run release -- <patch|minor|major>` (tag `fd-vX.Y.Z`), `npm run deploy` có
+  chốt chặn (`scripts/guard-deploy.mjs`), tài liệu `docs/QUY_TRINH.md`.
 ### Đổi (15/11/2026)
 - Logo FoxGo mới (favicon / icon cài app): mặt cáo tròn + đuôi cuộn chóp trắng trên nền tối — sinh bằng
   `Fox.Files/tools/gen_fox.py` (`svg/logo/foxgo-icon.svg`).

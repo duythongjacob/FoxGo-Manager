@@ -44,10 +44,10 @@ Khóa `foxdots.theme` nằm ở **hai nơi**: `src/lib/theme.ts` và script đ�
 3. Ghi CHANGELOG mục "Đổi".
 
 ## Deploy & GitHub
+Quy trình đầy đủ + kiểm tra sau phát hành + hoàn tác: [QUY_TRINH.md](QUY_TRINH.md) mục 5.
 ```bash
-npm run fuel:update   # giá xăng kỳ mới nhất → src/data/fuel.json (lỗi mạng thì giữ bản cũ)
-npm run check && npm run build
-npx firebase-tools deploy --only hosting --project foxgo-aed1f     # → https://foxgo.web.app
+npm run release -- patch   # (hoặc minor) fuel:update + check + build → tăng version, chốt CHANGELOG, tag fd-vX.Y.Z
+npm run deploy             # chốt chặn (master, cây sạch, có tag) → build → Hosting https://foxgo.web.app
 ```
 Đẩy GitHub (repo công khai `duythongjacob/FoxGo-Manager`): xem CLAUDE.md → *Lệnh*. Chỉ thư mục này được đẩy.
 Site mặc định `foxgo-aed1f.web.app` để trống — không deploy lên đó.

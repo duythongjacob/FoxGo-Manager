@@ -94,7 +94,8 @@ Mọi lệnh đọc/ghi bọc `try/catch`: trình duyệt chặn lưu trữ thì
 
 ## 6. Luồng phát triển một thay đổi
 
-Theo quy trình chung [`../docs/QUY_TRINH.md`](../../docs/QUY_TRINH.md), áp vào app này:
+Theo quy trình chung [`../docs/QUY_TRINH.md`](../../docs/QUY_TRINH.md), áp vào app này — chi tiết (DoD riêng, release,
+deploy, hoàn tác) ở [QUY_TRINH.md](QUY_TRINH.md):
 
 ```text
  1. Ý tưởng      → ../docs/ROADMAP.md (mã FD-xxx)
@@ -107,8 +108,8 @@ Theo quy trình chung [`../docs/QUY_TRINH.md`](../../docs/QUY_TRINH.md), áp và
  6. Kiểm tra     → npm run check (tsc + eslint + vitest + check:tree) · npm run build
                    xem tay: sáng/tối, 375px, desktop ≥ 1080px (../docs/DEFINITION_OF_DONE.md)
  7. Gộp          → git switch master && git merge --no-ff feature/FD-xxx-ten
- 8. Phát hành    → tăng version trong package.json, chốt CHANGELOG
-                   npm run build && npx firebase-tools deploy --only hosting --project foxgo-aed1f
+ 8. Phát hành    → npm run release -- <patch|minor|major>   (check + build, tăng version, chốt CHANGELOG, tag fd-vX.Y.Z)
+                   npm run deploy                          (chặn nếu không ở master / cây bẩn / chưa có tag)
  9. GitHub       → tách thư mục Manager, đẩy lên duythongjacob/FoxGo-Manager (lệnh trong CLAUDE.md)
 10. Theo dõi     → mở https://foxgo.web.app kiểm tra; lỗi → fix/FD-xxx-…
 ```

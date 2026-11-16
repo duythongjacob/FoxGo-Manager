@@ -25,8 +25,9 @@ FoxGo_Manager/  (trong FoxdotsProject/ — tài liệu chung ở ../docs/)
 │   ├── CAU_TRUC_THU_MUC.md       file này
 │   ├── LUONG_CODE.md             luồng chạy, luồng dữ liệu, luồng phát triển
 │   ├── BAO_TRI.md                việc bảo trì thường gặp, xử lý sự cố
+│   ├── QUY_TRINH.md              quy trình code: nhánh, DoD riêng, release + deploy, hoàn tác
 │   └── features/                 mỗi tính năng một file md + README.md mục lục
-├── scripts/                  lệnh Node phụ trợ (check-tree.mjs, fuel-update.mjs)
+├── scripts/                  lệnh Node phụ trợ (check-tree, fuel-update, release, guard-deploy)
 ├── public/                   🌐 file tĩnh chép nguyên vào bản build: manifest, icon
 │   └── fox/                  🌐 linh vật SVG (sinh từ ../Fox.Files, không vẽ tay)
 │       └── bieu-cam/         🌐 8 biểu cảm của cáo (trang Giới thiệu)
@@ -48,9 +49,9 @@ Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, 
 
 | Thư mục | Chức năng | Ghi chú |
 |---|---|---|
-| `docs/` | Tài liệu app: cấu trúc, luồng code, bảo trì | Repo GitHub công khai — không ghi dữ liệu cá nhân |
+| `docs/` | Tài liệu app: cấu trúc, luồng code, bảo trì, quy trình code | Repo GitHub công khai — không ghi dữ liệu cá nhân |
 | `docs/features/` | Tài liệu từng tính năng (mẫu `../docs/templates/FEATURE.md`), mục lục `README.md` | Viết cùng commit với code |
-| `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật), `fuel-update.mjs` + `fuel-parse.mjs` (giá xăng → `src/data/fuel.json`) | Chạy trong `npm run check` |
+| `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật), `fuel-update.mjs` + `fuel-parse.mjs` (giá xăng → `src/data/fuel.json`), `release.mjs` (phát hành + tag `fd-vX.Y.Z`), `guard-deploy.mjs` (chặn deploy sai) | `check-tree` chạy trong `npm run check` |
 | `public/` | File tĩnh: `manifest.webmanifest` (cài như app), `icon.svg` | 🌐 |
 | `public/fox/` | Linh vật: đầu `fox-<app>.svg`, toàn thân `*-toan-than.svg`, cáo vẫy tay, cáo giới thiệu | 🌐 Sinh bằng `../Fox.Files/tools/gen_fox.py` rồi chép sang |
 | `public/fox/bieu-cam/` | 8 biểu cảm `fox-<tên>.svg` | 🌐 Tên khớp `EXPRESSIONS` trong LandingPage |
