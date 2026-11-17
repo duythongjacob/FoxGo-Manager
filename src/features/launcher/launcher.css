@@ -81,6 +81,14 @@
   color: var(--lc-ink);
   animation: lc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+/* Rê chuột / focus ô app → chấm đổi sang màu nhấn của ô đó (--lc-dot đặt trên .lc-main từ LauncherPage) */
+.lc-logo .wm-dot {
+  background: var(--lc-dot, var(--fox));
+  box-shadow: 0 0 0.35em color-mix(in srgb, var(--lc-dot, var(--fox)) 55%, transparent);
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
 
 /* ---------- Ô app: chỉ chữ, ngăn cách bằng đường kẻ dọc mảnh ----------
    Lưới cố định 6 cột (3 cột ở ≤ 520px) để biết ô nào đầu hàng → ô đầu hàng không có đường kẻ bên trái.

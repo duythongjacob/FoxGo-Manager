@@ -105,6 +105,14 @@ export default function LauncherPage({
   const toggle = () => setCollapsed(!collapsed)
   const [settings, setSettings] = useState(false)
   const mainRef = useRef<HTMLDivElement>(null)
+  /** Màu nhấn của ô đang rê chuột / focus phím → chấm logo "Fox." đổi theo (null = cam mặc định). */
+  const [dotColor, setDotColor] = useState<string | null>(null)
+  /** Đọc màu của ô chứa phần tử `el` (ô app: data-line; ô link riêng: --app-accent trong CSS). */
+  const accentOf = (el: EventTarget) => {
+    const tile = (el as Element).closest<HTMLElement>('.lc-tile')
+    if (!tile) return null
+    return tile.dataset.line ?? (getComputedStyle(tile).getPropertyValue('--app-accent').trim() || null)
+  }
 
   const save = (p: Prefs, m: ThemeMode) => {
     setPrefs(p)
@@ -118,13 +126,26 @@ export default function LauncherPage({
       <InfoDock dark={dark} collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
 
       {/* data-lines="slow" → CSS kéo dài thời gian vẽ + xung sáng (biến --lc-line-k trong launcher.css) */}
-      <div className="lc-main" ref={mainRef} data-lines={prefs.lineFx}>
+      <div
+        className="lc-main"
+        ref={mainRef}
+        data-lines={prefs.lineFx}
+        style={dotColor ? ({ '--lc-dot': dotColor } as CSSProperties) : undefined}
+      >
         {prefs.lineFx !== 'off' && <TileLines mainRef={mainRef} deps={tiles} />}
         <h1 className="lc-logo">
           <Wordmark size={88} />
         </h1>
 
-        <nav className="lc-tiles" aria-label="Ứng dụng Fox và link của bạn">
+        {/* Chỉ chuột (không tính chạm — trên cảm ứng màu sẽ "dính" sau khi chạm) + focus bằng phím */}
+        <nav
+          className="lc-tiles"
+          aria-label="Ứng dụng Fox và link của bạn"
+          onPointerOver={(e) => e.pointerType === 'mouse' && setDotColor(accentOf(e.target))}
+          onPointerLeave={() => setDotColor(null)}
+          onFocus={(e) => setDotColor(accentOf(e.target))}
+          onBlur={() => setDotColor(null)}
+        >
           {tiles.map((t) =>
             t.kind === 'app' ? (
               <AppTile key={tileKey(t)} app={t.app} newTab={prefs.newTab} />

@@ -12,6 +12,8 @@ Tối giản theo màn khóa của Fox.TàiChính.
   - App đang chạy: bấm mở link chính (`url`), rê chuột hiện gạch chân màu nhấn dưới tên + thẻ nổi 3 tính năng chính.
   - App kế hoạch: chữ mờ, không bấm được, thẻ nổi chỉ ghi tên app + điểm nổi bật (không nhãn trạng thái — anh bỏ toàn dự án 17/11/2026).
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
+  - Rê chuột (hoặc focus bằng phím) vào ô bất kỳ → **chấm cam của logo "Fox." đổi sang màu nhấn của ô đó**, rời ra thì
+    về cam (biến `--lc-dot` trên `.lc-main`; chạm trên cảm ứng không đổi để màu không "dính").
 - **Line trang trí** (`TileLines.tsx`): mỗi ô app ở **hàng đầu** có một đường màu nhấn mọc từ dấu chấm cam của logo,
   uốn sang phía ngược rồi đáp thẳng xuống trên tên ô (các đường đan chéo nhau), chấm + quầng ở đích. App kế hoạch:
   đường mờ, không xung sáng.
@@ -34,7 +36,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
 
 ## Quy tắc nghiệp vụ
 - Tên trên ô: bỏ tiền tố "Fox." và tách chữ: "Fox.TàiChính" → "Tài Chính".
-- Màu nhấn của app chỉ đi qua biến CSS `--app-accent` (gạch chân khi rê chuột, viền đầu mục thẻ nổi).
+- Màu nhấn của app chỉ đi qua biến CSS `--app-accent` (gạch chân khi rê chuột, viền đầu mục thẻ nổi, chấm logo khi rê chuột).
 
 ## Dữ liệu
 | Dữ liệu | Lưu ở đâu | Khóa / đường dẫn | Ghi chú |
