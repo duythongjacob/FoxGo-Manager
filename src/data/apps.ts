@@ -57,6 +57,30 @@ export const APPS: FoxApp[] = [
     tags: ['todo', 'viec can lam', 'du an', 'pomodoro'],
   },
   {
+    code: 'FM',
+    name: 'FoxGo Mind',
+    area: 'Tư duy',
+    tagline: 'Vấn đề · quyết định',
+    desc: 'Đào sâu vấn đề, mở nhánh giải pháp, chấm điểm và ra quyết định có căn cứ.',
+    mascot: '/fox/fox-mind.svg',
+    fullBody: '/fox/fox-mind-toan-than.svg',
+    highlights: [
+      'Hồ sơ vấn đề 6 bước: 5 Whys → cây giải pháp → tiêu chí → chấm → pre-mortem → quyết',
+      'Mở nhánh bằng SCAMPER, đảo ngược, học từ ngành khác — thanh độ phủ nhắc đổi hướng',
+      'Nhật ký quyết định: xem lại, so độ tự tin với kết quả',
+      'Thuật ngữ Việt – Anh, hướng dẫn từng kỹ thuật kèm mức bằng chứng',
+    ],
+    accent: '#4f46e5',
+    // v0.1 (FM-000, 17/11/2026) code xong, chưa có Firebase / bản web — tạm chỉ có link trên máy.
+    status: 'building',
+    version: '0.1',
+    extra: [
+      { label: 'Trên máy', url: 'http://localhost:5185' },
+      { label: 'Test', url: 'http://localhost:5186' },
+    ],
+    tags: ['tu duy', 'quyet dinh', 'van de', 'y tuong', 'brainstorm'],
+  },
+  {
     code: 'FH',
     name: 'Fox.SứcKhỏe',
     area: 'Sức khỏe',
