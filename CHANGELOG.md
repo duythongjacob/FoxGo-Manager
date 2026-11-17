@@ -10,6 +10,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - Trang Giới thiệu: hai dấu chấm cuối tiêu đề hero ("Một nền tảng. Connect the dots.") **chuyển màu** chậm qua cam Fox
   và màu các app, quầng mờ cùng màu (giảm chuyển động → đứng yên màu cam).
 
+### Đổi (17/11/2026)
+- Favicon "F.": mỗi app FoxGo nay chấm theo màu riêng — Manager giữ cam, Fox.TàiChính xanh ngọc, Fox.CôngViệc xanh
+  dương (ghi trong `docs/DESIGN_SYSTEM.md`).
+
 ## [0.5.1] — 2026-11-17
 
 ### Đổi (17/11/2026)
