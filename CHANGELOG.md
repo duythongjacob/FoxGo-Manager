@@ -21,6 +21,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - Điện thoại: bấm nút menu (và ô app) không còn để lại nền/viền "đang nhấn" — bỏ vệt chạm mặc định của trình duyệt,
   hiệu ứng rê chuột chỉ áp cho máy có chuột, viền focus chỉ hiện khi dùng phím.
 
+### Tài liệu
+- PRD viết bù (anh duyệt 17/11/2026): PRD-002 Trang chủ, PRD-003 Thanh thông số, PRD-004 Cài đặt trang chủ;
+  PRD-001 chuyển *Đã phát hành (v0.4.0)*. Tài liệu tính năng trỏ tới PRD tương ứng.
+
 ## [0.4.0] — 2026-11-17
 
 ### Đổi (17/11/2026)

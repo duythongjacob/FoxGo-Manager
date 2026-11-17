@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Mã | FD-002 (trang chủ của FoxGo_Manager) |
-| Trạng thái | Nháp (viết bù) — chờ anh duyệt. Phần lớn đã phát hành tới v0.4.0; line logo → ô app chưa phát hành |
+| Trạng thái | Đã duyệt (viết bù, anh duyệt 17/11/2026). Phần lớn đã phát hành tới v0.4.0; line logo → ô app chưa phát hành |
 | Người duyệt | Anh (Product Owner) |
 | Ngày | 2026-11-17 |
 

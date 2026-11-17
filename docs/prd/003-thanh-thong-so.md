@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Mã | FD-002 (thanh thông số trên trang chủ FoxGo_Manager) |
-| Trạng thái | Nháp (viết bù) — chờ anh duyệt. Đã phát hành (≤ v0.4.0); dịch vụ ngoài anh duyệt 14/11/2026, giá xăng 15/11/2026 |
+| Trạng thái | Đã duyệt (viết bù, anh duyệt 17/11/2026). Đã phát hành (≤ v0.4.0); dịch vụ ngoài anh duyệt 14/11/2026, giá xăng 15/11/2026 |
 | Người duyệt | Anh (Product Owner) |
 | Ngày | 2026-11-17 |
 
