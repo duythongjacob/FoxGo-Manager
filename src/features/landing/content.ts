@@ -20,42 +20,74 @@ export const LANDING_NAV: { id: string; label: string }[] = [
   { id: SECTION.experience, label: 'Về FoxGo' },
 ]
 
+/** Chữ đầu mục Hệ sinh thái — giọng thương hiệu chuyên nghiệp (anh yêu cầu 17/11/2026), vẫn xưng "bạn". */
+export const CONNECTED_INTRO = {
+  title: 'Mọi thứ đều liên quan.',
+  lead: [
+    'Công việc, tài chính, sức khỏe và học tập không tồn tại tách biệt — mỗi quyết định ở một lĩnh vực đều tác động đến những lĩnh vực còn lại. Vậy mà phần lớn công cụ hiện nay buộc bạn quản lý chúng ở những nơi riêng rẽ.',
+    'FoxGo xây dựng một hệ sinh thái thống nhất: mỗi ứng dụng chuyên sâu cho một lĩnh vực, cùng chung một trang chủ. Bước tiếp theo trong lộ trình là kết nối dữ liệu giữa các ứng dụng — thông tin chỉ cần nhập một lần và được sử dụng ở mọi nơi cần đến.',
+  ],
+}
+
 /**
- * Câu chuyện của từng app ở mục Hệ sinh thái (theo mã app): `moment` = khoảnh khắc đời thường app giúp được;
- * `link` = app này sẽ nối với app khác ra sao — là LỘ TRÌNH giai đoạn 3 (../docs/TAM_NHIN.md), luôn hiện kèm nhãn
- * "Kết nối · lộ trình", không trình bày như đã có.
+ * Câu chuyện mục Hệ sinh thái — MỘT câu chuyện xuyên suốt (một tháng của "bạn", anh yêu cầu 17/11/2026; giọng chuyên nghiệp), mỗi app là
+ * một chương theo thứ tự trên sơ đồ (sortApps): `when` = mốc thời gian của chương; `moment` = điều xảy ra, app giúp gì;
+ * `link` = app này sẽ nối với app khác ra sao; `with` = mã các app được nhắc trong `link` — sơ đồ vẽ đường cong nối
+ * đúng các cặp này (phải khớp hai chiều: A có B thì B có A). `link` là LỘ TRÌNH giai đoạn 3 (../docs/TAM_NHIN.md):
+ * không còn nhãn "Sắp tới" nên câu luôn viết ở thì tương lai ("sẽ") + đường nét đứt — không trình bày như đã có.
+ * Số liệu trong truyện (3 triệu, 12 giờ…) là số minh họa.
  */
-export const APP_STORY: Record<string, { moment: string; link: string }> = {
+export const APP_STORY: Record<string, { when: string; moment: string; link: string; with: string[] }> = {
   FF: {
-    moment: 'Cuối tháng, bạn biết tiền đã đi đâu — và còn bao nhiêu cho mục tiêu.',
-    link: 'Học phí, chuyến đi, buổi tập ở các app khác tự đổ về ngân sách.',
+    when: 'Ngày 1',
+    moment: 'Thiết lập mục tiêu tiết kiệm 3 triệu đồng cho chuyến đi Đà Lạt cuối tháng.',
+    link: 'Chi phí học tập, sức khỏe và giải trí sẽ được tự động ghi nhận vào ngân sách, giúp bạn theo dõi tiến độ mục tiêu theo thời gian thực.',
+    with: ['FL', 'FE', 'FH'],
   },
   FW: {
-    moment: 'Sáng mở máy, ba việc quan trọng nhất đã nằm sẵn.',
-    link: 'Giờ tập, giờ học từ Sức khỏe và Học tập giữ chỗ trong lịch làm việc.',
+    when: 'Ngày 2',
+    moment:
+      'Ba ưu tiên hàng đầu của ngày được sắp xếp sẵn, giúp bạn tập trung vào những việc tạo ra giá trị lớn nhất.',
+    link: 'Lịch tập luyện, lịch học và kế hoạch chuyến đi sẽ được đồng bộ vào lịch làm việc, tránh trùng với các cuộc họp.',
+    with: ['FH', 'FL', 'FE'],
   },
   FH: {
-    moment: 'Ngủ đủ, uống đủ, đi đủ bước — chuỗi ngày dài dần.',
-    link: 'Lịch khám, lịch tập thành việc trong Công việc; chi phí sang Tài chính.',
+    when: 'Ngày 7',
+    moment: 'Một tuần duy trì 30 phút vận động mỗi ngày — chuỗi thói quen lành mạnh tiếp tục được ghi nhận.',
+    link: 'Lịch tập sẽ được chuyển thành công việc cụ thể; chi phí liên quan được cập nhật vào ngân sách.',
+    with: ['FW', 'FF'],
   },
   FL: {
-    moment: 'Học một chút mỗi ngày, thẻ ôn tập nhắc đúng lúc sắp quên.',
-    link: 'Khóa học có chi phí → Tài chính; kỹ năng học được → Kỹ năng.',
+    when: 'Ngày 15',
+    moment: 'Mỗi ngày ôn mười thẻ từ vựng, được hệ thống lặp lại ngắt quãng đề xuất đúng thời điểm.',
+    link: 'Học phí sẽ được ghi nhận vào ngân sách, thời gian học đưa vào lịch, khóa học hoàn thành được tính vào hồ sơ kỹ năng.',
+    with: ['FF', 'FW', 'FS'],
   },
   FE: {
-    moment: 'Phim muốn xem, chuyến đi muốn thử — không còn nằm rải rác.',
-    link: 'Ngân sách chuyến đi lấy từ Tài chính, ngày đi ghi vào Công việc.',
+    when: 'Ngày 22',
+    moment: 'Lịch trình chuyến đi được hoàn thiện từ danh sách trải nghiệm bạn đã lưu.',
+    link: 'Ngân sách chuyến đi sẽ được lấy từ mục tiêu tiết kiệm, ngày khởi hành tự động đưa vào lịch.',
+    with: ['FF', 'FW'],
   },
   FS: {
-    moment: 'Mỗi giờ luyện tập là một bằng chứng bạn đang tiến lên.',
-    link: 'Khóa học bên Học tập thành bằng chứng cho cấp độ kỹ năng.',
+    when: 'Ngày 30',
+    moment:
+      'Tổng kết tháng: 12 giờ luyện tập tiếng Anh, tăng một cấp độ — và mục tiêu tiết kiệm đã hoàn thành.',
+    link: 'Khóa học hoàn thành bên Học tập sẽ được ghi nhận là một cấp độ tiến bộ.',
+    with: ['FL'],
   },
 }
 
-/** Đoạn kết mục Hệ sinh thái: 3 giai đoạn lộ trình (../docs/TAM_NHIN.md → Kiến trúc tổng thể); giai đoạn 1 = hiện tại. */
+/** Đoạn kết mục Hệ sinh thái (khép câu chuyện): 3 giai đoạn lộ trình (../docs/TAM_NHIN.md); giai đoạn 1 = hiện tại. */
 export const FINALE = {
-  story: 'Không cần nhập một thứ hai lần — mỗi app biết phần việc của mình và báo cho app liên quan.',
-  phases: ['Trang chủ lối tắt — đang chạy', 'Một lần đăng nhập cho mọi app', 'Các app nói chuyện với nhau'],
+  title: 'Hướng tới một hệ sinh thái liền mạch',
+  story:
+    'Dữ liệu được nhập một lần và sử dụng ở mọi nơi cần thiết. Bạn tập trung vào mục tiêu — FoxGo đảm nhận phần còn lại.',
+  phases: [
+    'Trang chủ hợp nhất, truy cập nhanh mọi ứng dụng',
+    'Một tài khoản cho toàn bộ hệ sinh thái',
+    'Đồng bộ dữ liệu giữa các ứng dụng',
+  ],
 }
 
 /** Tên giao diện minh họa của từng tính năng (mocks/FeatureMocks.tsx). */
@@ -136,14 +168,26 @@ export type StepKey = (typeof STEPS)[number]['key']
 
 /** Cam kết trải nghiệm (rút từ nguyên tắc sản phẩm ../docs/TAM_NHIN.md — đổi một bên thì đổi cả hai). */
 export const PROMISES = [
-  { title: 'Đơn giản', desc: 'Mỗi app làm tốt một việc. Không tính năng “để dành”.' },
-  { title: 'Mọi màn hình', desc: 'Máy tính, máy tính bảng, điện thoại như nhau — cài được như app.' },
   {
-    title: 'Dữ liệu là của bạn',
-    desc: 'Nằm trên máy hoặc tài khoản của chính bạn. Không quảng cáo, không analytics.',
+    title: 'Tinh gọn',
+    desc: 'Mỗi ứng dụng giải quyết trọn vẹn một nhu cầu. Tính năng chỉ được thêm khi thực sự cần thiết, giữ trải nghiệm luôn rõ ràng và dễ dùng.',
   },
-  { title: 'Số liệu có nguồn', desc: 'Con số nào cũng truy được về dữ liệu gốc.' },
-  { title: 'Một chú cáo đồng hành', desc: 'Nhắc đúng lúc, khen khi bạn giữ nhịp — không phán xét.' },
+  {
+    title: 'Đa nền tảng',
+    desc: 'Giao diện tối ưu cho máy tính, máy tính bảng và điện thoại, hỗ trợ chế độ sáng/tối và cài đặt như một ứng dụng (PWA).',
+  },
+  {
+    title: 'Riêng tư',
+    desc: 'Dữ liệu được lưu trên thiết bị hoặc tài khoản của chính bạn. Không quảng cáo, không công cụ theo dõi hành vi.',
+  },
+  {
+    title: 'Minh bạch',
+    desc: 'Mọi con số đều truy xuất được về dữ liệu gốc; các giá trị ước tính luôn được ghi chú rõ ràng.',
+  },
+  {
+    title: 'Đồng hành',
+    desc: 'Nhắc nhở vào thời điểm phù hợp, ghi nhận khi bạn giữ được nhịp và gợi ý bước tiếp theo — không áp đặt.',
+  },
 ]
 
 /**

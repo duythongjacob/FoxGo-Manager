@@ -1,6 +1,6 @@
 # Trang Giới thiệu
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 16/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-001](../prd/001-trang-gioi-thieu.md) · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Landing page giới thiệu FoxGo — hệ sinh thái quản lý cuộc sống: các app, cách chúng gắn với nhau, cách dùng hằng ngày
@@ -27,22 +27,29 @@ minh họa chung chung; chuyển động kể chuyện sản phẩm chứ không
 không icon; rê chuột thì đảo màu). Không menu mục (anh bỏ 16/11/2026) — các mục vẫn có ở chân trang. Trong suốt ở đỉnh trang, cuộn xuống thành kính mờ có viền + bóng rất nhẹ.
 Vạch tiến độ cuộn mảnh màu xanh ở mép trên.
 
-1. **Hero** — "Cuộc sống của bạn. Gọn trong một nơi.": dòng nhỏ → tiêu đề từng dòng → mô tả → 2 nút
-   ("Bắt đầu hành trình" → trang chủ, nút hút nhẹ theo chuột; "Khám phá FoxGo" → mục Hệ sinh thái) → dashboard
+1. **Hero** — "Một nền tảng. Kết nối cuộc sống." (giọng chuyên nghiệp, 17/11/2026): dòng nhỏ → tiêu đề từng dòng → mô tả → 2 nút
+   ("Bắt đầu hành trình" → trang chủ, nút hút nhẹ theo chuột; "Khám phá FoxGo" → mục Hệ sinh thái) → **sơ đồ nhánh**
+   (một gốc dưới nút, đường cong tỏa xuống 6 lĩnh vực app — chấm màu + tên lĩnh vực, không nhãn trạng thái (anh bỏ 17/11/2026); nét liền + xung
+   sáng = app đã có, nét đứt = kế hoạch; màn hẹp chỉ còn lưới 3 cột) → dashboard
    minh họa phóng nhẹ + hiện dần. Dashboard "đang chạy": việc lần lượt được đánh dấu, khoản chi mới hiện ra, số dư
    cập nhật. 3 mô-đun nổi (mục tiêu, chuỗi thói quen, việc) trôi lên xuống. Cuộn: dashboard từ nghiêng 3D về phẳng,
    chữ lùi lên mờ dần, mô-đun nổi trôi theo độ sâu khác nhau.
-2. **Hệ sinh thái** — "Mọi thứ trong cuộc sống đều liên quan.": mục ghim (cao 320vh), sơ đồ kiểu **trục bánh xe**
-   (anh duyệt 16/11/2026), **không có vòng quỹ đạo** — các app đặt lệch nhau kiểu chòm sao (góc không đều, xa gần xen kẽ;
-   `LAYOUT` trong `Connected.tsx`). Tâm: Fox.Go + vòng màu 6 app xoay rất chậm, quầng đổi theo màu app đang nói tới. Cuộn tới
-   đâu, nan từ tâm vẽ tới app đó, app nổi lên (phóng to nhẹ; app chưa tới vẫn rõ nét, không làm mờ — anh bỏ 16/11/2026).
-   Nút app tối giản: chỉ tên mảng (anh bỏ icon + nhãn trạng thái trong nút 16/11/2026); app chưa chạy có viền nét đứt. Mỗi app 3 vệ tinh icon phẳng (nền nhạt màu app) xếp đều trên cung phía ngoài, bập bênh lệch nhịp.
-   Nối xong có chấm sáng màu app chạy dọc nan **về tâm** ("gom về một nơi"), lặp mãi. App đang nói tới (cuộn tới hoặc
-   rê chuột): nan đậm hơn, nút viền liền + quầng, vệ tinh tô đặc. Phần câu chuyện bên cạnh đổi theo app (cả khi rê
-   chuột): tên app, một khoảnh khắc đời thường app giúp được (in đậm), mô tả, và app sẽ nối với app khác ra sao (nhãn
-   "Kết nối · lộ trình" — chưa có). Đoạn kết: mọi nan cùng sáng màu app, chấm chạy nhanh hơn, lõi rực hơn:
-   "Các app nói chuyện với nhau" + 3 giai đoạn lộ trình (giai đoạn 1 = hiện tại).
-   Nội dung: `APP_STORY`, `FINALE` trong `content.ts`.
+   Nền: khung kẻ kiểu bản vẽ (2 đường dọc mép nội dung, 2 đường ngang ôm tiêu đề, dấu + ở chỗ giao) + vòng đồng tâm
+   mảnh sau tiêu đề — "hình" bằng nét, không hình cáo; không chấm trôi qua chữ (trông như dấu tiếng Việt bị lạc).
+2. **Hệ sinh thái** — "Mọi thứ đều liên quan.": mục ghim (cao 320vh), sơ đồ tối giản (anh yêu cầu 17/11/2026: đơn
+   giản, hiện đại, đường cong có logic). FoxGo ở tâm, 6 app chia đều quanh tâm, mỗi app một nhãn viên thuốc (chấm màu +
+   tên mảng; chấm đặc = đang dùng, chấm rỗng = đang làm / sắp có). Hai loại đường (không có chú thích — anh bỏ 17/11/2026, phần chữ bên cạnh đã nói rõ):
+   - **Nan cong nét liền** lõi → app, cùng xoáy một chiều = "mở từ trang chủ — đang có". Cuộn tới đâu nan vẽ tới app đó,
+     nhãn app rõ dần; chấm sáng màu app chạy dọc nan về lõi.
+   - **Đường cong nét đứt** app ↔ app (chuyển màu app A → B, nét đứt chảy) = "các app báo cho nhau — sắp tới" (lộ trình
+     giai đoạn 3). Chỉ vẽ đúng các cặp trong `APP_STORY[*].with` (khớp hai chiều, khớp câu `link`). Đường chạy vòng trong
+     dải giữa lõi và vòng app, đường càng dài càng vòng trong (`linkPath` trong `Connected.tsx`) → xếp lớp, không đâm lõi.
+   App đang kể (cuộn tới hoặc rê chuột): nan đậm, nhãn viền màu app; hiện các đường nối của app đó tới app liên quan (nhãn
+   viền nét đứt), rê chuột thì app không liên quan lùi lại. Phần chữ bên cạnh kể **một câu chuyện xuyên suốt** (một tháng của "bạn",
+   anh yêu cầu 17/11/2026), mỗi app một chương: mốc thời gian · tên app, điều xảy ra, chip các app sẽ nối + câu nối
+   viết ở thì tương lai ("sẽ") — không còn nhãn "Sắp tới", nét đứt + chữ "sẽ" giữ việc trình bày đúng là lộ trình. Đoạn kết: mọi đường nối cùng hiện, lõi rực hơn: "Hướng tới một hệ sinh thái
+   liền mạch" + 3 bước lộ trình (bước 1 = "Đang có").
+   Nội dung: `CONNECTED_INTRO`, `APP_STORY`, `FINALE` trong `content.ts`.
 3. **Tính năng** — 4 hàng lớn xen kẽ chữ/giao diện (đổi bên mỗi hàng, giao diện trôi parallax ±40px), 2 tính năng cuối
    đứng cạnh nhau. Mỗi tính năng một giao diện riêng: gõ một câu thành việc (Công việc), biểu đồ + ngân sách + giao
    dịch mới (Tài chính), cây kỹ năng + thử thách 30 ngày (Mục tiêu), lịch nhiệt 12 tuần (Thói quen), thẻ ôn tập lật
@@ -107,7 +114,7 @@ Không lưu gì. Đọc `src/data/apps.ts` và SVG trong `public/fox/`, `public/
 | File | Vai trò |
 |---|---|
 | `src/features/landing/LandingPage.tsx` | Ghép 8 mục, `LazyMotion` + `MotionConfig`, vạch tiến độ cuộn, nhảy tới mục khi vào thẳng link |
-| `src/features/landing/content.ts` | Nội dung chữ: `SECTION` (id mục), `LANDING_NAV`, `APP_STORY`, `FINALE`, `FEATURES`, `STEPS`, `PROMISES`, `CONTACT`, `MANIFESTO`, `TAGLINES`, `BENEFITS` |
+| `src/features/landing/content.ts` | Nội dung chữ: `SECTION` (id mục), `LANDING_NAV`, `CONNECTED_INTRO`, `APP_STORY`, `FINALE`, `FEATURES`, `STEPS`, `PROMISES`, `CONTACT`, `MANIFESTO`, `TAGLINES`, `BENEFITS` |
 | `src/features/landing/kit.tsx` | Component dùng chung: `Reveal`, `Lines`, `SectionHead`, `Magnetic`, `Counter`, `AppChip`, `MockWindow` |
 | `src/features/landing/hooks.ts` | `EASE`, `VIEW`, `WIDE`, `appByCode`, `vnd`, `useLoop`, `useMedia` |
 | `src/features/landing/sections/*.tsx` | Mỗi mục một file: `Hero`, `Connected`, `Features`, `Overview`, `Workflow`, `Experience`, `FinalCta` (+ `SortLines` — hình line khối "Vì sao có Fox", `BenefitTree` — sơ đồ lợi ích), `Footer` |
@@ -136,3 +143,4 @@ Không lưu gì. Đọc `src/data/apps.ts` và SVG trong `public/fox/`, `public/
 | 16/11/2026 | chưa phát hành | Bỏ hình cáo: sơ đồ Hệ sinh thái thành vòng tròn chữ + xung sáng chạy dọc đường nối; thẻ app chỉ chấm màu + tên (bỏ nhãn trạng thái); mục Về FoxGo thay khung thiết bị bằng chữ trôi + đường line chuyển động; bỏ cáo vẫy tay; thanh trên bỏ menu mục, nút Mở trang chủ viền mảnh không icon; favicon chữ "Fox." |
 | 16/11/2026 | chưa phát hành | Kêu gọi cuối thêm câu chuyện "Vì sao có Fox", khẩu hiệu "Fox — …" tự đổi (có giảm stress), hàng lợi ích; chân trang làm lại: nền lưới chấm, dải mời, cột Trạng thái, chữ "Fox." lớn, số phiên bản. Thanh trên bóng nhẹ hơn; tiêu đề chừa đủ chỗ cho dấu tiếng Việt hai tầng (không bị cắt) |
 | 16/11/2026 | chưa phát hành | Màn chờ khi vào trang (logo + vạch tiến độ, tải xong font + ảnh mới dựng các mục); sơ đồ Hệ sinh thái làm lại kiểu trục bánh xe (nan về tâm, bỏ vòng quỹ đạo, app đặt lệch kiểu chòm sao, 3 vệ tinh phẳng, trạng thái app, rê chuột); chân trang bỏ khối đếm app |
+| 17/11/2026 | chưa phát hành | Mục Hệ sinh thái làm lại tối giản: app chia đều, nhãn viên thuốc, nan cong nét liền (đang có) + đường cong nét đứt nối các app theo `APP_STORY.with` (sắp tới); bỏ vệ tinh icon + vòng màu xoay; viết lại chữ cho đời thường (`CONNECTED_INTRO`, đoạn kết); câu chuyện các app thành một tháng liền mạch (`APP_STORY.when`), bỏ nhãn "Sắp tới" + chú thích sơ đồ; chữ toàn mục chuyển sang giọng thương hiệu chuyên nghiệp (mốc "Ngày 1…30"). Hero: tiêu đề + mô tả mới, sơ đồ nhánh bỏ nhãn trạng thái (toàn dự án không còn hiện "Đang chạy / Đang xây / Kế hoạch / Sắp ra mắt") |

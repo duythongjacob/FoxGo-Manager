@@ -38,13 +38,6 @@ export interface FoxApp {
   tags?: string[]
 }
 
-/** Nhãn tiếng Việt của trạng thái — hiện trên ô app và trang Giới thiệu. */
-export const STATUS_LABEL: Record<AppStatus, string> = {
-  live: 'Đang chạy',
-  building: 'Đang xây',
-  planned: 'Kế hoạch',
-}
-
 const STATUS_ORDER: Record<AppStatus, number> = { live: 0, building: 1, planned: 2 }
 
 /** Bỏ dấu tiếng Việt + chữ thường để tìm "ha noi" ra "Hà Nội" (ô chọn thành phố). */

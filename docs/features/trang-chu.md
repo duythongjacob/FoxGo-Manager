@@ -10,7 +10,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
 - Đường dẫn `#/` (hoặc đường dẫn lạ). Toàn màn + lưới chấm, **không** có thanh trên. Nền theo giao diện: tối = xanh đậm kiểu màn khóa, sáng = trắng sạch + lưới ô vuông nhạt (đổi trong Cài đặt → Giao diện).
 - Giữa màn: logo chữ "Fox." lớn, dưới là các **ô app** chỉ có chữ (tên + mô tả 2–3 từ), ngăn cách bằng đường kẻ dọc mảnh mờ dần hai đầu (ô đầu hàng không có kẻ); lưới 6 cột.
   - App đang chạy: bấm mở link chính (`url`), rê chuột hiện gạch chân màu nhấn dưới tên + thẻ nổi 3 tính năng chính.
-  - App kế hoạch: chữ mờ, không bấm được, thẻ nổi ghi "Sắp ra mắt".
+  - App kế hoạch: chữ mờ, không bấm được, thẻ nổi chỉ ghi tên app + điểm nổi bật (không nhãn trạng thái — anh bỏ toàn dự án 17/11/2026).
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
 - Bên trái: **thanh thông số** — xem [thanh-thong-so.md](thanh-thong-so.md).
 - Chân trang: "FoxGo® | Thong Duy".
@@ -35,7 +35,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
 | `src/features/launcher/LauncherPage.tsx` | Trang: logo, ô app (`AppTile`), chân trang, trạng thái thu/mở thanh |
 | `src/features/launcher/launcher.css` | Bố cục màn khóa, ô chữ + đường kẻ, thẻ nổi, responsive (tiền tố `.lc-`) |
 | `src/components/Wordmark.tsx` | Logo chữ "Fox." |
-| `src/lib/apps.ts` (+ test) | `sortApps`, `STATUS_LABEL` |
+| `src/lib/apps.ts` (+ test) | `sortApps` |
 | `src/app/Layout.tsx` | Chế độ `is-immersive` (ẩn thanh trên ở trang chủ) |
 
 ## Kiểm thử

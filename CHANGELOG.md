@@ -4,7 +4,17 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Đổi (17/11/2026)
+- Trang Giới thiệu — Hero: tiêu đề "Một nền tảng. Kết nối cuộc sống." + mô tả mới; nền line-art (khung kẻ kiểu bản vẽ
+  ôm tiêu đề, dấu + ở chỗ giao, vòng đồng tâm mảnh); sơ đồ nhánh dưới nút tỏa xuống 6 lĩnh vực app (nét liền + xung
+  sáng = đã có, nét đứt = kế hoạch; màn hẹp thành lưới 3 cột).
+- Mục Hệ sinh thái làm lại tối giản: app chia đều quanh tâm, nhãn viên thuốc, nan cong nét liền (đang có) + đường cong
+  nét đứt nối các app (lộ trình); câu chuyện "một tháng của bạn", giọng thương hiệu chuyên nghiệp.
+- Bỏ nhãn trạng thái chữ ("Đang chạy / Đang xây / Kế hoạch / Sắp ra mắt") trên toàn dự án — trang chủ và trang
+  Giới thiệu; xóa `STATUS_LABEL`.
+
+### Tài liệu
+- PRD-001 Trang Giới thiệu (`docs/prd/001-trang-gioi-thieu.md`) — gom phạm vi, quyết định, tiêu chí nghiệm thu.
 
 ## [0.3.0] — 2026-11-16
 

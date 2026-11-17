@@ -31,7 +31,7 @@ Một nguồn duy nhất mô tả các app Fox (tên, trạng thái, link, linh 
 | File | Vai trò |
 |---|---|
 | `src/data/apps.ts` | Danh sách `APPS` |
-| `src/lib/apps.ts` (+ test) | Kiểu `FoxApp`, `STATUS_LABEL`, `sortApps`, `normalize` |
+| `src/lib/apps.ts` (+ test) | Kiểu `FoxApp`, `sortApps`, `normalize` |
 
 ## Kiểm thử
 - Tự động: `src/lib/apps.test.ts`.

@@ -3,9 +3,11 @@
  * Cuộn: dashboard từ nghiêng 3D về phẳng, chữ lùi lên mờ dần, các mô-đun nổi trôi theo độ sâu khác nhau (parallax).
  * Tài liệu: docs/features/gioi-thieu.md.
  */
-import { useRef, type ReactNode } from 'react'
+import { useRef, type CSSProperties, type ReactNode } from 'react'
 import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { ArrowRightOutlined } from '@ant-design/icons'
+import { APPS } from '@/data/apps'
+import { sortApps } from '@/lib/apps'
 import { href } from '@/lib/route'
 import { SECTION } from '../content'
 import { EASE } from '../hooks'
@@ -44,6 +46,82 @@ function Floater({
   )
 }
 
+/** App theo thứ tự trạng thái (đang chạy → đang xây → kế hoạch) — cùng thứ tự với sơ đồ mục Hệ sinh thái. */
+const RAIL_APPS = sortApps(APPS)
+/** Khung vẽ của sơ đồ nhánh (đơn vị SVG): rộng 960, mỗi app một cột 160, gốc nhánh ở giữa mép trên. */
+const RAIL_W = 960
+const RAIL_H = 96
+const railX = (i: number) => (RAIL_W / RAIL_APPS.length) * (i + 0.5)
+
+/**
+ * Sơ đồ nhánh dưới nút: một gốc → đường cong tỏa xuống từng lĩnh vực app (chỉ chữ + chấm màu, không hình cáo —
+ * quyết định 16/11/2026). Nét liền + xung sáng chạy = app đã có (đang chạy/đang xây); nét đứt = kế hoạch —
+ * cùng quy ước "nét đứt = sắp tới" với mục Hệ sinh thái, để không trình bày app chưa có như đã có.
+ */
+function HeroRail() {
+  return (
+    <m.div
+      className="ld-rail"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
+    >
+      <svg className="ld-rail-lines" viewBox={`0 -6 ${RAIL_W} ${RAIL_H + 6}`} aria-hidden>
+        {RAIL_APPS.map((a, i) => {
+          const x = railX(i)
+          // cong chữ S: rời gốc thẳng xuống rồi mới tỏa ngang, chạm cột app theo phương thẳng đứng
+          const d = `M${RAIL_W / 2} 0 C${RAIL_W / 2} ${RAIL_H * 0.62} ${x} ${RAIL_H * 0.38} ${x} ${RAIL_H}`
+          const planned = a.status === 'planned'
+          return (
+            <g key={a.code} style={{ '--app-accent': a.accent } as CSSProperties}>
+              {planned ? (
+                <m.path
+                  d={d}
+                  className="ld-rail-path is-planned"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1 + i * 0.08 }}
+                />
+              ) : (
+                <>
+                  <m.path
+                    d={d}
+                    className="ld-rail-path"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.1, ease: EASE, delay: 0.9 + i * 0.08 }}
+                  />
+                  <path
+                    d={d}
+                    pathLength={1}
+                    className="ld-rail-pulse"
+                    style={{ animationDelay: `${2 + i * 0.6}s` }}
+                  />
+                </>
+              )}
+            </g>
+          )
+        })}
+        <circle className="ld-rail-hub" cx={RAIL_W / 2} cy={0} r={4.5} />
+      </svg>
+      <ul className="ld-rail-nodes" aria-label="Các lĩnh vực trong hệ sinh thái FoxGo">
+        {RAIL_APPS.map((a) => (
+          <li
+            key={a.code}
+            className={`ld-rail-node is-${a.status}`}
+            style={{ '--app-accent': a.accent } as CSSProperties}
+          >
+            <span className="ld-rail-area">
+              <i aria-hidden />
+              {a.area}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </m.div>
+  )
+}
+
 export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
@@ -56,7 +134,15 @@ export default function Hero() {
   return (
     <section ref={ref} className="ld-hero" aria-labelledby="h-hero">
       <div className="ld-hero-glow" aria-hidden />
+      {/* vòng đồng tâm mảnh sau tiêu đề — "hình" bằng nét, không dùng ảnh. Không đặt chấm trôi: chấm đi qua chữ trông như dấu tiếng Việt bị lạc */}
+      <svg className="ld-hero-orbits" viewBox="-500 -500 1000 1000" aria-hidden>
+        <circle r={250} />
+        <circle r={360} />
+        <circle r={480} className="is-dashed" />
+      </svg>
       <m.div className="ld-wrap ld-hero-text" style={reduce ? undefined : { y: textY, opacity: textOpacity }}>
+        {/* khung kẻ kiểu bản vẽ: 2 đường dọc mép nội dung + 2 đường ngang ôm tiêu đề, dấu + ở chỗ giao */}
+        <div className="ld-hero-rails" aria-hidden />
         <m.span
           className="ld-pill"
           initial={{ opacity: 0, y: 10 }}
@@ -66,20 +152,26 @@ export default function Hero() {
           <i className="ld-pill-dot" aria-hidden />
           Làm chủ cuộc sống, chủ động tương lai
         </m.span>
-        <h1 id="h-hero">
-          <Lines
-            lines={['Cuộc sống của bạn.', <span className="ld-accent">Gọn trong một nơi.</span>]}
-            delay={0.1}
-          />
-        </h1>
+        <div className="ld-hero-title">
+          <i className="ld-tick tl" aria-hidden />
+          <i className="ld-tick tr" aria-hidden />
+          <i className="ld-tick bl" aria-hidden />
+          <i className="ld-tick br" aria-hidden />
+          <h1 id="h-hero">
+            <Lines
+              lines={['Một nền tảng.', <span className="ld-accent">Kết nối cuộc sống.</span>]}
+              delay={0.1}
+            />
+          </h1>
+        </div>
         <m.p
           className="ld-hero-lead"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.45 }}
         >
-          Sắp xếp việc cần làm, quản lý thu chi, xây thói quen tốt và tập trung vào điều thật sự quan trọng —
-          mỗi mảng một app Fox, gom về một trang chủ.
+          FoxGo là hệ sinh thái ứng dụng cá nhân cho công việc, tài chính, sức khỏe và học tập. Mỗi ứng dụng
+          chuyên sâu cho một lĩnh vực, cùng hướng tới một cuộc sống cân bằng và chủ động.
         </m.p>
         <m.div
           className="ld-cta"
@@ -96,6 +188,7 @@ export default function Hero() {
             Khám phá FoxGo
           </a>
         </m.div>
+        <HeroRail />
       </m.div>
 
       <div className="ld-wrap ld-stage">

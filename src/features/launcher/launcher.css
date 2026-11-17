@@ -218,13 +218,6 @@ a.lc-tile:focus-visible {
   color: var(--lc-ink);
   border-bottom: 1px solid rgba(var(--lc-rgb), 0.1);
 }
-.lc-pop-head em {
-  font-style: normal;
-  font-size: 10.5px;
-  font-weight: 500;
-  color: rgba(var(--lc-rgb), 0.45);
-  white-space: nowrap;
-}
 .lc-pop-item {
   padding: 1px 0 1px 10px;
   font-size: 12px;

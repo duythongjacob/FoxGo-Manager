@@ -5,7 +5,7 @@
 import { useMemo, useState, type CSSProperties } from 'react'
 import { APPS } from '@/data/apps'
 import { readPrefs, savePrefs } from '@/data/prefs'
-import { sortApps, STATUS_LABEL, type FoxApp } from '@/lib/apps'
+import { sortApps, type FoxApp } from '@/lib/apps'
 import type { Prefs, UserLink } from '@/lib/prefs'
 import type { ThemeMode } from '@/lib/theme'
 import Wordmark from '@/components/Wordmark'
@@ -28,10 +28,7 @@ function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
       {app.tagline && <span className="lc-tile-desc">{app.tagline}</span>}
       {app.highlights && app.highlights.length > 0 && (
         <span className="lc-pop" aria-hidden>
-          <span className="lc-pop-head">
-            {app.name}
-            <em>{live ? STATUS_LABEL[app.status] : 'Sắp ra mắt'}</em>
-          </span>
+          <span className="lc-pop-head">{app.name}</span>
           {app.highlights.slice(0, 3).map((h) => (
             <span key={h} className="lc-pop-item">
               {h}
@@ -55,8 +52,8 @@ function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
     <span
       className="lc-tile is-planned"
       style={style}
-      title={`${app.name} — ${STATUS_LABEL[app.status]}`}
-      aria-label={`${app.name} — ${STATUS_LABEL[app.status]}`}
+      title={app.name}
+      aria-label={app.name}
     >
       {inner}
     </span>
