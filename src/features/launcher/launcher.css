@@ -100,8 +100,8 @@
   z-index: -1;
   border-radius: 50%;
   background: var(--lc-dot-c);
-  opacity: 0.32;
-  filter: blur(0.22em);
+  opacity: 0.16;
+  filter: blur(0.3em);
   pointer-events: none;
   transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
