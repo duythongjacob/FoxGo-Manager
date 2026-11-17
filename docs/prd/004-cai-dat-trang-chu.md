@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Mã | FD-005 (lối tắt cá nhân trên FoxGo_Manager) |
-| Trạng thái | Đã duyệt (viết bù, anh duyệt 17/11/2026). Đã phát hành (≤ v0.4.0); "Hiệu ứng line" chưa phát hành; phím `/` chưa làm |
+| Trạng thái | Đã phát hành (v0.5.0) — viết bù, anh duyệt 17/11/2026; phím `/` chưa làm |
 | Người duyệt | Anh (Product Owner) |
 | Ngày | 2026-11-17 |
 
