@@ -13,6 +13,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 ### Đổi (17/11/2026)
 - Favicon "F.": mỗi app FoxGo nay chấm theo màu riêng — Manager giữ cam, Fox.TàiChính xanh ngọc, Fox.CôngViệc xanh
   dương (ghi trong `docs/DESIGN_SYSTEM.md`).
+- Ô Tài Chính mở tên miền mới **https://foxgo-finance.web.app** (Fox.TàiChính FF-106; link cũ vẫn tự chuyển hướng).
 
 ## [0.5.1] — 2026-11-17
 

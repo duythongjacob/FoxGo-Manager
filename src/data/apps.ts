@@ -22,8 +22,8 @@ export const APPS: FoxApp[] = [
     ],
     accent: '#0f766e',
     status: 'live',
-    version: '2.26',
-    url: 'https://finfox-finance.web.app',
+    version: '2.27',
+    url: 'https://foxgo-finance.web.app',
     extra: [
       { label: 'Trên máy', url: 'http://localhost:5173' },
       { label: 'Test', url: 'http://localhost:5174' },
