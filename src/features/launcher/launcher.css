@@ -90,6 +90,20 @@
   transition:
     background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+/* Nền mờ (blur) sau chấm — cùng màu chấm, đổi màu theo ô đang rê. Blur tĩnh, chỉ màu chuyển → nhẹ GPU. */
+.lc-logo .wm-dot::before {
+  content: '';
+  position: absolute;
+  inset: -0.32em;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--lc-dot-c);
+  opacity: 0.32;
+  filter: blur(0.22em);
+  pointer-events: none;
+  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---------- Ô app: chỉ chữ, ngăn cách bằng đường kẻ dọc mảnh ----------

@@ -6,7 +6,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ### Thêm (17/11/2026)
 - Trang chủ: rê chuột (hoặc focus bằng phím) vào ô app → **chấm cam của logo "Fox." đổi sang màu nhấn của app đó**,
-  rời ra thì về cam (màu pha nhẹ với cam, chuyển chậm 0,7 giây cho dịu; chạm trên cảm ứng không đổi).
+  rời ra thì về cam (màu pha nhẹ với cam, chuyển chậm 0,7 giây cho dịu, nền mờ cùng màu sau chấm; chạm trên cảm ứng không đổi).
 
 ## [0.5.1] — 2026-11-17
 

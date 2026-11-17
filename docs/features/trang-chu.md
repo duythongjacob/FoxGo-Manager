@@ -13,7 +13,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
   - App kế hoạch: chữ mờ, không bấm được, thẻ nổi chỉ ghi tên app + điểm nổi bật (không nhãn trạng thái — anh bỏ toàn dự án 17/11/2026).
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
   - Rê chuột (hoặc focus bằng phím) vào ô bất kỳ → **chấm cam của logo "Fox." đổi sang màu nhấn của ô đó**, rời ra thì
-    về cam — pha 25% cam, chuyển màu chậm 0,7 giây cho dịu (biến `--lc-dot` trên `.lc-main`; chạm trên cảm ứng không đổi để màu không "dính").
+    về cam — pha 25% cam, chuyển màu chậm 0,7 giây cho dịu, có nền mờ (blur) cùng màu sau chấm (biến `--lc-dot` trên `.lc-main`; chạm trên cảm ứng không đổi để màu không "dính").
 - **Line trang trí** (`TileLines.tsx`): mỗi ô app ở **hàng đầu** có một đường màu nhấn mọc từ dấu chấm cam của logo,
   uốn sang phía ngược rồi đáp thẳng xuống trên tên ô (các đường đan chéo nhau), chấm + quầng ở đích. App kế hoạch:
   đường mờ, không xung sáng.
