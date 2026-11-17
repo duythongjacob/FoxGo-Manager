@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.6.2] — 2026-11-17
+
 ### Thêm (17/11/2026)
 - **Test trình duyệt tự động** (FD-014, Playwright): `npm run e2e` — mọi trang × sáng/tối × máy tính/điện thoại
   (không tràn ngang, không lỗi console, không gọi host lạ), thao tác thanh thông số / Cài đặt / trang Giới thiệu,
