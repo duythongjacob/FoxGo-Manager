@@ -36,6 +36,8 @@ Vạch tiến độ cuộn mảnh màu xanh ở mép trên.
    chữ lùi lên mờ dần, mô-đun nổi trôi theo độ sâu khác nhau.
    Nền: khung kẻ kiểu bản vẽ (2 đường dọc mép nội dung, 2 đường ngang ôm tiêu đề, dấu + ở chỗ giao) + vòng đồng tâm
    mảnh sau tiêu đề — "hình" bằng nét, không hình cáo; không chấm trôi qua chữ (trông như dấu tiếng Việt bị lạc).
+   Hai dấu chấm cuối dòng tiêu đề (`HeroDot`) chuyển màu chậm qua cam Fox + màu nhấn các app (14 giây một vòng, hai
+   chấm lệch nửa vòng), quầng mờ cùng màu; giảm chuyển động → đứng yên màu cam.
 2. **Hệ sinh thái** — "Mọi thứ đều liên quan.": mục ghim (cao 320vh), sơ đồ tối giản (anh yêu cầu 17/11/2026: đơn
    giản, hiện đại, đường cong có logic). FoxGo ở tâm, 6 app chia đều quanh tâm, mỗi app một nhãn viên thuốc (chấm màu +
    tên mảng; chấm đặc = đang dùng, chấm rỗng = đang làm / sắp có). Hai loại đường (không có chú thích — anh bỏ 17/11/2026, phần chữ bên cạnh đã nói rõ):

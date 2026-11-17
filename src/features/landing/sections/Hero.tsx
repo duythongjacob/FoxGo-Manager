@@ -122,6 +122,24 @@ function HeroRail() {
   )
 }
 
+/** Bảng màu dấu chấm tiêu đề: cam Fox + màu nhấn từng app; luôn đủ 7 màu (--c0…--c6) cho keyframes ld-hdot-cycle. */
+const DOT_COLORS = ['#f97316', ...RAIL_APPS.map((a) => a.accent)]
+const DOT_VARS = Object.fromEntries(
+  Array.from({ length: 7 }, (_, i) => [`--c${i}`, DOT_COLORS[i % DOT_COLORS.length]]),
+) as CSSProperties
+
+/**
+ * Dấu chấm cuối dòng tiêu đề — chuyển màu chậm qua cam Fox và màu các app, có quầng mờ cùng màu ("connect the dots").
+ * `lag` (giây) lệch nhịp để hai chấm không cùng màu một lúc. Giảm chuyển động → đứng yên màu cam (CSS).
+ */
+function HeroDot({ lag = 0 }: { lag?: number }) {
+  return (
+    <span className="ld-hdot" style={{ ...DOT_VARS, animationDelay: `${-lag}s` }} aria-hidden>
+      .
+    </span>
+  )
+}
+
 export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
@@ -162,7 +180,16 @@ export default function Hero() {
           <i className="ld-tick br" aria-hidden />
           <h1 id="h-hero">
             <Lines
-              lines={['Một nền tảng.', <span className="ld-accent">Connect the dots.</span>]}
+              lines={[
+                <>
+                  Một nền tảng
+                  <HeroDot />
+                </>,
+                <span className="ld-accent">
+                  Connect the dots
+                  <HeroDot lag={7} />
+                </span>,
+              ]}
               delay={0.1}
             />
           </h1>

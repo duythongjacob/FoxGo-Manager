@@ -91,6 +91,45 @@ html:has(.ld-root) {
 .ld-accent {
   color: var(--primary);
 }
+/* Dấu chấm cuối dòng tiêu đề hero: chuyển màu qua cam Fox + màu app (--c0…--c6 từ Hero.tsx), quầng mờ (text-shadow
+   theo currentColor) đổi màu cùng chấm. 14s một vòng, mỗi màu ~2s, chuyển êm. */
+.ld-hdot {
+  display: inline-block;
+  color: var(--c0, #f97316);
+  text-shadow:
+    0 0 0.08em currentColor,
+    0 0 0.22em color-mix(in srgb, currentColor 45%, transparent);
+  animation: ld-hdot-cycle 14s ease-in-out infinite;
+}
+@keyframes ld-hdot-cycle {
+  0%,
+  100% {
+    color: var(--c0);
+  }
+  14.3% {
+    color: var(--c1);
+  }
+  28.6% {
+    color: var(--c2);
+  }
+  42.9% {
+    color: var(--c3);
+  }
+  57.1% {
+    color: var(--c4);
+  }
+  71.4% {
+    color: var(--c5);
+  }
+  85.7% {
+    color: var(--c6);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ld-hdot {
+    animation: none;
+  }
+}
 .ld-lead {
   max-width: 600px;
   margin: 0;
