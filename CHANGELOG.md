@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.5.0] — 2026-11-17
+
 ### Thêm (17/11/2026)
 - Trang chủ: **line màu nhấn** từ dấu chấm cam của logo "Fox." uốn đan nhau xuống từng ô app hàng đầu — chấm + quầng ở
   đích, xung sáng lóe dọc đường (app kế hoạch: đường mờ, không xung sáng); cùng kiểu hình line trang Giới thiệu, chỉ
