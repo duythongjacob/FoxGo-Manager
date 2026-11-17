@@ -186,7 +186,7 @@ export default function Hero() {
                   <HeroDot />
                 </>,
                 <span className="ld-accent">
-                  Connect the dots
+                  " Connect the dots
                   <HeroDot lag={7} />
                 </span>,
               ]}
