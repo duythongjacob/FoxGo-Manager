@@ -1,6 +1,6 @@
 # FoxGo_Manager — quy ước khi code (mã FD)
 
-Đọc cùng `../CLAUDE.md` và `../docs/` (quy trình, DoD, design system). File này chỉ nói về code trong `FoxGo_Manager/`.
+Đọc cùng `../CLAUDE.md` và `../docs/` (quy trình, DoD, design system). File này chỉ nói về code trong thư mục này — `FoxdotsManager/` (tên cũ, đổi khi xong FD-012).
 
 ## Mục đích
 Trang tổng hợp các app Fox, ghim làm homepage trình duyệt. Hai trang (hash route, không thanh tab):
@@ -52,7 +52,7 @@ npm run deploy     # chốt chặn (master + tag) → build → Firebase Hosting
 ```
 **Quy trình code** (như Fox.TàiChính): `docs/QUY_TRINH.md` — nhánh `feature/FD-xxx-…` → DoD → gộp `--no-ff` → release → deploy.
 GitHub (công khai, anh duyệt 15/11/2026): https://github.com/duythongjacob/FoxGo-Manager — chỉ thư mục này, tách từ repo gốc:
-`git subtree split --prefix=FoxGo_Manager -b export` (chạy ở `..`) → `git push <url> export:main` → xóa nhánh `export`.
+`git subtree split --prefix=FoxdotsManager -b export` (chạy ở `..`) → `git push <url> export:main` → xóa nhánh `export`.
 Repo công khai → không commit dữ liệu cá nhân, khóa, `.env`.
 Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\`).
 
