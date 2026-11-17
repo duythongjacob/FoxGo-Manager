@@ -81,13 +81,15 @@
   color: var(--lc-ink);
   animation: lc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-/* Rê chuột / focus ô app → chấm đổi sang màu nhấn của ô đó (--lc-dot đặt trên .lc-main từ LauncherPage) */
+/* Rê chuột / focus ô app → chấm đổi sang màu nhấn của ô đó (--lc-dot đặt trên .lc-main từ LauncherPage).
+   Nhẹ nhàng (anh yêu cầu 17/11/2026): pha 25% cam để màu không gắt, quầng mờ hơn, chuyển màu chậm 0.7s. */
 .lc-logo .wm-dot {
-  background: var(--lc-dot, var(--fox));
-  box-shadow: 0 0 0.35em color-mix(in srgb, var(--lc-dot, var(--fox)) 55%, transparent);
+  --lc-dot-c: color-mix(in srgb, var(--lc-dot, var(--fox)) 75%, var(--fox));
+  background: var(--lc-dot-c);
+  box-shadow: 0 0 0.35em color-mix(in srgb, var(--lc-dot-c) 40%, transparent);
   transition:
-    background-color 0.25s ease,
-    box-shadow 0.25s ease;
+    background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---------- Ô app: chỉ chữ, ngăn cách bằng đường kẻ dọc mảnh ----------
