@@ -27,7 +27,7 @@ minh họa chung chung; chuyển động kể chuyện sản phẩm chứ không
 không icon; rê chuột thì đảo màu). Không menu mục (anh bỏ 16/11/2026) — các mục vẫn có ở chân trang. Trong suốt ở đỉnh trang, cuộn xuống thành kính mờ có viền + bóng rất nhẹ.
 Vạch tiến độ cuộn mảnh màu xanh ở mép trên.
 
-1. **Hero** — "Một nền tảng. Connect the dots." (giọng chuyên nghiệp, 17/11/2026): dòng nhỏ → tiêu đề từng dòng → mô tả → 2 nút
+1. **Hero** — "Một nền tảng. “Connect the dots.”" (giọng chuyên nghiệp, 17/11/2026): dòng nhỏ → tiêu đề từng dòng → mô tả → 2 nút
    ("Bắt đầu hành trình" → trang chủ, nút hút nhẹ theo chuột; "Khám phá FoxGo" → mục Hệ sinh thái) → **sơ đồ nhánh**
    (một gốc dưới nút, đường cong tỏa xuống 6 lĩnh vực app — chấm màu + tên lĩnh vực, không nhãn trạng thái (anh bỏ 17/11/2026); nét liền + xung
    sáng = app đã có, nét đứt = kế hoạch; màn hẹp chỉ còn lưới 3 cột) → dashboard

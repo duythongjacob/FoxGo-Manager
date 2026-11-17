@@ -186,8 +186,9 @@ export default function Hero() {
                   <HeroDot />
                 </>,
                 <span className="ld-accent">
-                  " Connect the dots
-                  <HeroDot lag={7} />
+                  {/* nháy cong đủ cặp, nháy đóng sau dấu chấm màu (anh chọn 17/11/2026) */}
+                  “Connect the dots
+                  <HeroDot lag={7} />”
                 </span>,
               ]}
               delay={0.1}

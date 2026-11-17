@@ -4,7 +4,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Đổi (17/11/2026)
+- Trang Giới thiệu: dòng 2 tiêu đề hero đặt trong nháy cong — **“Connect the dots.”**
 
 ## [0.6.0] — 2026-11-17
 
