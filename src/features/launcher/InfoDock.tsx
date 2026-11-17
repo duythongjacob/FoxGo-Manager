@@ -255,7 +255,7 @@ export default function InfoDock({
               <ConfigProvider theme={dark ? DARK : LIGHT}>
                 <Select
                   className="dk-city"
-                  popupClassName="dk-city-pop"
+                  classNames={{ popup: { root: 'dk-city-pop' } }}
                   variant="borderless"
                   size="small"
                   showSearch

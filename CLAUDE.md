@@ -47,6 +47,7 @@ giữa là cáo + ô app, chân trang "FoxGo 2026 by Thong Duy";
 npm run dev        # http://localhost:5170
 npm run check      # tsc + eslint + vitest + check:tree — phải sạch
 npm run build
+npm run e2e        # test trình duyệt Playwright (dev:test :5171) — trước release; e2e:perf đo tốc độ (preview :4171)
 npm run release -- <patch|minor|major>   # trên master, cây sạch → tăng version, chốt CHANGELOG, tag fd-vX.Y.Z
 npm run deploy     # chốt chặn (master + tag) → build → Firebase Hosting
 ```

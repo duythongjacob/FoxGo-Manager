@@ -60,3 +60,20 @@ export const pct = (v: number | null) => (v === null ? null : `${v >= 0 ? '+' : 
 
 /** "$97,250" */
 export const usd = (v: number) => `$${Math.round(v).toLocaleString('en-US')}`
+
+const isQuote = (q: unknown): q is Quote => {
+  const x = q as Partial<Quote> | null
+  return !!x && typeof x.usd === 'number' && typeof x.vnd === 'number'
+}
+
+/** Giá trị đọc từ đệm có đúng dạng `Market` không (FD-014: đệm hỏng không được làm vỡ thanh thông số). */
+export function isMarket(v: unknown): v is Market {
+  const m = v as Partial<Market> | null
+  return !!m && isQuote(m.btc) && isQuote(m.gold) && typeof m.updated === 'number'
+}
+
+/** Giá trị đọc từ đệm có đúng dạng tỷ giá `{ rate, updated }` không. */
+export function isUsdVnd(v: unknown): v is { rate: number; updated: number } {
+  const r = v as { rate?: unknown; updated?: unknown } | null
+  return !!r && typeof r.rate === 'number' && r.rate > 0 && typeof r.updated === 'number'
+}

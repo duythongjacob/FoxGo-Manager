@@ -130,3 +130,21 @@ export function dayLabel(date: string, today: string): string {
   if (ms === 86_400_000) return 'Mai'
   return WD[new Date(`${date}T00:00:00Z`).getUTCDay()] ?? date
 }
+
+/**
+ * Giá trị đọc từ đệm localStorage có đúng dạng `Weather` không (FD-014: đệm bị sửa tay / định dạng cũ từng làm trắng
+ * trang chủ vì `days` không phải mảng). Chỉ kiểm các trường giao diện dùng.
+ */
+export function isWeather(v: unknown): v is Weather {
+  const w = v as Partial<Weather> | null
+  return (
+    !!w &&
+    typeof w.temp === 'number' &&
+    typeof w.code === 'number' &&
+    typeof w.isDay === 'boolean' &&
+    Array.isArray(w.days) &&
+    w.days.every(
+      (d) => !!d && typeof d.date === 'string' && typeof d.max === 'number' && typeof d.min === 'number',
+    )
+  )
+}

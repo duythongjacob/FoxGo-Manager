@@ -52,6 +52,21 @@ npm run deploy             # chốt chặn (master, cây sạch, có tag) → bu
 Đẩy GitHub (repo công khai `duythongjacob/FoxGo-Manager`): xem CLAUDE.md → *Lệnh*. Chỉ thư mục này được đẩy.
 Site mặc định `foxgo-aed1f.web.app` để trống — không deploy lên đó.
 
+## Test trình duyệt & tốc độ tải (FD-014)
+Chạy trước mỗi lần release và sau khi sửa giao diện / thêm thư viện (không nằm trong `npm run check` vì cần trình duyệt):
+```bash
+npm run e2e          # ~2–3 phút: tự bật dev:test :5171 (hoặc dùng server đang mở); 60 test, máy tính + Pixel 7
+npm run e2e:perf     # ~1–2 phút: build vào dist-perf/ + preview :4171, đo 5 lần/trang, in bảng tốc độ + bundle
+npm run e2e:report   # mở báo cáo HTML: ảnh chụp, bảng tốc độ (playwright-report/perf/ cho bài đo tốc độ)
+npx playwright test e2e/persistence.spec.ts --project=dien-thoai   # một file / một khung
+```
+| Dấu hiệu | Cách xử lý |
+|---|---|
+| `lỗi console` đỏ | Đọc thông báo trong báo cáo — thường là cảnh báo antd dùng prop cũ; sửa theo gợi ý của antd |
+| `gọi host ngoài danh sách được duyệt` | Có code gọi dịch vụ / CDN mới — không được nếu anh chưa duyệt (CLAUDE.md) |
+| `e2e:perf` vượt ngân sách | Xem bảng "File đã tải" (gói nào nặng); máy đang bận thì chạy lại. Đổi ngân sách (`BUDGET` trong `e2e/load.perf.ts`) chỉ khi có lý do, ghi vào tài liệu tính năng |
+| Thêm trang mới | Thêm vào `PAGES` (`e2e/helpers.ts`) và `TARGETS` (`e2e/load.perf.ts`) |
+
 ## Sự cố thường gặp khi chạy trên máy
 | Lỗi | Cách xử lý |
 |---|---|

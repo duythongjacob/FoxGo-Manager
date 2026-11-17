@@ -13,3 +13,4 @@ Repo này công khai trên GitHub — không ghi dữ liệu cá nhân.
 | Danh sách app | FD-002 | Đang chạy | [danh-sach-app.md](danh-sach-app.md) |
 | Điều hướng (hash route) | FD-002 | Đang chạy | [dieu-huong.md](dieu-huong.md) |
 | Giao diện sáng / tối | FD-002 | Đang chạy | [giao-dien-sang-toi.md](giao-dien-sang-toi.md) |
+| Test trình duyệt + đo tốc độ tải (Playwright) | FD-014 | Đang chạy | [test-giao-dien.md](test-giao-dien.md) |

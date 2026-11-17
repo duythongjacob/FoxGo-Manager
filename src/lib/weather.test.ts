@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { cityByName, dayLabel, DEFAULT_CITY, describeWeather, parseOpenMeteo } from './weather'
+import { cityByName, dayLabel, DEFAULT_CITY, describeWeather, isWeather, parseOpenMeteo } from './weather'
 
 describe('describeWeather', () => {
   it('mã WMO → mô tả + biểu tượng', () => {
@@ -49,5 +49,22 @@ describe('thành phố & ngày', () => {
     expect(dayLabel('2026-11-14', '2026-11-14')).toBe('Hôm nay')
     expect(dayLabel('2026-11-15', '2026-11-14')).toBe('Mai')
     expect(dayLabel('2026-11-16', '2026-11-14')).toBe('T2')
+  })
+})
+
+describe('isWeather (kiểm đệm localStorage)', () => {
+  it('nhận dữ liệu đúng dạng parseOpenMeteo trả về', () => {
+    const w = parseOpenMeteo(
+      {
+        current: { temperature_2m: 27, weather_code: 2, is_day: 1 },
+        daily: { time: ['2026-11-17'], temperature_2m_max: [30], temperature_2m_min: [22] },
+      },
+      0,
+    )
+    expect(isWeather(w)).toBe(true)
+  })
+  it('từ chối đệm hỏng / sai cấu trúc', () => {
+    for (const bad of [null, {}, { temp: 'nóng' }, { temp: 1, code: 1, isDay: true, days: {} }, 42])
+      expect(isWeather(bad)).toBe(false)
   })
 })

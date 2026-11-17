@@ -4,7 +4,16 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Thêm (17/11/2026)
+- **Test trình duyệt tự động** (FD-014, Playwright): `npm run e2e` — mọi trang × sáng/tối × máy tính/điện thoại
+  (không tràn ngang, không lỗi console, không gọi host lạ), thao tác thanh thông số / Cài đặt / trang Giới thiệu,
+  lưu thiết lập qua tải lại, dữ liệu localStorage hỏng. `npm run e2e:perf` — đo tốc độ tải bản build (FCP, LCP,
+  lúc hiện nội dung, màn chờ, byte JS/CSS/font) theo ngân sách + bảng kích thước bundle theo thư viện.
+
+### Sửa (17/11/2026)
+- Đệm thời tiết / giá trong localStorage đúng JSON nhưng sai cấu trúc (bị sửa tay, định dạng cũ) hoặc có thời điểm
+  lưu ở tương lai làm **trắng cả trang chủ** → nay bị bỏ qua và tải lại (`isWeather`, `isMarket`, `isUsdVnd`).
+- Ô chọn thành phố: bỏ prop antd đã lỗi thời `popupClassName` (cảnh báo console) → `classNames.popup.root`.
 
 ## [0.6.1] — 2026-11-17
 

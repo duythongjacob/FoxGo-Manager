@@ -79,4 +79,5 @@ Luồng đệm chi tiết: [../LUONG_CODE.md](../LUONG_CODE.md) mục 4.
 |---|---|---|
 | 15/11/2026 | chưa phát hành | Bản đầu (chép logic thời tiết/giá từ Fox.TàiChính FF-033/034/036) |
 | 15/11/2026 | chưa phát hành | Luôn thu nhỏ khi mở trang; bỏ khóa nhớ `foxdots.dock` |
+| 17/11/2026 | chưa phát hành | FD-014: kiểm cấu trúc đệm `foxdots.ext.*` khi đọc (đệm hỏng / thời điểm ở tương lai → bỏ, tải lại) |
 | 15/11/2026 | chưa phát hành | Thêm dòng Xăng RON95 (snapshot Petrolimex, `npm run fuel:update`) |

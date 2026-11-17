@@ -23,6 +23,10 @@ const IGNORE = new Set([
   '.vite',
   '.vscode',
   '.claude',
+  // kết quả test trình duyệt Playwright + bản build đo tốc độ (FD-014) — không commit
+  'test-results',
+  'playwright-report',
+  'dist-perf',
 ])
 
 if (!existsSync(DOC)) {

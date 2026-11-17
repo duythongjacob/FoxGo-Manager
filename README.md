@@ -46,7 +46,12 @@ Code có ghi chú: mỗi file có chú thích đầu file (làm gì, thuộc tí
 npm run check        # tsc + eslint + vitest + check:tree — phải sạch trước khi gộp
 npm run build        # bản build vào dist/
 npm run format       # Prettier
+npm run e2e          # test trình duyệt (Playwright): mọi trang sáng/tối, máy tính + điện thoại, thao tác, lưu dữ liệu
+npm run e2e:perf     # đo tốc độ tải trên bản build production (dist-perf/, cổng 4171) — in bảng + so ngân sách
+npm run e2e:report   # xem báo cáo HTML (ảnh chụp từng trang, bảng tốc độ)
 ```
+Chi tiết test trình duyệt: [docs/features/test-giao-dien.md](docs/features/test-giao-dien.md). Lần đầu trên máy mới:
+`npx playwright install chromium`.
 Windows: chạy từ đường dẫn `C:\…` chữ hoa (Vitest lỗi với `c:\`).
 
 ## Deploy

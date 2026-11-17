@@ -18,6 +18,8 @@ FoxGo_Manager/  (trong FoxdotsProject/ — tài liệu chung ở ../docs/)
 ├── index.html                trang HTML gốc + script đặt sáng/tối trước khi vẽ
 ├── package.json              thư viện + lệnh npm (dev, check, build)
 ├── vite.config.ts            cấu hình Vite + Vitest (cổng, alias @/, số phiên bản)
+├── playwright.config.ts      test trình duyệt (FD-014): dev:test :5171, máy tính + điện thoại
+├── playwright.perf.config.ts đo tốc độ tải: build vào dist-perf/ + preview :4171
 ├── firebase.json             cấu hình Firebase Hosting (site foxgo)
 ├── chay_local.bat            nhấp đúp để chạy trên máy: dev :5170 hoặc build + preview :4170
 │
@@ -28,6 +30,7 @@ FoxGo_Manager/  (trong FoxdotsProject/ — tài liệu chung ở ../docs/)
 │   ├── QUY_TRINH.md              quy trình code: nhánh, DoD riêng, release + deploy, hoàn tác
 │   ├── features/                 mỗi tính năng một file md + README.md mục lục
 │   └── prd/                      PRD (yêu cầu sản phẩm) — NNN-ten.md, anh duyệt trước khi code
+├── e2e/                      test trình duyệt Playwright: *.spec.ts (giao diện, thao tác, lưu dữ liệu), *.perf.ts (tốc độ)
 ├── scripts/                  lệnh Node phụ trợ (check-tree, fuel-update, release, guard-deploy)
 ├── public/                   🌐 file tĩnh chép nguyên vào bản build: manifest, icon
 │   └── fox/                  🌐 linh vật SVG (sinh từ ../Fox.Files, không vẽ tay)
@@ -46,7 +49,8 @@ FoxGo_Manager/  (trong FoxdotsProject/ — tài liệu chung ở ../docs/)
     └── styles/               global.css: token màu Fox (bản chuẩn của hệ sinh thái)
 ```
 
-Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, `.firebase/`, `coverage/`, `.vite/`.
+Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, `.firebase/`, `coverage/`, `.vite/`,
+`test-results/`, `playwright-report/`, `dist-perf/` (⚙️ kết quả test Playwright / bản build đo tốc độ — không commit).
 
 ## Bảng ý nghĩa
 
@@ -55,6 +59,7 @@ Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, 
 | `docs/` | Tài liệu app: cấu trúc, luồng code, bảo trì, quy trình code | Repo GitHub công khai — không ghi dữ liệu cá nhân |
 | `docs/features/` | Tài liệu từng tính năng (mẫu `../docs/templates/FEATURE.md`), mục lục `README.md` | Viết cùng commit với code |
 | `docs/prd/` | PRD theo `../docs/templates/PRD.md` — *sẽ làm gì*, phạm vi, tiêu chí nghiệm thu (khi nào bắt buộc: `docs/QUY_TRINH.md` mục 2) | Anh duyệt trước khi code |
+| `e2e/` | Test trình duyệt (Playwright, FD-014): `helpers.ts` (chặn dịch vụ ngoài bằng dữ liệu mẫu, đo bố cục), `layout.spec.ts`, `interactions.spec.ts`, `persistence.spec.ts`, `load.perf.ts` + `bundle.ts` (tốc độ tải, kích thước bundle) | `docs/features/test-giao-dien.md`; không chạy trong `npm run check` |
 | `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật), `fuel-update.mjs` + `fuel-parse.mjs` (giá xăng → `src/data/fuel.json`), `release.mjs` (phát hành + tag `fd-vX.Y.Z`), `guard-deploy.mjs` (chặn deploy sai) | `check-tree` chạy trong `npm run check` |
 | `public/` | File tĩnh: `manifest.webmanifest` (cài như app), `icon.svg` (favicon chữ "F.", nền trong suốt, chấm cam `#F97316` — Fox.TàiChính, Fox.CôngViệc cùng hình nhưng chấm màu riêng của app) | 🌐 |
 | `public/fox/` | Linh vật: đầu `fox-<app>.svg`, toàn thân `*-toan-than.svg`, cáo vẫy tay, cáo giới thiệu | 🌐 Sinh bằng `../Fox.Files/tools/gen_fox.py` rồi chép sang |

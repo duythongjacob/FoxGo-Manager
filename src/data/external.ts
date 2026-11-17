@@ -10,8 +10,8 @@
  * Khóa localStorage: `foxdots.ext.*` (đệm), `foxdots.city` (thành phố) — giữ tên cũ để không mất cài đặt (FD-012).
  */
 import { isFuelPrices, type FuelPrices } from '@/lib/fuel'
-import { parseCoinGecko, parseUsdVnd, type Market } from '@/lib/market'
-import { parseOpenMeteo, type City, type Weather } from '@/lib/weather'
+import { isMarket, isUsdVnd, parseCoinGecko, parseUsdVnd, type Market } from '@/lib/market'
+import { isWeather, parseOpenMeteo, type City, type Weather } from '@/lib/weather'
 import fuelSnapshot from './fuel.json'
 
 /** Giá xăng dầu kỳ gần nhất (snapshot trong bundle); null nếu file hỏng → thanh thông số ẩn dòng xăng. */
@@ -24,9 +24,16 @@ export interface Fetched<T> {
   stale: boolean
 }
 
-function readCache<T>(key: string): { at: number; value: T } | null {
+/**
+ * Đọc đệm; JSON hỏng, sai cấu trúc (`valid` từ chối) hoặc thời điểm lưu không hợp lệ / ở tương lai → coi như không có.
+ * Vì sao kiểm kỹ: localStorage có thể bị sửa tay hoặc còn định dạng cũ — trước FD-014 đệm sai cấu trúc làm
+ * thanh thông số ném lỗi khi vẽ và trắng cả trang chủ.
+ */
+function readCache<T>(key: string, valid: (v: unknown) => v is T): { at: number; value: T } | null {
   try {
-    return JSON.parse(localStorage.getItem(key) ?? 'null')
+    const c = JSON.parse(localStorage.getItem(key) ?? 'null') as { at?: unknown; value?: unknown } | null
+    if (!c || typeof c.at !== 'number' || c.at > Date.now() || !valid(c.value)) return null
+    return { at: c.at, value: c.value }
   } catch {
     return null
   }
@@ -54,8 +61,13 @@ async function getJson(url: string, ms = 8000): Promise<unknown> {
 }
 
 /** Đọc đệm còn hạn → trả luôn; hết hạn → gọi mạng; lỗi → trả bản đệm cũ (stale) nếu có. */
-async function cached<T>(key: string, ttl: number, load: () => Promise<T | null>): Promise<Fetched<T>> {
-  const c = readCache<T>(key)
+async function cached<T>(
+  key: string,
+  ttl: number,
+  valid: (v: unknown) => v is T,
+  load: () => Promise<T | null>,
+): Promise<Fetched<T>> {
+  const c = readCache(key, valid)
   if (c && Date.now() - c.at < ttl) return { value: c.value, stale: false }
   try {
     const v = await load()
@@ -76,14 +88,17 @@ export function fetchWeather(city: City): Promise<Fetched<Weather>> {
     '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day' +
     '&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max' +
     '&timezone=auto&forecast_days=3'
-  return cached(`foxdots.ext.weather:${city.lat.toFixed(2)},${city.lon.toFixed(2)}`, 30 * 60_000, async () =>
-    parseOpenMeteo(await getJson(url), Date.now()),
+  return cached(
+    `foxdots.ext.weather:${city.lat.toFixed(2)},${city.lon.toFixed(2)}`,
+    30 * 60_000,
+    isWeather,
+    async () => parseOpenMeteo(await getJson(url), Date.now()),
   )
 }
 
 /** Giá Bitcoin + PAX Gold (USD, VND, % 24 giờ). Đệm 10 phút — gói miễn phí CoinGecko giới hạn số lần gọi. */
 export function fetchMarket(): Promise<Fetched<Market>> {
-  return cached('foxdots.ext.market', 10 * 60_000, async () =>
+  return cached('foxdots.ext.market', 10 * 60_000, isMarket, async () =>
     parseCoinGecko(
       await getJson(
         'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,pax-gold&vs_currencies=usd,vnd' +
@@ -95,7 +110,7 @@ export function fetchMarket(): Promise<Fetched<Market>> {
 
 /** Tỷ giá USD/VND. Đệm 6 giờ — nguồn chỉ cập nhật khoảng 1 lần/ngày. */
 export function fetchUsdVnd(): Promise<Fetched<{ rate: number; updated: number }>> {
-  return cached('foxdots.ext.usdvnd', 6 * 3600_000, async () =>
+  return cached('foxdots.ext.usdvnd', 6 * 3600_000, isUsdVnd, async () =>
     parseUsdVnd(await getJson('https://open.er-api.com/v6/latest/USD')),
   )
 }

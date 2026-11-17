@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compactVnd, goldPerLuong, parseCoinGecko, parseUsdVnd, pct, usd } from './market'
+import { compactVnd, goldPerLuong, isMarket, isUsdVnd, parseCoinGecko, parseUsdVnd, pct, usd } from './market'
 
 describe('parseCoinGecko', () => {
   it('đọc Bitcoin và PAX Gold', () => {
@@ -47,5 +47,18 @@ describe('định dạng', () => {
     expect(pct(-0.4)).toBe('-0.40%')
     expect(pct(null)).toBeNull()
     expect(usd(97250.6)).toBe('$97,251')
+  })
+})
+
+describe('isMarket / isUsdVnd (kiểm đệm localStorage)', () => {
+  it('nhận dữ liệu đúng dạng', () => {
+    const m = parseCoinGecko({ bitcoin: { usd: 1, vnd: 2 }, 'pax-gold': { usd: 3, vnd: 4 } })
+    expect(isMarket(m)).toBe(true)
+    expect(isUsdVnd({ rate: 25400, updated: 0 })).toBe(true)
+  })
+  it('từ chối đệm hỏng', () => {
+    for (const bad of [null, {}, { btc: {}, gold: {} }, 'x']) expect(isMarket(bad)).toBe(false)
+    for (const bad of [null, {}, { rate: -1, updated: 0 }, { rate: '25400', updated: 0 }])
+      expect(isUsdVnd(bad)).toBe(false)
   })
 })
