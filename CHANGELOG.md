@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.4.0] — 2026-11-17
+
 ### Đổi (17/11/2026)
 - Trang Giới thiệu — Hero: tiêu đề "Một nền tảng. Kết nối cuộc sống." + mô tả mới; nền line-art (khung kẻ kiểu bản vẽ
   ôm tiêu đề, dấu + ở chỗ giao, vòng đồng tâm mảnh); sơ đồ nhánh dưới nút tỏa xuống 6 lĩnh vực app (nét liền + xung
