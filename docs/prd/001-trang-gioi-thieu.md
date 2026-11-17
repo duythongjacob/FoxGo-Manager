@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Mã | FD-002 (trang Giới thiệu của FoxGo_Manager) |
-| Trạng thái | Đang làm — đã có bản chạy (v0.2.0–v0.3.0), chờ anh duyệt PRD + nghiệm thu đợt chỉnh 17/11/2026 |
+| Trạng thái | Đã duyệt (anh duyệt 17/11/2026) — gộp master, chờ release v0.4.0 |
 | Người duyệt | Anh (Product Owner) |
 | Ngày | 2026-11-17 |
 
@@ -86,6 +86,8 @@ nhau ra sao, app nào đã dùng được, và FoxGo cam kết gì về dữ li�
 - Màn chờ tới khi font + ảnh tải xong (tối thiểu 0,7 s, tối đa 8 s) để hiệu ứng vào trang không chạy mất.
 - "Giảm chuyển động": bỏ dịch chuyển, dừng vòng lặp, không ghim, nhảy thẳng thay vì cuộn mượt.
 - Responsive: ≤ 960px cột xếp dọc; ≤ 760px ẩn mô-đun nổi, sơ đồ nhánh Hero thành lưới 3 cột; ≤ 640px lề 16px.
+- **Điện thoại cuộn mượt (≤ 760px):** không chạy hiệu ứng nặng với GPU — không dựng mô-đun nổi, không nghiêng 3D,
+  không `drop-shadow` trên xung sáng, không kính mờ dải chân trang, đốm mờ nền đứng yên, thanh trên blur 8px.
 
 ## 6. Tiêu chí nghiệm thu
 - [ ] Mở `#/gioi-thieu` từ nút "Giới thiệu" trên trang chủ → màn chờ → Hero hiện đủ tiêu đề, mô tả, 2 nút, sơ đồ nhánh.
@@ -95,6 +97,7 @@ nhau ra sao, app nào đã dùng được, và FoxGo cam kết gì về dữ li�
 - [ ] Mọi giao diện minh họa có dòng "số liệu mẫu"; không số liệu cá nhân trong code/bundle.
 - [ ] Không hình cáo ở sơ đồ, thẻ app, Về FoxGo, kêu gọi cuối (linh vật chỉ trong giao diện minh họa).
 - [ ] Sáng + tối, 375px + 1440px: không tràn ngang, chữ tiếng Việt không bị cắt dấu (ố, ộ, ẩ, ọ).
+- [ ] Điện thoại (375px): cuộn hết trang không khựng; không còn đốm nền trôi, mô-đun nổi, nghiêng 3D.
 - [ ] Bật "giảm chuyển động" → đủ nội dung, không ghim, không vòng lặp.
 - [ ] Trang chủ không tải thư viện `motion` (kiểm tra tab Network: chỉ tải khi vào `#/gioi-thieu`).
 - [ ] `npm run check` sạch, `npm run build` thành công.

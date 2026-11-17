@@ -10,7 +10,7 @@ import { APPS } from '@/data/apps'
 import { sortApps } from '@/lib/apps'
 import { href } from '@/lib/route'
 import { SECTION } from '../content'
-import { EASE } from '../hooks'
+import { EASE, useMedia } from '../hooks'
 import { Lines, Magnetic } from '../kit'
 import DashboardMock from '../mocks/Dashboard'
 
@@ -125,8 +125,11 @@ function HeroRail() {
 export default function Hero() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
+  // điện thoại: 3 mô-đun nổi vốn bị CSS ẩn nhưng vòng lặp trôi (JS) vẫn chạy mỗi khung hình → không dựng hẳn;
+  // bỏ nghiêng 3D (perspective + rotateX trên khối lớn nặng với GPU điện thoại, màn hẹp cũng khó thấy)
+  const roomy = useMedia('(min-width: 761px)')
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const tilt = useTransform(scrollYProgress, [0, 0.45], [reduce ? 0 : 16, 0])
+  const tilt = useTransform(scrollYProgress, [0, 0.45], [reduce || !roomy ? 0 : 16, 0])
   const scale = useTransform(scrollYProgress, [0, 0.45], [0.94, 1])
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60])
   const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0])
@@ -201,27 +204,31 @@ export default function Hero() {
           <m.div className="ld-stage-tilt" style={{ rotateX: tilt, scale }}>
             <DashboardMock />
           </m.div>
-          <Floater className="f-goal" depth={140} delay={1.3} progress={scrollYProgress}>
-            <span className="ld-float-label">Mục tiêu tiết kiệm</span>
-            <strong>72%</strong>
-            <span className="ld-float-bar">
-              <i style={{ width: '72%' }} />
-            </span>
-          </Floater>
-          <Floater className="f-habit" depth={220} delay={1.5} progress={scrollYProgress}>
-            <img src="/fox/fox-suckhoe.svg" alt="" width={28} height={28} />
-            <span>
-              <strong>21 ngày</strong>
-              <span className="ld-float-label">Chuỗi ngủ đủ giấc</span>
-            </span>
-          </Floater>
-          <Floater className="f-task" depth={90} delay={1.7} progress={scrollYProgress}>
-            <span className="ld-float-check" />
-            <span>
-              <strong>Gửi báo cáo</strong>
-              <span className="ld-float-label">Thứ 6 · 09:00</span>
-            </span>
-          </Floater>
+          {roomy && (
+            <>
+              <Floater className="f-goal" depth={140} delay={1.3} progress={scrollYProgress}>
+                <span className="ld-float-label">Mục tiêu tiết kiệm</span>
+                <strong>72%</strong>
+                <span className="ld-float-bar">
+                  <i style={{ width: '72%' }} />
+                </span>
+              </Floater>
+              <Floater className="f-habit" depth={220} delay={1.5} progress={scrollYProgress}>
+                <img src="/fox/fox-suckhoe.svg" alt="" width={28} height={28} />
+                <span>
+                  <strong>21 ngày</strong>
+                  <span className="ld-float-label">Chuỗi ngủ đủ giấc</span>
+                </span>
+              </Floater>
+              <Floater className="f-task" depth={90} delay={1.7} progress={scrollYProgress}>
+                <span className="ld-float-check" />
+                <span>
+                  <strong>Gửi báo cáo</strong>
+                  <span className="ld-float-label">Thứ 6 · 09:00</span>
+                </span>
+              </Floater>
+            </>
+          )}
         </m.div>
         <p className="ld-note">Giao diện minh họa · số liệu mẫu</p>
       </div>

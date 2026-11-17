@@ -1852,6 +1852,18 @@ html:has(.ld-root) {
 }
 /* mô-đun nổi quanh dashboard chỉ hiện khi đủ chỗ */
 @media (max-width: 760px) {
+  /* xung sáng nét SVG vẽ lại mỗi khung hình — bỏ quầng drop-shadow (lọc cả vùng) cho nhẹ trên điện thoại */
+  .ld-net-pulse,
+  .ld-sort-pulse,
+  .ld-tree-pulse {
+    filter: none;
+  }
+  /* dải mời ở chân trang: nền đặc là đủ, bỏ kính mờ */
+  .ld-footer-cta {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--surface);
+  }
   .ld-float {
     display: none;
   }

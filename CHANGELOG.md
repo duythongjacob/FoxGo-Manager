@@ -13,6 +13,9 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 - Bỏ nhãn trạng thái chữ ("Đang chạy / Đang xây / Kế hoạch / Sắp ra mắt") trên toàn dự án — trang chủ và trang
   Giới thiệu; xóa `STATUS_LABEL`.
 
+- Điện thoại cuộn mượt hơn: bỏ các hiệu ứng nặng với GPU khi màn ≤ 760px (đốm mờ trôi ở nền, nghiêng 3D + mô-đun nổi
+  ở Hero, quầng sáng của xung chạy dọc đường, kính mờ dải chân trang; thanh trên mờ nhẹ hơn).
+
 ### Tài liệu
 - PRD-001 Trang Giới thiệu (`docs/prd/001-trang-gioi-thieu.md`) — gom phạm vi, quyết định, tiêu chí nghiệm thu.
 

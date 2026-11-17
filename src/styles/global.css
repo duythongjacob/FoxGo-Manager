@@ -503,3 +503,17 @@ html.pl-lock {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* ---------- Điện thoại: bớt việc vẽ lại mỗi khung hình cho cuộn mượt ----------
+   Đốm mờ blur(80px) trôi mãi + kính mờ blur(16px) của thanh trên là hai thứ nặng nhất với GPU điện thoại:
+   đốm đứng yên (vẫn giữ màu nền), thanh trên mờ nhẹ hơn. */
+@media (max-width: 760px) {
+  .fd-blob {
+    animation: none;
+    will-change: auto;
+  }
+  .fd-top.is-scrolled {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}

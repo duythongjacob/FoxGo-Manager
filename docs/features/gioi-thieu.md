@@ -98,6 +98,9 @@ thành 4 ô ngang; ≤ 640px: lề 16px.
 - **Giảm chuyển động** (hệ điều hành): `MotionConfig reducedMotion="user"` bỏ dịch chuyển, chỉ giữ mờ/hiện; các vòng
   lặp dừng ở trạng thái đẹp nhất; Tổng quan không ghim, Quy trình không tự chuyển; nút không hút theo chuột; link mục
   nhảy thẳng thay vì cuộn mượt.
+- **Điện thoại (≤ 760px) — cuộn mượt:** Hero không dựng 3 mô-đun nổi (không chạy vòng lặp trôi) và bỏ nghiêng 3D
+  dashboard; xung sáng nét SVG bỏ quầng `drop-shadow`; dải mời chân trang bỏ kính mờ; nền chung (`global.css`) đốm mờ
+  đứng yên, thanh trên mờ kính nhẹ hơn (8px).
 - Trang **nạp lười** (`React.lazy` trong `Root.tsx`) → `motion` không làm nặng trang chủ (trang mở đầu trình duyệt).
   Vì vậy vào thẳng link có mục thì `LandingPage` tự nhảy tới mục khi dựng xong (nhảy lại ở 300/900 ms vì bố cục còn
   giãn; người dùng tự cuộn thì thôi).
