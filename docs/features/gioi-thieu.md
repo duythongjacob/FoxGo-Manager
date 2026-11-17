@@ -17,7 +17,7 @@ minh họa chung chung; chuyển động kể chuyện sản phẩm chứ không
 - **Logo chữ "Fox.Go"** (Fox lớn, chấm cam, Go nhỏ — `<Wordmark go />`) thay logo hình cáo; hạn chế dùng hình cáo
   (`public/icon.svg`) vì thương hiệu có thể đổi — tên thương hiệu chỉ vẽ ở `src/components/Wordmark.tsx`.
   Linh vật từng app vẫn giữ trong giao diện minh họa; **sơ đồ Hệ sinh thái, thẻ app, mục Về FoxGo, kêu gọi cuối dùng chữ,
-  không hình cáo** (anh chọn 16/11/2026). Favicon / icon cài app = chữ "F." nền trong suốt, chấm vàng (`public/icon.svg`, viết tay — chữ, không phải linh vật; đổi 17/11/2026).
+  không hình cáo** (anh chọn 16/11/2026). Favicon / icon cài app = chữ "F." nền trong suốt, chấm cam `--fox` (#F97316, đổi từ vàng 17/11/2026) (`public/icon.svg`, viết tay — chữ, không phải linh vật; đổi 17/11/2026).
 
 ## Cách dùng / hành vi
 Đường dẫn `#/gioi-thieu`; mục con `#/gioi-thieu/<id>` nhảy tới mục đó — id mục: `he-sinh-thai`, `tinh-nang`,

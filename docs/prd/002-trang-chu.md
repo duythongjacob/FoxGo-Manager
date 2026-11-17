@@ -53,7 +53,7 @@ duyệt (homepage) gọn, đẹp, cùng "gia đình" giao diện, bấm một l�
 | Tối giữ nền xanh đậm; sáng nền trắng + lưới ô vuông nhạt | 16/11/2026 |
 | Bỏ nhãn trạng thái chữ toàn dự án; app chưa có = chữ mờ, không bấm được | 17/11/2026 |
 | Line màu từ logo xuống ô app (cùng kiểu line trang Giới thiệu); xung sáng **chỉ lóe** để nhẹ máy | 17/11/2026 |
-| Favicon chữ "F." nền trong suốt, chấm vàng | 17/11/2026 |
+| Favicon chữ "F." nền trong suốt, chấm cam (như chấm logo "Fox.") — cùng favicon cho mọi app | 17/11/2026 |
 
 ### 5.2 Hành vi
 - **Ô app:** tên bỏ tiền tố "Fox." ("Fox.TàiChính" → "Tài Chính"); thứ tự đang chạy → đang xây → kế hoạch (`sortApps`),

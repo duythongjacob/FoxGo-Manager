@@ -56,7 +56,7 @@ Không liệt kê (bỏ qua khi kiểm tra): `node_modules/`, `dist/`, `.git/`, 
 | `docs/features/` | Tài liệu từng tính năng (mẫu `../docs/templates/FEATURE.md`), mục lục `README.md` | Viết cùng commit với code |
 | `docs/prd/` | PRD theo `../docs/templates/PRD.md` — *sẽ làm gì*, phạm vi, tiêu chí nghiệm thu (khi nào bắt buộc: `docs/QUY_TRINH.md` mục 2) | Anh duyệt trước khi code |
 | `scripts/` | Lệnh Node phụ trợ: `check-tree.mjs` (so file này với thư mục thật), `fuel-update.mjs` + `fuel-parse.mjs` (giá xăng → `src/data/fuel.json`), `release.mjs` (phát hành + tag `fd-vX.Y.Z`), `guard-deploy.mjs` (chặn deploy sai) | `check-tree` chạy trong `npm run check` |
-| `public/` | File tĩnh: `manifest.webmanifest` (cài như app), `icon.svg` (favicon chữ "F.", nền trong suốt, chấm vàng) | 🌐 |
+| `public/` | File tĩnh: `manifest.webmanifest` (cài như app), `icon.svg` (favicon chữ "F.", nền trong suốt, chấm cam `#F97316` — cùng file ở Fox.TàiChính, Fox.CôngViệc) | 🌐 |
 | `public/fox/` | Linh vật: đầu `fox-<app>.svg`, toàn thân `*-toan-than.svg`, cáo vẫy tay, cáo giới thiệu | 🌐 Sinh bằng `../Fox.Files/tools/gen_fox.py` rồi chép sang |
 | `public/fox/bieu-cam/` | 8 biểu cảm `fox-<tên>.svg` | 🌐 Tên khớp `EXPRESSIONS` trong LandingPage |
 | `src/` | Mã nguồn TypeScript/React | Luồng: `docs/LUONG_CODE.md` |
