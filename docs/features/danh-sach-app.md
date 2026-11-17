@@ -1,6 +1,6 @@
 # Danh sách app
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-002](../prd/002-trang-chu.md) · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Một nguồn duy nhất mô tả các app Fox (tên, trạng thái, link, linh vật, màu nhấn) để trang chủ và trang Giới thiệu cùng dùng.

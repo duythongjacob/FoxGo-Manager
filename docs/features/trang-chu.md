@@ -1,6 +1,6 @@
 # Trang chủ
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-002](../prd/002-trang-chu.md) · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Trang mở đầu trình duyệt (ghim làm homepage): nhìn giờ/thời tiết/giá trong một giây và bấm vào app Fox cần dùng.

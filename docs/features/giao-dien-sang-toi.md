@@ -1,6 +1,6 @@
 # Giao diện sáng / tối
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-002](../prd/002-trang-chu.md) · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Dễ nhìn ngày và đêm; mặc định theo hệ điều hành, người dùng chọn được và được nhớ.

@@ -1,6 +1,6 @@
 # Cài đặt trang chủ (thứ tự ô, tab mới, link riêng)
 
-> Mã: `FD-005` · PRD: — · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-005` · PRD: [PRD-004](../prd/004-cai-dat-trang-chu.md) · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng lên đầu, mở trong tab mới, thêm link ngoài hệ Fox

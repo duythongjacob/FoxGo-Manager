@@ -1,6 +1,6 @@
 # Thanh thông số (giờ, thời tiết, giá)
 
-> Mã: `FD-002` · PRD: — (dịch vụ ngoài anh duyệt 14/11/2026) · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-003](../prd/003-thanh-thong-so.md) (dịch vụ ngoài anh duyệt 14/11/2026) · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Thông tin nhìn nhanh mỗi lần mở trình duyệt: giờ, lời chào, thời tiết 3 ngày, giá vàng thế giới quy đổi, USD/VND, Bitcoin,

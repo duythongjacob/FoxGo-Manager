@@ -1,6 +1,6 @@
 # Điều hướng (hash route)
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: [PRD-002](../prd/002-trang-chu.md) · Cập nhật: 15/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Chuyển giữa Trang chủ và Giới thiệu mà không cần cấu hình server (chạy được trên Firebase Hosting / mọi hosting tĩnh).

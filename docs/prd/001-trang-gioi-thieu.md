@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Mã | FD-002 (trang Giới thiệu của FoxGo_Manager) |
-| Trạng thái | Đã duyệt (anh duyệt 17/11/2026) — gộp master, chờ release v0.4.0 |
+| Trạng thái | Đã phát hành (v0.4.0) — anh duyệt 17/11/2026 |
 | Người duyệt | Anh (Product Owner) |
 | Ngày | 2026-11-17 |
 
@@ -59,7 +59,7 @@ nhau ra sao, app nào đã dùng được, và FoxGo cam kết gì về dữ li�
 | "Hình" bằng nét kẻ (line-art), không ảnh minh họa chung chung | 17/11/2026 |
 
 ### 5.2 Các mục
-1. **Hero** — "Một nền tảng. Kết nối cuộc sống." + một đoạn mô tả FoxGo; 2 nút: "Bắt đầu hành trình" → trang chủ,
+1. **Hero** — "Một nền tảng. Connect the dots." (đổi 17/11/2026, sau v0.4.0; trước là "Kết nối cuộc sống.") + một đoạn mô tả FoxGo; 2 nút: "Bắt đầu hành trình" → trang chủ,
    "Khám phá FoxGo" → mục Hệ sinh thái. Nền line-art: khung kẻ kiểu bản vẽ (2 đường dọc, 2 đường ngang ôm tiêu đề, dấu +
    ở chỗ giao) + vòng đồng tâm mảnh. Dưới nút: **sơ đồ nhánh** từ một gốc tỏa xuống 6 lĩnh vực (chấm màu + tên lĩnh vực;
    nét liền + xung sáng = app đã có, nét đứt = kế hoạch). Rồi dashboard minh họa "đang chạy" + 3 mô-đun nổi.
