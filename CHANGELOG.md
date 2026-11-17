@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.5.1] — 2026-11-17
+
 ### Đổi (17/11/2026)
 - Favicon / icon cài app: chấm của chữ "F." đổi từ vàng sang **cam** `#F97316` (đúng màu chấm logo "Fox.");
   Fox.TàiChính và Fox.CôngViệc dùng chung favicon này.
