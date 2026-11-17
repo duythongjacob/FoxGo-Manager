@@ -162,7 +162,7 @@ export default function Hero() {
           <i className="ld-tick br" aria-hidden />
           <h1 id="h-hero">
             <Lines
-              lines={['Một nền tảng.', <span className="ld-accent">Kết nối cuộc sống.</span>]}
+              lines={['Một nền tảng.', <span className="ld-accent">Connect the dots.</span>]}
               delay={0.1}
             />
           </h1>

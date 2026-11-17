@@ -6,7 +6,7 @@
  * Vị trí đo từ DOM thật (chấm logo, tên ô app có `data-line`) nên khớp mọi cỡ màn và mọi thứ tự ô người dùng chọn.
  * Chỉ nối tới ô ở **hàng đầu** của lưới: hàng sau (điện thoại 3 cột, ô link riêng) mà nối thì đường cắt ngang hàng trên.
  */
-import { useEffect, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState, type RefObject } from 'react'
 
 /** Một đường đã tính: path SVG + điểm đích + màu. */
 interface Strand {
@@ -55,9 +55,21 @@ function measure(main: HTMLElement): { w: number; h: number; strands: Strand[] }
   return { w: box.width, h: box.height, strands }
 }
 
+/** Xung sáng đầu tiên: sau khi các đường vẽ xong (CSS lc-line-draw: trễ 0.55s + 1.4s + lệch nhịp). */
+const FIRST_PULSE_MS = 2200
+/** Sau đó cứ mỗi chừng này lại cho MỘT đường lóe (lần lượt) — giữa các lần không có hoạt ảnh nào → CPU ~0. */
+const PULSE_EVERY_MS = 9000
+/** Không có thao tác chuột/phím/chạm trong chừng này → ngừng lóe định kỳ tới khi có thao tác lại. */
+const IDLE_STOP_MS = 60_000
+
 /**
  * Lớp SVG nằm dưới logo + ô app (CSS .lc-lines). `deps` đổi (VD thứ tự/số ô sau khi lưu Cài đặt) → đo lại.
  * Đo lại khi: đổi cỡ, font tải xong, hoạt ảnh trồi lên của logo/ô kết thúc (lúc đang trồi, vị trí lệch 12px).
+ *
+ * Xung sáng KHÔNG chạy liên tục (đo 17/11/2026: chạy vòng lặp vô hạn tốn ~150 ms CPU/giây trên desktop, ~500 trên
+ * điện thoại giả lập — trang chủ mở cả ngày → hao pin). Chỉ lóe: tất cả một lần lúc vào trang, rồi mỗi 9 giây một
+ * đường, rê chuột vào ô app thì đường của ô đó lóe. Tab ẩn, 60 giây không thao tác, hoặc giảm chuyển động → không lóe
+ * (đo lại: lóe theo nhịp ~40 ms/giây desktop; để yên quá 60 giây → như không có line).
  */
 export default function TileLines({
   mainRef,
@@ -67,21 +79,72 @@ export default function TileLines({
   deps: unknown
 }) {
   const [shape, setShape] = useState<ReturnType<typeof measure> | null>(null)
+  /** Chỉ số các đường đang lóe; đường lóe xong (animationend) tự rút khỏi danh sách. */
+  const [pulsing, setPulsing] = useState<number[]>([])
+  const lastShape = useRef('')
 
   useEffect(() => {
     const main = mainRef.current
     if (!main) return
-    const update = () => setShape(measure(main))
+    const update = () => {
+      const next = measure(main)
+      const key = JSON.stringify(next)
+      if (key === lastShape.current) return // không đổi → khỏi vẽ lại
+      lastShape.current = key
+      setShape(next)
+    }
+    // animationend nổi bọt lên cả từ nét line/xung sáng bên trong SVG → bỏ qua, chỉ đo khi logo/ô trồi xong
+    const onAnimEnd = (e: AnimationEvent) => {
+      if (!(e.target as Element).closest('.lc-lines')) update()
+    }
+    // rê chuột (không tính chạm) vào ô app đang chạy → đường của ô đó lóe; ô hàng đầu đứng đầu DOM nên chỉ số trùng
+    const onOver = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return
+      const tile = (e.target as Element).closest<HTMLElement>('.lc-tile[data-line]')
+      if (!tile || tile.dataset.planned === '1') return
+      const i = [...main.querySelectorAll('.lc-tile[data-line]')].indexOf(tile)
+      setPulsing((p) => (p.includes(i) ? p : [...p, i]))
+    }
     update()
     const ro = new ResizeObserver(update)
     ro.observe(main)
-    main.addEventListener('animationend', update)
+    main.addEventListener('animationend', onAnimEnd)
+    main.addEventListener('pointerover', onOver)
     document.fonts?.ready.then(update).catch(() => {})
     return () => {
       ro.disconnect()
-      main.removeEventListener('animationend', update)
+      main.removeEventListener('animationend', onAnimEnd)
+      main.removeEventListener('pointerover', onOver)
     }
   }, [mainRef, deps])
+
+  // Danh sách đường được lóe (app đang chạy) dạng chuỗi → effect chỉ chạy lại khi tập này thật sự đổi
+  const liveKey = shape?.strands.flatMap((s, i) => (s.planned ? [] : [i])).join(',') ?? ''
+  useEffect(() => {
+    if (!liveKey || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const ids = liveKey.split(',').map(Number)
+    let next = 0
+    let lastActive = Date.now()
+    const active = () => {
+      lastActive = Date.now()
+    }
+    // chế độ "Chậm" (Cài đặt → Hiệu ứng line) kéo dài thời gian vẽ theo --lc-line-k → lóe đầu tiên chờ tương ứng
+    const main = mainRef.current
+    const k = (main && parseFloat(getComputedStyle(main).getPropertyValue('--lc-line-k'))) || 1
+    const first = setTimeout(() => setPulsing(ids), FIRST_PULSE_MS * k)
+    const timer = setInterval(() => {
+      // tab ẩn, hoặc để nguyên lâu không ai đụng (homepage mở cả ngày) → thôi lóe, CPU về ~0
+      if (document.hidden || Date.now() - lastActive > IDLE_STOP_MS) return
+      setPulsing((p) => (p.length > 0 ? p : [ids[next++ % ids.length]]))
+    }, PULSE_EVERY_MS)
+    const EVENTS = ['pointermove', 'pointerdown', 'keydown', 'wheel', 'visibilitychange'] as const
+    EVENTS.forEach((t) => window.addEventListener(t, active, { passive: true }))
+    return () => {
+      clearTimeout(first)
+      clearInterval(timer)
+      EVENTS.forEach((t) => window.removeEventListener(t, active))
+    }
+  }, [liveKey, mainRef])
 
   if (!shape || shape.strands.length === 0) return null
   return (
@@ -99,7 +162,14 @@ export default function TileLines({
           style={{ color: s.accent, ['--i' as string]: i }}
         >
           <path d={s.d} pathLength={100} className="lc-line" />
-          {!s.planned && <path d={s.d} pathLength={100} className="lc-line-pulse" />}
+          {!s.planned && pulsing.includes(i) && (
+            <path
+              d={s.d}
+              pathLength={100}
+              className="lc-line-pulse"
+              onAnimationEnd={() => setPulsing((p) => p.filter((x) => x !== i))}
+            />
+          )}
           <circle cx={s.x} cy={s.y} r={7} className="lc-line-halo" />
           <circle cx={s.x} cy={s.y} r={3.2} className="lc-line-end" />
         </g>

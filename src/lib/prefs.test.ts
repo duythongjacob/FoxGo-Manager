@@ -17,7 +17,7 @@ describe('prefs (FD-005)', () => {
     expect(nameFromUrl('lạ')).toBe('lạ')
   })
   it('parsePrefs: bỏ dữ liệu hỏng, link nguy hiểm, trùng id; giới hạn số link', () => {
-    expect(parsePrefs(null)).toEqual({ order: [], newTab: false, links: [] })
+    expect(parsePrefs(null)).toEqual({ order: [], newTab: false, links: [], lineFx: 'normal' })
     const p = parsePrefs({
       order: ['app:FF', 1, 'app:FF', 'link:a'],
       newTab: true,
@@ -34,6 +34,12 @@ describe('prefs (FD-005)', () => {
     expect(p.links).toEqual([{ id: 'a', name: 'Mail', url: 'https://mail.google.com/' }])
     const many = Array.from({ length: 40 }, (_, i) => ({ id: `${i}`, name: 'n', url: 'a.vn' }))
     expect(parsePrefs({ links: many }).links).toHaveLength(MAX_LINKS)
+  })
+  it('parsePrefs: hiệu ứng line — nhận normal/slow/off, giá trị lạ → normal', () => {
+    expect(parsePrefs({ lineFx: 'slow' }).lineFx).toBe('slow')
+    expect(parsePrefs({ lineFx: 'off' }).lineFx).toBe('off')
+    expect(parsePrefs({ lineFx: 'nhanh' }).lineFx).toBe('normal')
+    expect(parsePrefs({ lineFx: 1 }).lineFx).toBe('normal')
   })
   it('parsePrefs: giữ mô tả link (cắt độ dài), bỏ mô tả rỗng/sai kiểu', () => {
     const p = parsePrefs({

@@ -13,10 +13,16 @@ Tối giản theo màn khóa của Fox.TàiChính.
   - App kế hoạch: chữ mờ, không bấm được, thẻ nổi chỉ ghi tên app + điểm nổi bật (không nhãn trạng thái — anh bỏ toàn dự án 17/11/2026).
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
 - **Line trang trí** (`TileLines.tsx`): mỗi ô app ở **hàng đầu** có một đường màu nhấn mọc từ dấu chấm cam của logo,
-  uốn sang phía ngược rồi đáp thẳng xuống trên tên ô (các đường đan chéo nhau), chấm + quầng ở đích, xung sáng chạy dọc
-  đường. App kế hoạch: đường mờ, không xung sáng. Ô hàng sau (điện thoại 3 cột, ô link riêng) không nối để đường không
+  uốn sang phía ngược rồi đáp thẳng xuống trên tên ô (các đường đan chéo nhau), chấm + quầng ở đích. App kế hoạch:
+  đường mờ, không xung sáng.
+  - **Xung sáng chỉ lóe, không chạy liên tục** (hiệu năng — trang mở cả ngày): mọi đường lóe một lần lúc vào trang, rồi
+    mỗi 9 giây một đường (lần lượt), rê chuột vào ô app → đường của ô đó lóe. Tab ẩn hoặc **60 giây không thao tác** →
+    ngừng lóe tới khi có thao tác lại. Số đo 17/11/2026 (Edge headless, bản build): chạy vòng lặp liên tục ~150 ms CPU/giây
+    desktop, ~500 ms/giây điện thoại giả lập CPU chậm 4×; bản lóe ~25–50 / ~110–150 ms/giây khi đang dùng, để yên > 60 giây
+    = như không có line (~5 / ~15 ms/giây). Ô hàng sau (điện thoại 3 cột, ô link riêng) không nối để đường không
   cắt ngang hàng trên. Hiện sau khi logo/ô trồi lên; giảm chuyển động → không vẽ dần, không xung sáng; ≤ 760px bỏ quầng
   sáng (nhẹ GPU).
+  Cài đặt → Giao diện → Hiệu ứng line: Chậm (`data-lines="slow"` trên `.lc-main`, hệ số `--lc-line-k`) / Tắt (không vẽ).
 - Cảm ứng: không vệt chạm/viền khi bấm, hiệu ứng rê chuột chỉ trên máy có chuột; viền focus chỉ khi dùng phím.
 - Bên trái: **thanh thông số** — xem [thanh-thong-so.md](thanh-thong-so.md).
 - Chân trang: "FoxGo® | Thong Duy".

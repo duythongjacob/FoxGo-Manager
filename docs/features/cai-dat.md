@@ -1,6 +1,6 @@
 # Cài đặt trang chủ (thứ tự ô, tab mới, link riêng)
 
-> Mã: `FD-005` · PRD: — · Cập nhật: 16/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-005` · PRD: — · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng lên đầu, mở trong tab mới, thêm link ngoài hệ Fox
@@ -10,13 +10,15 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 - Nút **Cài đặt** (bánh răng) ở cuối thanh thông số, ngay trên "Giới thiệu". Có ở cả dạng thu nhỏ (chỉ icon) lẫn mở rộng.
 - Bấm vào → popup "Cài đặt trang chủ" (đầu popup: icon + tiêu đề + "Chỉ lưu trên trình duyệt này"; nội dung chia nhóm có nhãn, mỗi nhóm một khung viền):
   - **Giao diện → Chế độ màu**: Hệ thống / Sáng / Tối (khóa `foxdots.theme`, dùng chung với nút trên trang Giới thiệu).
+  - **Giao diện → Hiệu ứng line**: Bình thường / Chậm (vẽ + xung sáng chậm 2,5 lần) / Tắt (ẩn hẳn line logo → ô app;
+    khoảng cách logo–ô app giữ nguyên để trang không nhảy).
   - **Mở trong tab mới** (công tắc): bật → mọi ô app/link mở tab mới (`target="_blank"`, `rel="noopener noreferrer"`).
   - **Ô trên trang chủ** (đếm số ô): mỗi dòng có số thứ tự, tên + mô tả ngắn (app) / mô tả hoặc địa chỉ (link),
     nút lên/xuống (không icon, không nhãn trạng thái); link có thêm nút xóa (app thì không xóa được).
   - **Thêm link riêng** (đếm x/24): tên (không bắt buộc, tối đa 24 ký tự) + mô tả (không bắt buộc, tối đa 32 ký tự)
     + link → "Thêm" hoặc Enter. Bỏ trống tên → lấy theo tên miền
     (`youtube.com` → "youtube"). Link sai → báo đỏ dưới ô.
-  - **Khôi phục mặc định**: trả thứ tự về mặc định, tắt tab mới, giao diện về "Hệ thống"; **giữ** các link đã thêm.
+  - **Khôi phục mặc định**: trả thứ tự về mặc định, tắt tab mới, giao diện về "Hệ thống", line về "Bình thường"; **giữ** các link đã thêm.
   - **Hủy** / dấu X / bấm nền: bỏ mọi thay đổi. **Lưu thay đổi** (chỉ bật khi có thay đổi): áp dụng ngay + ghi vào máy.
 - Ô link trên trang chủ: cùng kiểu chữ với ô app (tên + mô tả, không có mô tả thì tên miền; gạch chân cam FD khi rê chuột); rê chuột thấy địa chỉ.
 - Màn 375px: popup gần full màn, ô "Tên" và "Mô tả" mỗi ô một dòng, ẩn số thứ tự, nút Hủy/Lưu chia đôi hàng dưới. Popup theo giao diện sáng/tối đang chọn.
@@ -32,7 +34,7 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 | Dữ liệu | Lưu ở đâu | Khóa | Ghi chú |
 |---|---|---|---|
 | Chế độ giao diện | localStorage | `foxdots.theme` | xem [giao-dien-sang-toi.md](giao-dien-sang-toi.md) |
-| Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url,desc?}[] }`; `order` gồm `app:<mã>` / `link:<id>` |
+| Thiết lập trang chủ | localStorage | `foxdots.prefs` | `{ order: string[], newTab: boolean, links: {id,name,url,desc?}[], lineFx: 'normal'|'slow'|'off' }` (thiếu/lạ → `normal`); `order` gồm `app:<mã>` / `link:<id>` |
 
 Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không tải favicon của link (sẽ phải gọi dịch vụ ngoài).
 
@@ -43,7 +45,7 @@ Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không t�
 | `src/features/launcher/tiles.ts` | Kiểu `Tile` (app \| link), `tilesOf`, `tileKey`, `tileName` |
 | `src/features/launcher/LauncherPage.tsx` | Giữ thiết lập, vẽ `AppTile` / `LinkTile` |
 | `src/features/launcher/InfoDock.tsx` | Nút Cài đặt (`onSettings`) |
-| `src/lib/prefs.ts` (+ test) | `parsePrefs`, `normalizeUrl`, `nameFromUrl`, `applyOrder`, `move` |
+| `src/lib/prefs.ts` (+ test) | `parsePrefs` (cả `lineFx`), `normalizeUrl`, `nameFromUrl`, `applyOrder`, `move` |
 | `src/data/prefs.ts` | `readPrefs` / `savePrefs` (localStorage) |
 | `src/features/launcher/launcher.css` | `.dk-settings`, `.lc-tile.is-link`, `.st-*` |
 
@@ -64,3 +66,4 @@ Chỉ trên máy này — không đồng bộ, không gửi đi đâu. Không t�
 | 15/11/2026 | chưa phát hành | Bản đầu: tab mới, thứ tự ô, thêm/xóa link |
 | 16/11/2026 | chưa phát hành | Làm lại giao diện popup (nhóm có nhãn, nhãn trạng thái, Lưu chỉ bật khi có thay đổi), thêm mục Giao diện |
 | 16/11/2026 | chưa phát hành | Danh sách ô bỏ icon và nhãn trạng thái; thêm link có trường Mô tả |
+| 17/11/2026 | chưa phát hành | Thêm Giao diện → Hiệu ứng line (Bình thường / Chậm / Tắt) |

@@ -1,7 +1,7 @@
 /**
  * Popup "Cài đặt trang chủ" (FD-005) — mở từ nút Cài đặt trên thanh thông số. Xem docs/features/cai-dat.md.
  * Sửa trên bản nháp; chỉ khi bấm "Lưu thay đổi" mới áp dụng + ghi localStorage (Hủy = bỏ hết thay đổi).
- * Gồm: giao diện (sáng/tối/theo hệ thống), mở tab mới, thứ tự ô, thêm link riêng.
+ * Gồm: giao diện (sáng/tối/theo hệ thống, hiệu ứng line), mở tab mới, thứ tự ô, thêm link riêng.
  */
 import { useState, type ReactNode } from 'react'
 import { Button, Input, Modal, Segmented, Switch, Tooltip, Typography } from 'antd'
@@ -26,6 +26,7 @@ import {
   move,
   nameFromUrl,
   normalizeUrl,
+  type LineFx,
   type Prefs,
   type UserLink,
 } from '@/lib/prefs'
@@ -42,6 +43,12 @@ const MODE_OPTIONS = [
   { value: 'system', label: 'Hệ thống', icon: <DesktopOutlined /> },
   { value: 'light', label: 'Sáng', icon: <SunOutlined /> },
   { value: 'dark', label: 'Tối', icon: <MoonOutlined /> },
+]
+
+const LINE_FX_OPTIONS = [
+  { value: 'normal', label: 'Bình thường' },
+  { value: 'slow', label: 'Chậm' },
+  { value: 'off', label: 'Tắt' },
 ]
 
 /** Một nhóm cài đặt: nhãn nhỏ phía trên + khung viền chứa nội dung. */
@@ -85,6 +92,7 @@ interface Props {
 function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Props, 'open'>) {
   const [mode, setMode] = useState<ThemeMode>(savedMode)
   const [newTab, setNewTab] = useState(prefs.newTab)
+  const [lineFx, setLineFx] = useState<LineFx>(prefs.lineFx)
   const [links, setLinks] = useState<UserLink[]>(prefs.links)
   // Bản nháp thứ tự = thứ tự đang hiện trên trang chủ (đủ mọi ô, kể cả app mới chưa có trong order đã lưu)
   const [initialOrder] = useState<string[]>(() => tilesOf(apps, prefs).map(tileKey))
@@ -94,10 +102,12 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
   const [url, setUrl] = useState('')
   const [err, setErr] = useState<string | null>(null)
 
-  const tiles = tilesOf(apps, { order, newTab, links })
+  const draft: Prefs = { order, newTab, links, lineFx }
+  const tiles = tilesOf(apps, draft)
   const dirty =
     mode !== savedMode ||
     newTab !== prefs.newTab ||
+    lineFx !== prefs.lineFx ||
     JSON.stringify(links) !== JSON.stringify(prefs.links) ||
     order.join() !== initialOrder.join()
 
@@ -124,6 +134,7 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
   const reset = () => {
     setMode(DEFAULT_MODE)
     setNewTab(DEFAULT_PREFS.newTab)
+    setLineFx(DEFAULT_PREFS.lineFx)
     // Giữ link đã thêm, chỉ trả thứ tự về mặc định (app trước, link sau theo lúc thêm)
     setOrder(tilesOf(apps, { ...DEFAULT_PREFS, links }).map(tileKey))
   }
@@ -139,6 +150,15 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
               options={MODE_OPTIONS}
               onChange={(v) => setMode(v as ThemeMode)}
               aria-label="Chế độ màu"
+            />
+          </Row>
+          <Row title="Hiệu ứng line" desc="Đường màu từ logo xuống các ô app">
+            <Segmented
+              size="middle"
+              value={lineFx}
+              options={LINE_FX_OPTIONS}
+              onChange={(v) => setLineFx(v as LineFx)}
+              aria-label="Hiệu ứng line"
             />
           </Row>
         </Section>
@@ -261,7 +281,7 @@ function SettingsBody({ prefs, mode: savedMode, apps, onSave, onClose }: Omit<Pr
           Khôi phục mặc định
         </Button>
         <Button onClick={onClose}>Hủy</Button>
-        <Button type="primary" disabled={!dirty} onClick={() => onSave({ order, newTab, links }, mode)}>
+        <Button type="primary" disabled={!dirty} onClick={() => onSave(draft, mode)}>
           Lưu thay đổi
         </Button>
       </footer>

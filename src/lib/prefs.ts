@@ -12,15 +12,21 @@ export interface UserLink {
   desc?: string
 }
 
+/** Hiệu ứng line trang trí trang chủ: chạy bình thường / chuyển động chậm / tắt hẳn (ẩn line). */
+export type LineFx = 'normal' | 'slow' | 'off'
+export const LINE_FX: readonly LineFx[] = ['normal', 'slow', 'off']
+
 export interface Prefs {
   /** Thứ tự ô: khóa `app:<mã>` hoặc `link:<id>`; ô chưa có trong danh sách xếp cuối theo thứ tự mặc định */
   order: string[]
   /** true = bấm ô mở tab mới */
   newTab: boolean
   links: UserLink[]
+  /** Hiệu ứng line logo → ô app (dữ liệu cũ chưa có → 'normal') */
+  lineFx: LineFx
 }
 
-export const DEFAULT_PREFS: Prefs = { order: [], newTab: false, links: [] }
+export const DEFAULT_PREFS: Prefs = { order: [], newTab: false, links: [], lineFx: 'normal' }
 
 /** Giới hạn để dữ liệu hỏng/lạ không làm vỡ trang (localStorage có thể bị sửa tay). */
 export const MAX_LINKS = 24
@@ -77,7 +83,8 @@ export function parsePrefs(raw: unknown): Prefs {
   const order = Array.isArray(r.order)
     ? [...new Set(r.order.filter((k): k is string => typeof k === 'string'))]
     : []
-  return { order, newTab: r.newTab === true, links }
+  const lineFx = LINE_FX.includes(r.lineFx as LineFx) ? (r.lineFx as LineFx) : 'normal'
+  return { order, newTab: r.newTab === true, links, lineFx }
 }
 
 /**

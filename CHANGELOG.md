@@ -6,10 +6,14 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ### Thêm (17/11/2026)
 - Trang chủ: **line màu nhấn** từ dấu chấm cam của logo "Fox." uốn đan nhau xuống từng ô app hàng đầu — chấm + quầng ở
-  đích, xung sáng chạy dọc đường (app kế hoạch: đường mờ, không xung sáng); cùng kiểu hình line trang Giới thiệu, chỉ
+  đích, xung sáng lóe dọc đường (app kế hoạch: đường mờ, không xung sáng); cùng kiểu hình line trang Giới thiệu, chỉ
   SVG + CSS (`TileLines.tsx`). Logo và ô app cách xa hơn để chừa chỗ cho đường.
+  Hiệu năng: xung sáng chỉ lóe (lúc vào trang, mỗi 9 giây một đường, khi rê chuột vào ô), tab ẩn / 60 giây không thao tác
+  thì ngừng — để yên CPU như không có line (chạy liên tục từng tốn ~150 ms CPU/giây trên desktop).
+- Cài đặt trang chủ → Giao diện → **Hiệu ứng line**: Bình thường / Chậm / Tắt (lưu trong `foxdots.prefs`).
 
 ### Đổi (17/11/2026)
+- Trang Giới thiệu — Hero: tiêu đề "Một nền tảng. **Connect the dots.**" (thay "Kết nối cuộc sống.").
 - Favicon / icon cài app: chữ **"F."** nền trong suốt, chấm vàng (chữ tự đổi đen/trắng theo tab sáng/tối) thay "Fox"
   trên nền xanh đen.
 

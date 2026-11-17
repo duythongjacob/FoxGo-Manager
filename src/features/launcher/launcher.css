@@ -1008,6 +1008,13 @@ a.lc-tile:focus-visible {
 .lc-main .lc-tiles {
   margin-top: 120px;
 }
+/* Hệ số thời gian hiệu ứng line — Cài đặt → Hiệu ứng line: "Chậm" = 2.5 lần (vẽ + xung sáng); "Tắt" không vẽ SVG. */
+.lc-main {
+  --lc-line-k: 1;
+}
+.lc-main[data-lines='slow'] {
+  --lc-line-k: 2.5;
+}
 @keyframes lc-lines-in {
   from {
     opacity: 0;
@@ -1019,7 +1026,8 @@ a.lc-tile:focus-visible {
   stroke-width: 1.5;
   stroke-linecap: round;
   opacity: 0.55;
-  animation: lc-line-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) calc(0.55s + var(--i) * 0.08s) both;
+  animation: lc-line-draw calc(1.4s * var(--lc-line-k)) cubic-bezier(0.65, 0, 0.35, 1)
+    calc(0.55s + var(--i) * 0.08s * var(--lc-line-k)) both;
 }
 @keyframes lc-line-draw {
   from {
@@ -1036,16 +1044,19 @@ a.lc-tile:focus-visible {
   stroke: currentColor;
   stroke-width: 3;
   stroke-linecap: round;
-  stroke-dasharray: 9 91;
-  animation: lc-line-pulse 3.6s linear calc(var(--i) * -0.9s) infinite;
+  /* đoạn sáng dài 9 (pathLength 100); khe 100 → đầu và cuối hoạt ảnh đoạn sáng nằm ngoài đường (không lộ chấm thừa) */
+  stroke-dasharray: 9 100;
+  /* chạy MỘT lần rồi thôi (TileLines bật/tắt từng đường) — vòng lặp vô hạn vẽ lại mỗi khung hình, tốn CPU/pin */
+  animation: lc-line-pulse calc(1.8s * var(--lc-line-k)) cubic-bezier(0.45, 0, 0.55, 1)
+    calc(var(--i) * 0.15s * var(--lc-line-k)) both;
   filter: drop-shadow(0 0 4px currentColor);
 }
 @keyframes lc-line-pulse {
   from {
-    stroke-dashoffset: 100;
+    stroke-dashoffset: 9;
   }
   to {
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -100;
   }
 }
 .lc-line-halo {

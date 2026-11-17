@@ -117,8 +117,9 @@ export default function LauncherPage({
     <div className="lc">
       <InfoDock dark={dark} collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
 
-      <div className="lc-main" ref={mainRef}>
-        <TileLines mainRef={mainRef} deps={tiles} />
+      {/* data-lines="slow" → CSS kéo dài thời gian vẽ + xung sáng (biến --lc-line-k trong launcher.css) */}
+      <div className="lc-main" ref={mainRef} data-lines={prefs.lineFx}>
+        {prefs.lineFx !== 'off' && <TileLines mainRef={mainRef} deps={tiles} />}
         <h1 className="lc-logo">
           <Wordmark size={88} />
         </h1>
