@@ -2,7 +2,7 @@
  * Trang chủ (#/) — xem docs/features/trang-chu.md, cài đặt ô: docs/features/cai-dat.md.
  * CSS: launcher.css (tiền tố .lc- trang, .dk- thanh thông số, .st- popup cài đặt).
  */
-import { useMemo, useState, type CSSProperties } from 'react'
+import { useMemo, useRef, useState, type CSSProperties } from 'react'
 import { APPS } from '@/data/apps'
 import { readPrefs, savePrefs } from '@/data/prefs'
 import { sortApps, type FoxApp } from '@/lib/apps'
@@ -11,6 +11,7 @@ import type { ThemeMode } from '@/lib/theme'
 import Wordmark from '@/components/Wordmark'
 import InfoDock from './InfoDock'
 import SettingsModal from './SettingsModal'
+import TileLines from './TileLines'
 import { tileKey, tileName, tilesOf } from './tiles'
 import './launcher.css'
 
@@ -43,6 +44,7 @@ function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
       className="lc-tile"
       href={app.url}
       style={style}
+      data-line={app.accent}
       aria-label={`Mở ${app.name}`}
       {...newTabProps(newTab)}
     >
@@ -52,6 +54,8 @@ function AppTile({ app, newTab }: { app: FoxApp; newTab: boolean }) {
     <span
       className="lc-tile is-planned"
       style={style}
+      data-line={app.accent}
+      data-planned="1"
       title={app.name}
       aria-label={app.name}
     >
@@ -100,6 +104,7 @@ export default function LauncherPage({
   const [collapsed, setCollapsed] = useState(true)
   const toggle = () => setCollapsed(!collapsed)
   const [settings, setSettings] = useState(false)
+  const mainRef = useRef<HTMLDivElement>(null)
 
   const save = (p: Prefs, m: ThemeMode) => {
     setPrefs(p)
@@ -112,7 +117,8 @@ export default function LauncherPage({
     <div className="lc">
       <InfoDock dark={dark} collapsed={collapsed} onToggle={toggle} onSettings={() => setSettings(true)} />
 
-      <div className="lc-main">
+      <div className="lc-main" ref={mainRef}>
+        <TileLines mainRef={mainRef} deps={tiles} />
         <h1 className="lc-logo">
           <Wordmark size={88} />
         </h1>

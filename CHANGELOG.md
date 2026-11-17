@@ -4,7 +4,18 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Thêm (17/11/2026)
+- Trang chủ: **line màu nhấn** từ dấu chấm cam của logo "Fox." uốn đan nhau xuống từng ô app hàng đầu — chấm + quầng ở
+  đích, xung sáng chạy dọc đường (app kế hoạch: đường mờ, không xung sáng); cùng kiểu hình line trang Giới thiệu, chỉ
+  SVG + CSS (`TileLines.tsx`). Logo và ô app cách xa hơn để chừa chỗ cho đường.
+
+### Đổi (17/11/2026)
+- Favicon / icon cài app: chữ **"F."** nền trong suốt, chấm vàng (chữ tự đổi đen/trắng theo tab sáng/tối) thay "Fox"
+  trên nền xanh đen.
+
+### Sửa (17/11/2026)
+- Điện thoại: bấm nút menu (và ô app) không còn để lại nền/viền "đang nhấn" — bỏ vệt chạm mặc định của trình duyệt,
+  hiệu ứng rê chuột chỉ áp cho máy có chuột, viền focus chỉ hiện khi dùng phím.
 
 ## [0.4.0] — 2026-11-17
 

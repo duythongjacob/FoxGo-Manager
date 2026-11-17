@@ -17,6 +17,7 @@
   -webkit-user-drag: none;
 }
 .lc-main {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,10 +132,15 @@
     left 0.22s cubic-bezier(0.16, 1, 0.3, 1),
     right 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-a.lc-tile:hover .lc-tile-name::after,
 a.lc-tile:focus-visible .lc-tile-name::after {
   left: 0;
   right: 0;
+}
+@media (hover: hover) {
+  a.lc-tile:hover .lc-tile-name::after {
+    left: 0;
+    right: 0;
+  }
 }
 a.lc-tile,
 a.lc-tile:hover,
@@ -408,9 +414,12 @@ a.lc-tile:focus-visible {
     background 0.15s ease,
     color 0.15s ease;
 }
-.dk-toggle:hover {
-  color: var(--lc-ink);
-  background: rgba(var(--lc-rgb), 0.08);
+/* chỉ máy có chuột: trên màn cảm ứng :hover "dính" lại sau khi chạm → nút còn nền/viền như đang nhấn */
+@media (hover: hover) {
+  .dk-toggle:hover {
+    color: var(--lc-ink);
+    background: rgba(var(--lc-rgb), 0.08);
+  }
 }
 .dk-rail {
   display: flex;
@@ -962,5 +971,113 @@ a.lc-tile:focus-visible {
   }
   .st-add > .st-add-url {
     grid-column: 1;
+  }
+}
+
+/* ── Chạm trên điện thoại: bỏ vệt xanh/xám mặc định của trình duyệt và viền focus khi bấm (viền chỉ hiện khi dùng phím
+   — :focus-visible). Phản hồi nhấn bằng :active nhẹ thay thế. ── */
+.lc,
+.dk-toggle {
+  -webkit-tap-highlight-color: transparent;
+}
+.lc :focus:not(:focus-visible),
+.dk-toggle:focus:not(:focus-visible) {
+  outline: none;
+}
+.dk-toggle:active {
+  transform: scale(0.94);
+}
+
+/* ── Line trang trí (TileLines.tsx): từ chấm logo đan nhau xuống từng ô app hàng đầu ──
+   Nằm dưới logo + ô app; hiện sau khi logo/ô đã trồi lên xong; xung sáng chạy dọc đường như SortLines (Giới thiệu). */
+.lc-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+  animation: lc-lines-in 0.6s ease 0.55s both;
+}
+.lc-logo,
+.lc-tiles {
+  position: relative;
+  z-index: 1;
+}
+/* chừa chỗ giữa logo và ô app cho các đường uốn */
+.lc-main .lc-tiles {
+  margin-top: 120px;
+}
+@keyframes lc-lines-in {
+  from {
+    opacity: 0;
+  }
+}
+.lc-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+  animation: lc-line-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) calc(0.55s + var(--i) * 0.08s) both;
+}
+@keyframes lc-line-draw {
+  from {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+}
+.lc-line-pulse {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 9 91;
+  animation: lc-line-pulse 3.6s linear calc(var(--i) * -0.9s) infinite;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+@keyframes lc-line-pulse {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.lc-line-halo {
+  fill: currentColor;
+  opacity: 0.18;
+}
+.lc-line-end {
+  fill: currentColor;
+}
+/* app kế hoạch: đường mờ hơn, không xung sáng */
+.lc-strand.is-planned .lc-line {
+  opacity: 0.28;
+}
+.lc-strand.is-planned .lc-line-halo {
+  opacity: 0.1;
+}
+.lc-strand.is-planned .lc-line-end {
+  opacity: 0.55;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lc-line-pulse {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  /* như trang Giới thiệu: bỏ quầng drop-shadow (lọc cả vùng mỗi khung hình) cho nhẹ trên điện thoại */
+  .lc-line-pulse {
+    filter: none;
+  }
+}
+@media (max-width: 520px) {
+  .lc-main .lc-tiles {
+    margin-top: 84px;
   }
 }

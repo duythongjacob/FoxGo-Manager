@@ -1,6 +1,6 @@
 # Trang chủ
 
-> Mã: `FD-002` · PRD: — · Cập nhật: 16/11/2026 · Trạng thái: Đang chạy
+> Mã: `FD-002` · PRD: — · Cập nhật: 17/11/2026 · Trạng thái: Đang chạy
 
 ## Mục đích
 Trang mở đầu trình duyệt (ghim làm homepage): nhìn giờ/thời tiết/giá trong một giây và bấm vào app Fox cần dùng.
@@ -12,6 +12,12 @@ Tối giản theo màn khóa của Fox.TàiChính.
   - App đang chạy: bấm mở link chính (`url`), rê chuột hiện gạch chân màu nhấn dưới tên + thẻ nổi 3 tính năng chính.
   - App kế hoạch: chữ mờ, không bấm được, thẻ nổi chỉ ghi tên app + điểm nổi bật (không nhãn trạng thái — anh bỏ toàn dự án 17/11/2026).
   - Thứ tự: đang chạy → đang xây → kế hoạch (`sortApps`).
+- **Line trang trí** (`TileLines.tsx`): mỗi ô app ở **hàng đầu** có một đường màu nhấn mọc từ dấu chấm cam của logo,
+  uốn sang phía ngược rồi đáp thẳng xuống trên tên ô (các đường đan chéo nhau), chấm + quầng ở đích, xung sáng chạy dọc
+  đường. App kế hoạch: đường mờ, không xung sáng. Ô hàng sau (điện thoại 3 cột, ô link riêng) không nối để đường không
+  cắt ngang hàng trên. Hiện sau khi logo/ô trồi lên; giảm chuyển động → không vẽ dần, không xung sáng; ≤ 760px bỏ quầng
+  sáng (nhẹ GPU).
+- Cảm ứng: không vệt chạm/viền khi bấm, hiệu ứng rê chuột chỉ trên máy có chuột; viền focus chỉ khi dùng phím.
 - Bên trái: **thanh thông số** — xem [thanh-thong-so.md](thanh-thong-so.md).
 - Chân trang: "FoxGo® | Thong Duy".
 - Màn hình:
@@ -34,6 +40,7 @@ Tối giản theo màn khóa của Fox.TàiChính.
 |---|---|
 | `src/features/launcher/LauncherPage.tsx` | Trang: logo, ô app (`AppTile`), chân trang, trạng thái thu/mở thanh |
 | `src/features/launcher/launcher.css` | Bố cục màn khóa, ô chữ + đường kẻ, thẻ nổi, responsive (tiền tố `.lc-`) |
+| `src/features/launcher/TileLines.tsx` | Line trang trí logo → ô app (đo vị trí từ DOM, SVG + CSS `.lc-line*`) |
 | `src/components/Wordmark.tsx` | Logo chữ "Fox." |
 | `src/lib/apps.ts` (+ test) | `sortApps` |
 | `src/app/Layout.tsx` | Chế độ `is-immersive` (ẩn thanh trên ở trang chủ) |
@@ -54,3 +61,4 @@ Tối giản theo màn khóa của Fox.TàiChính.
 | 15/11/2026 | chưa phát hành | Làm lại kiểu màn khóa, bỏ ô tìm & thẻ app cũ; đổi tên FoxGo |
 | 15/11/2026 | chưa phát hành | Thanh thông số luôn thu nhỏ khi mở; ô Fox.CôngViệc bấm được (bản trên máy) |
 | 16/11/2026 | chưa phát hành | Bỏ linh vật/khung kính ở ô app, ngăn cách bằng đường kẻ mảnh |
+| 17/11/2026 | chưa phát hành | Line màu từ logo xuống ô app; sửa trạng thái nhấn nút menu trên điện thoại |
