@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.7.2] — 2026-11-18
+
 ### Sửa
 - Ô app FoxGo Mind trên trang chủ ghi "Mind" (trước bị tách thành "Fox Go Mind").
 - Ngăn kéo thanh thông số trên điện thoại: nút Cài đặt và Giới thiệu luôn hiện ở đáy màn hình, không phải cuộn
