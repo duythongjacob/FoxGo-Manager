@@ -11,7 +11,7 @@
 > và tiêu chí nghiệm thu về một chỗ. Hành vi chi tiết từng mục: [`../features/gioi-thieu.md`](../features/gioi-thieu.md).
 
 ## 1. Vấn đề
-FoxGo là một bộ app cá nhân (Tài chính, Công việc, Sức khỏe, Học tập, Giải trí, Kỹ năng) nhưng trang chủ chỉ là lưới
+FoxGo là một bộ app cá nhân (Tài chính, Công việc, Tư duy, Sức khỏe, Học tập, Giải trí) nhưng trang chủ chỉ là lưới
 link — người lần đầu ghé (hoặc chính anh khi giới thiệu cho người khác) không thấy được FoxGo là gì, các app gắn với
 nhau ra sao, app nào đã dùng được, và FoxGo cam kết gì về dữ liệu. Cần một trang giới thiệu chuyên nghiệp, cùng
 "gia đình" giao diện với các app, nói đúng sự thật về sản phẩm.
@@ -57,6 +57,7 @@ nhau ra sao, app nào đã dùng được, và FoxGo cam kết gì về dữ li�
 | Không hiện nhãn trạng thái chữ ("Đang chạy / Đang xây / Kế hoạch / Sắp ra mắt") ở bất kỳ đâu trong dự án; phân biệt đã có / sắp tới bằng **nét liền / nét đứt** và thì tương lai ("sẽ") | 17/11/2026 |
 | Thư viện `motion` chỉ trong `src/features/landing/`, trang nạp lười | 16/11/2026 |
 | "Hình" bằng nét kẻ (line-art), không ảnh minh họa chung chung | 17/11/2026 |
+| Bỏ Fox.KỹNăng khỏi trang; FoxGo Mind (Tư duy) đứng thứ 3. Tính năng "Mục tiêu & kế hoạch" → "Tư duy & quyết định" (Mind), câu chuyện Hệ sinh thái có chương Mind — v0.7.4 | 18/11/2026 |
 
 ### 5.2 Các mục
 1. **Hero** — "Một nền tảng. Connect the dots." (đổi 17/11/2026, sau v0.4.0; trước là "Kết nối cuộc sống.") + một đoạn mô tả FoxGo; 2 nút: "Bắt đầu hành trình" → trang chủ,

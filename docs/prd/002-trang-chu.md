@@ -54,9 +54,10 @@ duyệt (homepage) gọn, đẹp, cùng "gia đình" giao diện, bấm một l�
 | Bỏ nhãn trạng thái chữ toàn dự án; app chưa có = chữ mờ, không bấm được | 17/11/2026 |
 | Line màu từ logo xuống ô app (cùng kiểu line trang Giới thiệu); xung sáng **chỉ lóe** để nhẹ máy | 17/11/2026 |
 | Favicon chữ "F." nền trong suốt, chấm cam (như chấm logo "Fox.") — cùng favicon cho mọi app | 17/11/2026 |
+| Bỏ ô Fox.KỹNăng; thứ tự Tài chính → Công việc → Tư duy (Mind) → app kế hoạch — v0.7.4 | 18/11/2026 |
 
 ### 5.2 Hành vi
-- **Ô app:** tên bỏ tiền tố "Fox." ("Fox.TàiChính" → "Tài Chính"); thứ tự đang chạy → đang xây → kế hoạch (`sortApps`),
+- **Ô app:** tên bỏ tiền tố "Fox." ("Fox.TàiChính" → "Tài Chính"); thứ tự app mở được (đang chạy / đang xây) theo khai báo trong `data/apps.ts` → kế hoạch (`sortApps`),
   hoặc theo Cài đặt. App có `url` → bấm mở; app kế hoạch → mờ, không bấm. Rê chuột: gạch chân màu nhấn + thẻ nổi
   (thiết bị cảm ứng không có thẻ nổi). Màu nhấn chỉ qua `--app-accent`.
 - **Line:** mỗi ô hàng đầu một đường từ chấm logo, đan chéo, chấm + quầng ở đích; app kế hoạch đường mờ không xung.

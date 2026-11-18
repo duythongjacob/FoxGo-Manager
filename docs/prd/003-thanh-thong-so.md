@@ -26,6 +26,7 @@ gom các thông tin nhìn nhanh đó về một dải bên trái, không làm r�
   + dự báo 3 ngày; 4 dòng giá: Vàng (đ/lượng, % 24h), USD/VND, Bitcoin (USD, % 24h), Xăng RON95 (vùng 1, kỳ dd/mm).
 - Tooltip ghi nguồn + giờ cập nhật (bắt buộc theo giấy phép Open-Meteo, ExchangeRate-API).
 - ≥ 1080px cố định trái; < 1080px ngăn kéo + nền mờ.
+- Đang mở → bấm ra ngoài thanh hoặc nhấn Esc thì tự thu lại, mọi cỡ màn (anh yêu cầu 18/11/2026, v0.7.4).
 
 **Ngoài phạm vi:**
 - Giá vàng SJC/vàng miếng trong nước (không có nguồn miễn phí được duyệt).
@@ -71,6 +72,7 @@ mặc định Hà Nội). Không lưu gì về người dùng ngoài thành ph�
 - [ ] DevTools Offline khi đã có đệm → vẫn hiện số; xóa `foxdots.ext.*` + Offline → "Chưa tải được…", trang không treo.
 - [ ] Network: chỉ gọi 3 tên miền đã duyệt; không gọi giaxanghomnay.com từ trình duyệt.
 - [ ] < 1080px: ngăn kéo trượt, bấm nền mờ đóng; 375px không tràn.
+- [ ] Mọi cỡ màn: bấm ra ngoài thanh / Esc → thu lại; bấm trong thanh hoặc popup chọn thành phố → vẫn mở.
 - [ ] `npm run check` sạch (test `weather`, `market`, `greeting`, `fuel`).
 
 ## 7. Rủi ro & bảo mật
