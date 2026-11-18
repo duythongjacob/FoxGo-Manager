@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.7.4] — 2026-11-18
+
 ### Đổi
 - Bỏ Fox.KỹNăng khỏi danh sách app; FoxGo Mind (Tư duy) đứng thứ 3, sau Tài chính và Công việc.
 - Trang Giới thiệu: tính năng "Mục tiêu & kế hoạch" thay bằng "Tư duy & quyết định" (FoxGo Mind); câu chuyện Hệ sinh
