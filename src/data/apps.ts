@@ -71,9 +71,10 @@ export const APPS: FoxApp[] = [
       'Thuật ngữ Việt – Anh, hướng dẫn từng kỹ thuật kèm mức bằng chứng',
     ],
     accent: '#4f46e5',
-    // v0.1 (FM-000, 17/11/2026) code xong, chưa có Firebase / bản web — tạm chỉ có link trên máy.
-    status: 'building',
+    // v0.1.0 phát hành 18/11/2026 (FM-000) — bản web Firebase Hosting project foxgo-mind.
+    status: 'live',
     version: '0.1',
+    url: 'https://foxgo-mind.web.app',
     extra: [
       { label: 'Trên máy', url: 'http://localhost:5185' },
       { label: 'Test', url: 'http://localhost:5186' },
