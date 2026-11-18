@@ -4,6 +4,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
+_(chưa có thay đổi)_
+
+## [0.7.0] — 2026-11-18
+
 ### Thêm (18/11/2026)
 - Thẻ app **FoxGo Mind** (FD-015, mã FM, màu chàm, cáo bóng đèn ý tưởng) — "Đang chạy" v0.1, mở
   https://foxgo-mind.web.app (kèm link trên máy 5185 / Test 5186).
