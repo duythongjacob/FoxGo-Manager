@@ -54,7 +54,7 @@ Vạch tiến độ cuộn mảnh màu xanh ở mép trên.
    Nội dung: `CONNECTED_INTRO`, `APP_STORY`, `FINALE` trong `content.ts`.
 3. **Tính năng** — 4 hàng lớn xen kẽ chữ/giao diện (đổi bên mỗi hàng, giao diện trôi parallax ±40px), 2 tính năng cuối
    đứng cạnh nhau. Mỗi tính năng một giao diện riêng: gõ một câu thành việc (Công việc), biểu đồ + ngân sách + giao
-   dịch mới (Tài chính), cây kỹ năng + thử thách 30 ngày (Mục tiêu), lịch nhiệt 12 tuần (Thói quen), thẻ ôn tập lật
+   dịch mới (Tài chính), chấm điểm phương án + số nhánh giải pháp đã mở (Tư duy — FoxGo Mind), lịch nhiệt 12 tuần (Thói quen), thẻ ôn tập lật
    (Ghi chú), thông báo lần lượt trên màn khóa (Nhắc nhở). Số đếm lên khi vào màn.
 4. **Tổng quan** — "Nhìn thấy bức tranh lớn.": màn rộng (> 960px) ghim lại (280vh, có đệm trên để đầu mục không sát thanh trên), các mảnh dashboard bay từ chỗ rải
    rác về đúng ô theo cuộn, đường biểu đồ tự vẽ. Ghi rõ: tóm tắt số liệu trên trang chủ là giai đoạn 2 của lộ trình.

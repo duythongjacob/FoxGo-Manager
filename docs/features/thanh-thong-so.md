@@ -19,6 +19,7 @@ Chỉ để tham khảo.
   - Lỗi và chưa có bản lưu: "Chưa tải được…".
   - Mất mạng nhưng có bản lưu: hiện bản lưu (có thể cũ).
 - Màn < 1080px: ngăn kéo trượt từ trái, bấm nền mờ để đóng.
+- Mọi cỡ màn: đang mở mà bấm ra ngoài thanh (trừ nút menu, popup chọn thành phố) hoặc nhấn Esc → tự thu lại.
 
 ## Quy tắc nghiệp vụ
 - Lời chào: < 5h "Khuya rồi" · < 11h sáng · < 13h trưa · < 18h chiều · còn lại tối.

@@ -24,7 +24,7 @@ Cho mỗi người tự sắp trang chủ theo thói quen: app/link hay dùng l�
 - Màn 375px: popup gần full màn, ô "Tên" và "Mô tả" mỗi ô một dòng, ẩn số thứ tự, nút Hủy/Lưu chia đôi hàng dưới. Popup theo giao diện sáng/tối đang chọn.
 
 ## Quy tắc nghiệp vụ
-- Thứ tự mặc định: app theo `sortApps` (đang chạy → đang xây → kế hoạch), sau đó link theo lúc thêm.
+- Thứ tự mặc định: app theo `sortApps` (mở được theo thứ tự khai báo → kế hoạch), sau đó link theo lúc thêm.
 - Đã lưu thứ tự: ô có trong danh sách đã lưu đứng trước đúng thứ tự đó; ô mới (app mới thêm vào `apps.ts`) xếp cuối.
 - Link chỉ nhận `http`/`https` (chặn `javascript:`, `data:`… vì gắn thẳng vào `<a>`); thiếu giao thức → thêm `https://`;
   tên miền phải có dấu chấm (trừ `localhost`).

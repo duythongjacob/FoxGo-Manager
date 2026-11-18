@@ -108,6 +108,25 @@ export default function InfoDock({
   onSettings: () => void
 }) {
   const now = useNow(15_000)
+  // Đang mở → bấm ra ngoài thanh (mọi cỡ màn, không chỉ điện thoại) hoặc phím Esc thì tự thu lại.
+  // Bỏ qua: chính thanh, nút menu, nền mờ (đã tự xử lý onClick — tránh đóng rồi mở lại) và popup chọn thành phố
+  // (AntD gắn vào <body>, nằm ngoài thanh).
+  useEffect(() => {
+    if (collapsed) return
+    const KEEP = '#fd-dock, .dk-toggle, .dk-backdrop, .dk-city-pop'
+    const onDown = (e: PointerEvent) => {
+      if (e.target instanceof Element && !e.target.closest(KEEP)) onToggle()
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onToggle()
+    }
+    document.addEventListener('pointerdown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [collapsed, onToggle])
   const [city, setCity] = useState(() => cityByName(readCityName()))
   const [w, setW] = useState<Weather | null>(null)
   const [wErr, setWErr] = useState(false)

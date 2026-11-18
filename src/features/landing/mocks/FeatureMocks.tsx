@@ -166,14 +166,14 @@ function FinanceMock() {
   )
 }
 
-/* ---------- 03 Mục tiêu: cây kỹ năng + thử thách 30 ngày ---------- */
+/* ---------- 03 Tư duy (FoxGo Mind): chấm điểm phương án + độ phủ nhánh giải pháp ---------- */
 const SKILLS = [
-  { name: 'Tiếng Anh giao tiếp', level: 3 },
-  { name: 'Thuyết trình', level: 2 },
-  { name: 'Viết code TypeScript', level: 4 },
+  { name: 'Tự học online', level: 4 },
+  { name: 'Học ở trung tâm', level: 3 },
+  { name: 'Thuê gia sư 1–1', level: 2 },
 ]
 
-function GoalMock() {
+function DecisionMock() {
   return (
     <div className="mk-panel mk-goals">
       <div className="mk-skills">
@@ -192,15 +192,15 @@ function GoalMock() {
                 />
               ))}
             </span>
-            <b>Cấp {s.level}</b>
+            <b>{s.level}/5 điểm</b>
           </div>
         ))}
       </div>
       <div className="mk-challenge">
         <div>
-          <small className="mk-muted">Thử thách 30 ngày</small>
+          <small className="mk-muted">Nhánh giải pháp đã mở</small>
           <strong>
-            <Counter to={18} /> <small>/ 30 ngày</small>
+            <Counter to={18} /> <small>/ 30 ý tưởng</small>
           </strong>
         </div>
         <span className="mk-days" aria-hidden>
@@ -347,7 +347,7 @@ function ReminderMock() {
 const MOCKS: Record<FeatureMockId, ComponentType> = {
   task: TaskMock,
   finance: FinanceMock,
-  goal: GoalMock,
+  decision: DecisionMock,
   habit: HabitMock,
   notes: NotesMock,
   reminder: ReminderMock,

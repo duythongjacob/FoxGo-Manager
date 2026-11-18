@@ -7,7 +7,8 @@ Một nguồn duy nhất mô tả các app Fox (tên, trạng thái, link, linh 
 
 ## Cách dùng / hành vi
 - Trang chủ: mỗi app một ô; trang Giới thiệu: lưới bento + quỹ đạo linh vật.
-- Thứ tự hiển thị: đang chạy → đang xây → kế hoạch, giữ thứ tự khai báo trong cùng nhóm.
+- Thứ tự hiển thị: app mở được (đang chạy / đang xây) theo thứ tự khai báo, app kế hoạch xuống cuối (anh chọn 18/11/2026:
+  Tài chính → Công việc → Tư duy → …). Fox.KỹNăng (FS) đã bỏ khỏi danh sách 18/11/2026.
 
 ## Quy tắc nghiệp vụ
 - **Chỉ link + mô tả chung**. Không đọc, không hiển thị số liệu cá nhân của app nào (cho tới FD-008 có PRD duyệt).
@@ -18,7 +19,7 @@ Một nguồn duy nhất mô tả các app Fox (tên, trạng thái, link, linh 
 ## Dữ liệu
 | Trường (`FoxApp`) | Ý nghĩa |
 |---|---|
-| `code` | Mã 2 chữ (FF, FW, FH, FL, FE, FS) |
+| `code` | Mã 2 chữ (FF, FW, FM, FH, FL, FE) |
 | `name`, `area`, `tagline`, `desc` | Tên `Fox.<Tên>`, mảng cuộc sống, mô tả 2–3 từ, mô tả 1 câu |
 | `mascot`, `fullBody` | SVG đầu / toàn thân trong `public/fox/` |
 | `highlights` | Tính năng chính (thẻ nổi, bento) |

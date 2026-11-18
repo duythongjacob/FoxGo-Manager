@@ -42,14 +42,21 @@ export const APP_STORY: Record<string, { when: string; moment: string; link: str
     when: 'Ngày 1',
     moment: 'Thiết lập mục tiêu tiết kiệm 3 triệu đồng cho chuyến đi Đà Lạt cuối tháng.',
     link: 'Chi phí học tập, sức khỏe và giải trí sẽ được tự động ghi nhận vào ngân sách, giúp bạn theo dõi tiến độ mục tiêu theo thời gian thực.',
-    with: ['FL', 'FE', 'FH'],
+    with: ['FM', 'FL', 'FE', 'FH'],
   },
   FW: {
     when: 'Ngày 2',
     moment:
       'Ba ưu tiên hàng đầu của ngày được sắp xếp sẵn, giúp bạn tập trung vào những việc tạo ra giá trị lớn nhất.',
     link: 'Lịch tập luyện, lịch học và kế hoạch chuyến đi sẽ được đồng bộ vào lịch làm việc, tránh trùng với các cuộc họp.',
-    with: ['FH', 'FL', 'FE'],
+    with: ['FM', 'FH', 'FL', 'FE'],
+  },
+  FM: {
+    when: 'Ngày 4',
+    moment:
+      'Phân vân giữa học tiếng Anh ở trung tâm hay tự học online — liệt kê tiêu chí, chấm điểm từng phương án và chốt quyết định có căn cứ.',
+    link: 'Quyết định sẽ được chuyển thành việc cần làm, chi phí dự kiến đưa thẳng vào ngân sách.',
+    with: ['FW', 'FF'],
   },
   FH: {
     when: 'Ngày 7',
@@ -60,21 +67,14 @@ export const APP_STORY: Record<string, { when: string; moment: string; link: str
   FL: {
     when: 'Ngày 15',
     moment: 'Mỗi ngày ôn mười thẻ từ vựng, được hệ thống lặp lại ngắt quãng đề xuất đúng thời điểm.',
-    link: 'Học phí sẽ được ghi nhận vào ngân sách, thời gian học đưa vào lịch, khóa học hoàn thành được tính vào hồ sơ kỹ năng.',
-    with: ['FF', 'FW', 'FS'],
+    link: 'Học phí sẽ được ghi nhận vào ngân sách, thời gian học đưa vào lịch, tiến độ mỗi khóa được theo dõi ngay trong lịch tuần.',
+    with: ['FF', 'FW'],
   },
   FE: {
     when: 'Ngày 22',
     moment: 'Lịch trình chuyến đi được hoàn thiện từ danh sách trải nghiệm bạn đã lưu.',
     link: 'Ngân sách chuyến đi sẽ được lấy từ mục tiêu tiết kiệm, ngày khởi hành tự động đưa vào lịch.',
     with: ['FF', 'FW'],
-  },
-  FS: {
-    when: 'Ngày 30',
-    moment:
-      'Tổng kết tháng: 12 giờ luyện tập tiếng Anh, tăng một cấp độ — và mục tiêu tiết kiệm đã hoàn thành.',
-    link: 'Khóa học hoàn thành bên Học tập sẽ được ghi nhận là một cấp độ tiến bộ.',
-    with: ['FL'],
   },
 }
 
@@ -91,7 +91,7 @@ export const FINALE = {
 }
 
 /** Tên giao diện minh họa của từng tính năng (mocks/FeatureMocks.tsx). */
-export type FeatureMockId = 'task' | 'finance' | 'goal' | 'habit' | 'notes' | 'reminder'
+export type FeatureMockId = 'task' | 'finance' | 'decision' | 'habit' | 'notes' | 'reminder'
 
 export interface Feature {
   /** id trên trang (mã app chữ thường khi tính năng thuộc một app → `#/gioi-thieu/ff` cuộn tới đây) */
@@ -123,12 +123,12 @@ export const FEATURES: Feature[] = [
     mock: 'finance',
   },
   {
-    id: 'fs',
-    title: 'Mục tiêu & kế hoạch',
-    desc: 'Chia mục tiêu lớn thành cấp độ nhỏ, luyện tập có chủ đích và nhìn thấy mình tiến lên từng bậc.',
-    points: ['Cây kỹ năng, cấp độ 1–5 kèm bằng chứng', 'Thử thách 30 ngày'],
-    apps: ['FS'],
-    mock: 'goal',
+    id: 'fm',
+    title: 'Tư duy & quyết định',
+    desc: 'Đào sâu gốc rễ vấn đề, mở nhiều nhánh giải pháp rồi chấm điểm theo tiêu chí — quyết định có căn cứ, không cảm tính.',
+    points: ['5 Whys → cây giải pháp → chấm điểm → pre-mortem', 'Nhật ký quyết định để nhìn lại'],
+    apps: ['FM'],
+    mock: 'decision',
   },
   {
     id: 'fh',

@@ -4,6 +4,7 @@ import type { FoxApp } from '@/lib/apps'
  * Danh sách app Fox. Thêm app mới → thêm 1 mục ở đây + cập nhật ../docs/MA_APP.md (các bước: docs/BAO_TRI.md).
  * Tính năng: docs/features/danh-sach-app.md. Kiểu dữ liệu `FoxApp` ở lib/apps.ts.
  * Bundle web là công khai: chỉ link & mô tả chung, KHÔNG số liệu cá nhân.
+ * Thứ tự mảng = thứ tự hiển thị (sortApps chỉ đẩy app 'planned' xuống cuối). Fox.KỹNăng (FS) bỏ khỏi danh sách 18/11/2026.
  */
 export const APPS: FoxApp[] = [
   {
@@ -134,23 +135,5 @@ export const APPS: FoxApp[] = [
     accent: '#db2777',
     status: 'planned',
     tags: ['phim', 'game', 'du lich', 'nhac'],
-  },
-  {
-    code: 'FS',
-    name: 'Fox.KỹNăng',
-    area: 'Kỹ năng',
-    tagline: 'Luyện tập',
-    desc: 'Cây kỹ năng, giờ luyện tập có chủ đích, thử thách 30 ngày.',
-    mascot: '/fox/fox-kynang.svg',
-    fullBody: '/fox/fox-kynang-toan-than.svg',
-    highlights: [
-      'Cây kỹ năng, cấp độ 1–5 kèm bằng chứng',
-      'Giờ luyện tập có chủ đích theo từng kỹ năng',
-      'Thử thách 30 ngày',
-      'Xuất hồ sơ năng lực để cập nhật CV',
-    ],
-    accent: '#ca8a04',
-    status: 'planned',
-    tags: ['ky nang', 'luyen tap', 'thu thach', 'cv'],
   },
 ]

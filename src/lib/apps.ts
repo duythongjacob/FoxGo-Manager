@@ -38,7 +38,8 @@ export interface FoxApp {
   tags?: string[]
 }
 
-const STATUS_ORDER: Record<AppStatus, number> = { live: 0, building: 1, planned: 2 }
+/** Đang chạy và đang xây cùng nhóm (đều mở được) — thứ tự trong nhóm theo data/apps.ts (anh chọn 18/11/2026). */
+const STATUS_ORDER: Record<AppStatus, number> = { live: 0, building: 0, planned: 1 }
 
 /** Bỏ dấu tiếng Việt + chữ thường để tìm "ha noi" ra "Hà Nội" (ô chọn thành phố). */
 export function normalize(s: string): string {
@@ -50,7 +51,7 @@ export function normalize(s: string): string {
     .trim()
 }
 
-/** Sắp xếp: đang chạy → đang xây → kế hoạch, giữ thứ tự gốc trong cùng nhóm. */
+/** Sắp xếp: app mở được (đang chạy / đang xây) → kế hoạch, giữ thứ tự gốc trong cùng nhóm. */
 export function sortApps(apps: readonly FoxApp[]): FoxApp[] {
   return apps
     .map((a, i) => ({ a, i }))

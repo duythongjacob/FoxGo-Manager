@@ -4,7 +4,14 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Đổi
+- Bỏ Fox.KỹNăng khỏi danh sách app; FoxGo Mind (Tư duy) đứng thứ 3, sau Tài chính và Công việc.
+- Trang Giới thiệu: tính năng "Mục tiêu & kế hoạch" thay bằng "Tư duy & quyết định" (FoxGo Mind); câu chuyện Hệ sinh
+  thái có chương của Mind, bỏ chương Kỹ năng.
+
+### Sửa
+- Trang Giới thiệu: dải tên app ở đầu trang không còn dư ô "Kỹ năng" rớt xuống dòng dưới.
+- Thanh thông số đang mở: bấm ra ngoài hoặc nhấn Esc thì tự thu lại (trước chỉ đóng bằng nút menu trên máy tính).
 
 ## [0.7.3] — 2026-11-18
 

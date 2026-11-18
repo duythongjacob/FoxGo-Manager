@@ -30,7 +30,11 @@ describe('normalize', () => {
 })
 
 describe('sortApps', () => {
-  it('đang chạy → đang xây → kế hoạch, giữ thứ tự trong nhóm', () => {
+  it('mở được (đang chạy / đang xây) → kế hoạch, giữ thứ tự trong nhóm', () => {
     expect(sortApps(APPS).map((a) => a.code)).toEqual(['FF', 'FH', 'FW', 'FL'])
+  })
+  it('đang xây đứng trước đang chạy nếu khai báo trước', () => {
+    const list = [APPS[2], APPS[1]]
+    expect(sortApps(list).map((a) => a.code)).toEqual(['FH', 'FF'])
   })
 })

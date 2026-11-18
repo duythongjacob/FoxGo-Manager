@@ -8,11 +8,12 @@ import { APPS } from '../src/data/apps'
 import { sortApps } from '../src/lib/apps'
 import { openAbout, openHome, openSettings, stubNetwork, watchErrors } from './helpers'
 
-/** Tên ô như trên trang chủ: "Fox.TàiChính" → "Tài Chính" (khớp tileName trong features/launcher/tiles.ts). */
-const tileName = (name: string) => name.replace('Fox.', '').replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2')
+/** Tên ô như trên trang chủ: "Fox.TàiChính" → "Tài Chính", "FoxGo Mind" → "Mind" (khớp tileName trong features/launcher/tiles.ts). */
+const tileName = (name: string) =>
+  name.replace(/^(Fox\.|FoxGo\s+)/, '').replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2')
 
 test.describe('ô app trên trang chủ', () => {
-  test('đủ app, đúng thứ tự (đang chạy → đang xây → kế hoạch), link đúng URL', async ({ page }) => {
+  test('đủ app, đúng thứ tự (mở được theo khai báo → kế hoạch), link đúng URL', async ({ page }) => {
     const errors = watchErrors(page)
     await stubNetwork(page)
     await openHome(page)
@@ -107,6 +108,24 @@ test.describe('thanh thông số', () => {
     const vp = page.viewportSize()!
     await page.mouse.click(vp.width - 10, vp.height / 2)
     await expect(page.locator('.dk-toggle')).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  test('máy tính: bấm ra ngoài hoặc nhấn Esc thì thu thanh thông số', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'điện thoại đã có test nền mờ')
+    await stubNetwork(page)
+    await openHome(page)
+    const toggle = page.locator('.dk-toggle')
+    await toggle.click()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    // bấm trong thanh thì không đóng
+    await page.locator('#fd-dock .dk-time').click()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    const vp = page.viewportSize()!
+    await page.mouse.click(vp.width - 10, vp.height - 10)
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await toggle.click()
+    await page.keyboard.press('Escape')
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
   })
 
   test('dịch vụ ngoài lỗi, chưa có đệm → báo "Chưa tải được", trang vẫn chạy', async ({ page }) => {
