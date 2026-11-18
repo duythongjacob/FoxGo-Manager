@@ -15,7 +15,8 @@ export default defineConfig({
   workers: 3,
   retries: 0,
   timeout: 45_000,
-  reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
+  // 'dot': qua hết chỉ in một dòng, test lỗi mới in chi tiết (đỡ token khi Claude chạy) — chi tiết: npm run e2e:report
+  reporter: [['dot'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
   use: {
     baseURL: 'http://localhost:5171',
     locale: 'vi-VN',
