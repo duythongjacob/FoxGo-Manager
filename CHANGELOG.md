@@ -4,7 +4,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Đổi
+- Thẻ app FoxGo Mind ghi phiên bản v0.4 (Mind vừa phát hành v0.4.0).
 
 ## [0.7.2] — 2026-11-18
 
