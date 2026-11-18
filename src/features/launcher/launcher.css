@@ -638,6 +638,25 @@ a.lc-tile:focus-visible {
   .dk-rail {
     display: none;
   }
+  /* Vì sao: điện thoại hiện thanh địa chỉ/thanh dưới thì chiều cao thấy được hụt đi; trước đây cả ngăn kéo cuộn chung
+     nên Cài đặt + Giới thiệu (đẩy xuống đáy bằng margin-top: auto) rơi khỏi màn hình. Giờ chỉ phần thông số cuộn,
+     hai nút luôn ghim ở đáy. */
+  .dk:not(.is-collapsed) {
+    overflow: hidden;
+  }
+  .dk-full {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .dk-settings,
+  .dk-about {
+    flex: none;
+  }
+  .dk > .dk-about:last-child {
+    padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  }
   .dk-toggle {
     top: 14px;
     left: 14px;

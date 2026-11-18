@@ -10,9 +10,14 @@ export type Tile = { kind: 'app'; app: FoxApp } | { kind: 'link'; link: UserLink
 /** Khóa thứ tự của ô (khớp `Prefs.order`). */
 export const tileKey = (t: Tile) => (t.kind === 'app' ? appKey(t.app.code) : linkKey(t.link.id))
 
-/** Tên hiển thị: "Fox.TàiChính" → "Tài Chính"; link → tên người dùng đặt. */
+/**
+ * Tên hiển thị: bỏ tiền tố thương hiệu cũ "Fox." hoặc mới "FoxGo " — "Fox.TàiChính" → "Tài Chính",
+ * "FoxGo Mind" → "Mind"; link → tên người dùng đặt.
+ */
 export const tileName = (t: Tile) =>
-  t.kind === 'app' ? t.app.name.replace('Fox.', '').replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2') : t.link.name
+  t.kind === 'app'
+    ? t.app.name.replace(/^(Fox\.|FoxGo\s+)/, '').replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2')
+    : t.link.name
 
 /** Mọi ô theo thứ tự hiển thị: mặc định app (đã sortApps) rồi tới link; có `order` đã lưu thì theo order. */
 export function tilesOf(apps: readonly FoxApp[], prefs: Prefs): Tile[] {

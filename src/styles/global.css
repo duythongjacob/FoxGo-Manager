@@ -284,7 +284,10 @@ body {
   flex-direction: column;
   gap: 56px;
   flex: 1;
-  animation: fd-page-in 0.22s ease-out both;
+  /* `backwards`, KHÔNG `both`: giữ transform sau khi chạy xong khiến .fd-main thành khối chứa của phần tử
+     position: fixed bên trong (ngăn kéo thanh thông số) → ngăn kéo cao theo trang, không theo màn hình, nút đáy rơi
+     khỏi màn trên điện thoại. */
+  animation: fd-page-in 0.22s ease-out backwards;
 }
 @keyframes fd-page-in {
   from {
