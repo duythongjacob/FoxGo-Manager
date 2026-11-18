@@ -1633,9 +1633,10 @@ html:has(.ld-root) {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+/* Rê chuột không nhấc phần tử có chữ (18/11/2026): translateY + transition làm Chrome tách lớp, phần tử ở toạ độ
+   lẻ → chữ và viền bị nhoè. Phản hồi hover bằng viền / nền / bóng. */
 .ld-footer-btn:hover {
   color: var(--bg);
-  transform: translateY(-1px);
   box-shadow: 0 12px 24px -12px color-mix(in srgb, var(--text) 60%, transparent);
 }
 .ld-footer-grid {

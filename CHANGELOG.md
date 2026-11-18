@@ -4,7 +4,8 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/), phiên bản theo
 
 ## [Chưa phát hành]
 
-_(chưa có thay đổi)_
+### Sửa
+- Rê chuột lên nút ở chân trang giới thiệu không còn bị nhoè chữ: bỏ hiệu ứng nhấc lên 1px.
 
 ## [0.7.0] — 2026-11-18
 
